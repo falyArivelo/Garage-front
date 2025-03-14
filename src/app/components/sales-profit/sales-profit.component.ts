@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
-
+import { AuthService } from '../../services/auth.service';
 import {
     ApexChart,
     ChartComponent,
@@ -56,7 +56,7 @@ export class AppSalesProfitComponent {
         { value: 'june', viewValue: 'Nov 2025' },
     ];
 
-    constructor() {
+    constructor(public  authService: AuthService) {
         this.salesprofitChart = {
 
             series: [

@@ -22,22 +22,23 @@ export class AuthService {
     this.loadUserFromLocalStorage();
    }
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${environment.baseUrl}/login`, credentials);
+  // login(credentials: { email: string; password: string }): Observable<any> {
+  //   return this.http.post(`${environment.baseUrl}/login`, credentials);
+  // }
+
+  login(credentials: { email: string; password: string }): Observable<User> {
+    return new Observable<User>(observer => {
+      this.http.post<User>(`${environment.baseUrl}/login`, credentials)
+        .subscribe({
+          next: (user) => {
+            this.storeUser(user);
+            observer.next(user);
+          },
+          error: (error) => observer.error(error)
+        });
+    });
   }
 
-  // login(credentials: { email: string; password: string }): Observable<User> {
-  //   return new Observable<User>(observer => {
-  //     this.http.post<User>(`${environment.baseUrl}/login`, credentials)
-  //       .subscribe({
-  //         next: (user) => {
-  //           this.storeUser(user);
-  //           observer.next(user);
-  //         },
-  //         error: (error) => observer.error(error)
-  //       });
-  //   });
-  // }
 
   signup(userData: { username: string; email: string; password: string; }): Observable<any> {
     return this.http.post(`${environment.baseUrl}/signup`, userData);
@@ -74,4 +75,9 @@ export class AuthService {
   get isLoggedIn(): boolean {
     return this.currentUser !== null;
   }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('user-role'); // Récupère le rôle de l'utilisateur
+  }
+  
 }
