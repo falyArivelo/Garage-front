@@ -1,0 +1,33 @@
+<h2>Ajouter une pièce</h2>
+<form #pieceForm="ngForm" (ngSubmit)="addPiece()">
+    <div>
+        <label for="name">Pièce :</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newPiece.name" required />
+    </div>
+    <div>
+        <label for="category">Catégorie :</label>
+        <select id="category" name="category" [(ngModel)]="newPiece.category" required>
+        <option value="Moteur">Moteur</option>
+        <option value="Système de freinage">Système de freinage</option>
+        <option value="Electrique et Electronique">Electrique et Electronique</option>
+        <option value="Echappement">Echappement</option>
+        </select>
+    </div>
+    <div>
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" [(ngModel)]="newPiece.description" ></textarea>
+      </div>
+    <div>
+        <label for="price">Prix :</label>
+        <input type="text" id="price" name="price" [(ngModel)]="newPiece.prix" required />
+    </div>
+    <div>
+        <label for="stock">Nombre de Stock :</label>
+        <input type="number" id="stock" name="stock" [(ngModel)]="newPiece.stock" required />
+    </div>
+    <div>
+        <label for="createDate">Date :</label>
+        <input type="createDate" id="createDate" name="createDate" [(ngModel)]="newPiece.createDate" required />
+    </div>
+    <button type="submit">Ajouter</button>
+</form>
