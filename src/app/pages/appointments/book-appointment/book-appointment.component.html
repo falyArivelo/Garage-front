@@ -1,0 +1,34 @@
+<mat-card class="b-1 shadow-none">
+    <mat-card-header>
+        <mat-card-title>Sélectionner des services</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="service-list">
+            <div *ngFor="let service of services" class="service-item">
+                <div class="service-info">
+                    <h3>{{ service.name }}</h3>
+                    <p><strong>Catégorie :</strong> {{ service.category }}</p>
+                    <p>{{ service.description }}</p>
+                    <p><strong>Prix :</strong> {{ service.price |  currency:'MGA':'symbol':'1.0-0' }}</p>
+                    <p><strong>Disponibilité :</strong> {{ service.availability ? 'Disponible' : 'Indisponible' }}</p>
+                </div>
+                <div class="service-image">
+                    <img *ngIf="service.image" [src]="service.image" alt="Image du service" />
+                </div>
+                <div class="service-select">
+                    <input type="checkbox" [checked]="isSelected(service)" (change)="onServiceSelect(service)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Affichage des services sélectionnés -->
+        <div class="f-w-600 p-16 bg-light-primary rounded">
+            Services sélectionnés :
+            <ul>
+                <li *ngFor="let selectedService of selectedServices">
+                    {{ selectedService.name }}
+                </li>
+            </ul>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -4,7 +4,7 @@
 <div mat-subheader class="nav-caption">
   {{ item.navCap }}
 </div>
-} @if(!item.navCap && !item.external) {
+} @if(!item.navCap && !item.external ) {
   <a mat-list-item (click)="onItemSelected(item)" [ngClass]="{
       activeMenu: item.route ? router.isActive(item.route, true) : false,
       expanded: expanded,
