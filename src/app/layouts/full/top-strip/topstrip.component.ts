@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { BrandingComponent } from '../sidebar/branding.component';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, User } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-topstrip',
@@ -48,7 +48,9 @@ export class AppTopstripComponent {
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
 
-  constructor(private authService: AuthService) {}
+  email = (this.authService.currentUserValue as User)?.email || '';
+
+  constructor(public authService: AuthService) {}
 
   logout() {
     this.authService.logout();

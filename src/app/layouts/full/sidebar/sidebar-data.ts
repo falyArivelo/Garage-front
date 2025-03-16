@@ -5,14 +5,31 @@ export const navItems: NavItem[] = [
     navCap: 'Home',
   },
   {
-    displayName: 'Dashboard',
-    iconName: 'solar:atom-line-duotone',
+    displayName: 'Tableau de Bord',
+    iconName: 'bx:stats',
     route: '/dashboard',
+  },
+  {
+    displayName: 'Mes Véhicules',
+    iconName: 'mingcute:car-line',
+    route: '/vehicles/me',
+  },
+  {
+    displayName: 'Rendez Vous',
+    iconName: 'material-symbols:schedule-outline-rounded',
+    route: '/appointments/book',
+  },
+  {
+    displayName: 'Pièces',
+    iconName: 'solar:settings-line-duotone',
+    route: '/ui-components/pieces',
+    role : 'client'
   },
   {
     navCap: 'Ui Components',
     divider: true
   },
+
   {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',

@@ -9,6 +9,9 @@
                 style="width: 100px; height: auto;" />
             </a>
           </div>
+          <!-- LOADING -->
+          <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
           <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">

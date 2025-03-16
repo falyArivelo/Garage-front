@@ -1,0 +1,73 @@
+/* Container pour la liste des services */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    /* Espacement entre les informations du service et le bouton de sélection */
+    align-items: center;
+    padding: 5px ;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+    min-height: 100px;
+    /* Hauteur minimale ajustable */
+    height: auto;
+    box-sizing: border-box;
+}
+
+.service-info {
+    flex: 1;
+    padding-right: 16px;
+    /* Espacement entre la description et l'image */
+    font-size: 14px;
+    color: #383838;
+
+    h3 {
+        color: rgb(150, 0, 180);
+    }
+}
+
+.service-image {
+    max-width: 120px;
+    max-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.service-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-light-primary {
+    background-color: #e3f2fd;
+    /* Couleur de fond claire pour le conteneur des services sélectionnés */
+}
+
+/* Pour éviter que la liste ne devienne trop longue sans possibilité de défilement */
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Gérer l'affichage de la section des services sélectionnés */
+mat-selection-list {
+    max-height: 600px;
+    /* Limite la hauteur de la liste si elle est trop grande */
+    overflow-y: auto;
+    /* Ajoute un scroll si nécessaire */
+}
