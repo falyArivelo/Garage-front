@@ -55,9 +55,9 @@ export class VehicleAddComponent {
     this.isLoading = true;
     this.vehicleService.saveVehicle(this.vehicle).subscribe({
       next: () => {
-        this.isLoading = false;
       },
       error: () => {
+      }, complete: () => {
         this.isLoading = false;
       }
     });
