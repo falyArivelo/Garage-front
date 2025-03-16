@@ -22,9 +22,14 @@ export const routes: Routes = [
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
       },
       {
+        path: 'vehicles',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/vehicles/vehicles.routes').then((m) => m.VehicleRoutes),
+      },
+      {
         path: 'ui-components',
-        canActivate: [AuthGuard,RoleGuard],
-        data: { roles: ['manager'] },
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./pages/ui-components/ui-components.routes').then(
             (m) => m.UiComponentsRoutes

@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common'; // à importer
 })
 export class AppSideRegisterComponent  implements OnInit{
   options = this.settings.getOptions();
+  isLoading = false;
 
   constructor(private settings: CoreService, private router: Router, private authService: AuthService) {}
 
@@ -46,6 +47,7 @@ export class AppSideRegisterComponent  implements OnInit{
     if (this.form.invalid) {
       return;
     }
+    this.isLoading = true
 
     const userData = {
       username: this.form.value.username || '',
@@ -62,6 +64,9 @@ export class AppSideRegisterComponent  implements OnInit{
         console.error('Erreur d inscription :', err);
         // tu peux aussi afficher un message d'erreur ici
       },
+      complete : () => {
+        this.isLoading = false
+      }
     })
     
   }

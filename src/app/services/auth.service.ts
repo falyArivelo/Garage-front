@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 export interface User {
-  id: number;
+  user_id: number;
   username: string;
   email: string;
   role: string;
