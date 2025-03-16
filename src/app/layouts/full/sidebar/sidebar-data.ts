@@ -14,6 +14,11 @@ export const navItems: NavItem[] = [
     divider: true
   },
   {
+    displayName: 'Pièces',
+    iconName: 'solar:settings-line-duotone',
+    route: '/ui-components/pieces',
+  },
+  {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',
     route: '/ui-components/badge',

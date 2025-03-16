@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { PieceService } from '../../services/piece.service';
+import { PieceService } from 'src/app/services/piece.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
  
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
     imports: [CommonModule, FormsModule],
     templateUrl: './piece.component.html',
     styleUrl: './piece.component.css',
+    standalone: true, // IMPORTANT : Rend le composant standalone
 })
 export class PieceComponent {
     // Nouveau modèle pour le formulaire
