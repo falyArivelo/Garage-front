@@ -28,6 +28,12 @@ export const routes: Routes = [
           import('./pages/vehicles/vehicles.routes').then((m) => m.VehicleRoutes),
       },
       {
+        path: 'appointments',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/appointments/appointments.routes').then((m) => m.AppointmentRoutes),
+      },
+      {
         path: 'ui-components',
         canActivate: [AuthGuard],
         loadChildren: () =>

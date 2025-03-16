@@ -15,14 +15,21 @@ export const navItems: NavItem[] = [
     route: '/vehicles/me',
   },
   {
-    navCap: 'Ui Components',
-    divider: true
+    displayName: 'Rendez Vous',
+    iconName: 'material-symbols:schedule-outline-rounded',
+    route: '/appointments/book',
   },
   {
     displayName: 'Pièces',
     iconName: 'solar:settings-line-duotone',
     route: '/ui-components/pieces',
+    role : 'client'
   },
+  {
+    navCap: 'Ui Components',
+    divider: true
+  },
+
   {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',

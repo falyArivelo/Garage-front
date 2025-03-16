@@ -22,10 +22,6 @@ export class AuthService {
     this.loadUserFromLocalStorage();
    }
 
-  // login(credentials: { email: string; password: string }): Observable<any> {
-  //   return this.http.post(`${environment.baseUrl}/login`, credentials);
-  // }
-
   login(credentials: { email: string; password: string }): Observable<User> {
     return new Observable<User>(observer => {
       this.http.post<User>(`${environment.baseUrl}/login`, credentials)
@@ -38,7 +34,6 @@ export class AuthService {
         });
     });
   }
-
 
   signup(userData: { username: string; email: string; password: string; }): Observable<any> {
     return this.http.post(`${environment.baseUrl}/signup`, userData);

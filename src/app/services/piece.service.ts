@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment' // Import de l’en
 
 export class PieceService {
     private apiUrl = `${environment.baseUrl}/pieces` // Utilisation de la variable d’environnement
+    
     constructor(private http: HttpClient) {}
     // Liste toutes les pieces
     getPieces(): Observable<any> {
