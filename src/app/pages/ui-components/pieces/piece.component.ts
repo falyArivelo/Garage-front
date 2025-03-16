@@ -38,21 +38,37 @@ export class PieceComponent {
 
     // Méthode pour ajouter un nouvel piece
     addPiece(): void {
-        // Vérifie si le titre et le contenu ne sont pas vides
-        if (this.newPiece.name && this.newPiece.category && this.newPiece.price > 0 && this.newPiece.stock >=0 && this.newPiece.createDate) {
-            this.pieceService.addPiece(this.newPiece).subscribe(() => {
-                this.loadPieces()
-                // Recharge la liste après ajout
+        const pieceToSend = {
+            ...this.newPiece,
+            price: Number(this.newPiece.price),
+            stock: Number(this.newPiece.stock),
+            createDate: new Date(this.newPiece.createDate).toISOString().split('T')[0] // Format YYYY-MM-DD
+        };
+    
+        // Vérifie si les champs sont bien remplis
+        if (!pieceToSend.name || !pieceToSend.category || pieceToSend.price <= 0 || pieceToSend.stock < 0 || !pieceToSend.createDate) {
+            alert("Veuillez remplir correctement tous les champs !");
+            return;
+        }
+    
+        this.pieceService.addPiece(pieceToSend).subscribe({
+            next: () => {
+                this.loadPieces(); // Recharge la liste après ajout
                 this.newPiece = { 
                     name: '', 
                     category: '', 
-                    description: '',
-                    price: 0,
-                    stock: 0,
-                    createDate: '', 
-                } // Réinitialise le formulaire
-            })
-        }
+                    description: '', 
+                    price: 0, 
+                    stock: 0, 
+                    createDate: '' 
+                };
+                alert("Pièce ajoutée avec succès !");
+            },
+            error: (err) => {
+                console.error("Erreur lors de l’ajout :", err);
+                alert("Une erreur est survenue lors de l'ajout de la pièce.");
+            }
+        });
     }
 
     // Méthode pour mettre à jour une pièce
