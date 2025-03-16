@@ -1,0 +1,102 @@
+<mat-card class="cardWithShadow theme-card">
+
+    <mat-card-header>
+
+        <mat-card-title class="m-b-0">Modifier un véhicule</mat-card-title>
+    </mat-card-header>
+            <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-card-content class="b-t-1">
+        <form>
+            <div class="row">
+                <!-- Marque -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Marque</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: Toyota" [(ngModel)]="vehicle.brand" name="brand" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Modèle -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Modèle</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: Corolla" [(ngModel)]="vehicle.model" name="model" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Année -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Année</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="number" placeholder="ex: 2022" [(ngModel)]="vehicle.year" name="year" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Immatriculation -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Plaque d'immatriculation</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: AB-123-CD" [(ngModel)]="vehicle.licensePlate"
+                            name="licensePlate" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Type de carburant -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Type de carburant</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select [(ngModel)]="vehicle.fuelType" name="fuelType">
+                            <mat-option value="Essence">Essence</mat-option>
+                            <mat-option value="Diesel">Diesel</mat-option>
+                            <mat-option value="Électrique">Électrique</mat-option>
+                            <mat-option value="Hybride">Hybride</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Kilométrage -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Kilométrage</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="number" placeholder="ex: 120000" [(ngModel)]="vehicle.mileage"
+                            name="mileage" />
+                    </mat-form-field>
+                </div>
+
+                <!-- Statut -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Statut</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select [(ngModel)]="vehicle.status" name="status">
+                            <mat-option value="Actif">Actif</mat-option>
+                            <mat-option value="En réparation">En réparation</mat-option>
+                            <mat-option value="Hors service">Hors service</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- Couleur -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Couleur</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: Rouge" [(ngModel)]="vehicle.color" name="color" />
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="m-t-12">
+                <button mat-flat-button color="primary" class="m-r-8" (click)="save()">
+                    <!-- Spinner affiché uniquement pendant le chargement -->
+                    Mettre à jour
+                </button>
+                <button mat-stroked-button color="warn" type="button" (click)="cancel()">Annuler</button>
+
+            </div>
+
+        </form>
+
+    </mat-card-content>
+
+</mat-card>

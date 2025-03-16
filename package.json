@@ -28,8 +28,10 @@
     "iconify": "^1.4.0",
     "ng-apexcharts": "^1.7.6",
     "ngx-scrollbar": "^11.0.0",
+    "react-icons": "^5.5.0",
     "rxjs": "~7.5.0",
     "sass": "^1.57.1",
+    "sweetalert2": "^11.17.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

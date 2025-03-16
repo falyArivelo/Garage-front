@@ -10,12 +10,14 @@ import { CommonModule } from '@angular/common'; // à importer
 
 @Component({
   selector: 'app-side-login',
-  imports: [CommonModule,RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './side-login.component.html',
 })
 export class AppSideLoginComponent implements OnInit {
   email = '';
   password = '';
+
+  isLoading = false;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -34,10 +36,12 @@ export class AppSideLoginComponent implements OnInit {
     return this.form.controls;
   }
 
-  submit() {
+  submit() : void {
     if (this.form.invalid) {
       return;
     }
+
+    this.isLoading = true
 
     const credentials = {
       email: this.form.value.email || '',
@@ -50,10 +54,12 @@ export class AppSideLoginComponent implements OnInit {
         localStorage.setItem('carcare-token', res.token);
         this.router.navigate(['/dashboard']);
       },
-      error(err) {
+      error(err) {    
         console.error('Erreur de connexion:', err);
-        // tu peux aussi afficher un message d'erreur ici
       },
+      complete : () => {
+        this.isLoading = false
+      }
     })
   }
 }
