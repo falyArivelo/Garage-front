@@ -23,77 +23,77 @@ export interface PieceData {
 @Component({
     selector: 'app-list-pieces',
     imports: [
-      MaterialModule,
-      MatMenuModule,
-      MatButtonModule,
-      CommonModule,
-      TablerIconsModule,
-      MatProgressBarModule,
-      NgScrollbarModule,
-      RouterModule
+        MaterialModule,
+        MatMenuModule,
+        MatButtonModule,
+        CommonModule,
+        TablerIconsModule,
+        MatProgressBarModule,
+        NgScrollbarModule,
+        RouterModule
     ],
     templateUrl: './all.component.html',
 })
 
-export class PieceAllComponent implements OnInit{
-    displayedColumns: string[] = ['name', 'category', 'description', 'price', 'stock'];
+export class PieceAllComponent implements OnInit {
+    displayedColumns: string[] = ['name', 'category', 'price', 'stock',"menu"];
     @Input() dataSource: any[] = [];
     isLoading = true;
 
-    constructor(private pieceService: PieceService,  private cdr: ChangeDetectorRef) { }
+    constructor(private pieceService: PieceService, private cdr: ChangeDetectorRef) { }
 
     ngOnInit(): void {
-    if (!this.dataSource || this.dataSource.length === 0) {
-        this.loadPieces();
-    } else {
-        this.isLoading = false
-    }
+        if (!this.dataSource || this.dataSource.length === 0) {
+            this.loadPieces();
+        } else {
+            this.isLoading = false
+        }
     }
 
     loadPieces(): void {
-    this.isLoading = true;
-    this.pieceService.getAllPieces().subscribe({
-        next: (pieces: any[]) => {
-        this.dataSource = pieces;
-        this.isLoading = false;
-         console.log(pieces)
-        },
-        error: () => {
-        this.isLoading = false; // même en cas d'erreur, on arrête le chargement
-        }
-    });
+        this.isLoading = true;
+        this.pieceService.getAllPieces().subscribe({
+            next: (pieces: any[]) => {
+                this.dataSource = pieces;
+                this.isLoading = false;
+                console.log(pieces)
+            },
+            error: () => {
+                this.isLoading = false; // même en cas d'erreur, on arrête le chargement
+            }
+        });
     }
 
     // Fonction de suppression avec confirmation
     confirmDelete(piece_id: string): void {
-    Swal.fire({
-        title: 'êtes-vous sûrs?',
-        text: 'Voulez-vous supprimer cette pièce?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimez-la!',
-        cancelButtonText: 'Annuler'
-    }).then((result) => {
-        if (result.isConfirmed) {
-        this.deletePiece(piece_id);
-        }
-    });
+        Swal.fire({
+            title: 'êtes-vous sûrs?',
+            text: 'Voulez-vous supprimer cette pièce?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimez-la!',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.deletePiece(piece_id);
+            }
+        });
     }
 
     // Logique pour supprimer la pièce
     deletePiece(piece_id: string): void {
-    console.log(piece_id);
-    this.pieceService.deletePiece(piece_id).subscribe({
-        next: (response) => {
-        console.log('Pièce supprimé avec succès:', response);
-        this.dataSource = this.dataSource.filter(piece => piece_id !== piece_id);
-        this.cdr.detectChanges();
-        },
-        error: (error) => {
-        console.error('Erreur lors de la suppression:', error);
-        }
-    });
+        console.log(piece_id);
+        this.pieceService.deletePiece(piece_id).subscribe({
+            next: (response) => {
+                console.log('Pièce supprimé avec succès:', response);
+                this.dataSource = this.dataSource.filter(piece => piece_id !== piece_id);
+                this.cdr.detectChanges();
+            },
+            error: (error) => {
+                console.error('Erreur lors de la suppression:', error);
+            }
+        });
     }
 }
