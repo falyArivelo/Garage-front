@@ -1,0 +1,77 @@
+<mat-card class="cardWithShadow overflow-hidden">
+    <mat-card-content>
+        <mat-card-title class="m-b-4">Mes Pièces</mat-card-title>
+        <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle>
+    </mat-card-content>
+
+    <div class="table-responsive">
+
+        <table mat-table [dataSource]="dataSource" class="w-100">
+
+        <!-- Brand Column -->
+        <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Pièce </th>
+            <td mat-cell *matCellDef="let piece">
+            <div class="d-flex align-items-center">
+                <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 lh-sm">{{ piece.name }}</h6>
+
+                <!-- <img [src]="vehicle.imagePath" alt="vehicle" width="60" class="rounded-7" /> -->
+                <!-- <div class="m-l-16">
+                    <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 lh-sm">{{ vehicle.brand }}</h6>
+                </div> -->
+            </div>
+            </td>
+        </ng-container>
+
+        <!-- Model Column -->
+        <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Catégorie </th>
+            <td mat-cell *matCellDef="let piece">{{ piece.category }}</td>
+        </ng-container>
+
+        <!-- Year Column -->
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Prix </th>
+            <td mat-cell *matCellDef="let piece">{{ piece.price }}</td>
+        </ng-container>
+
+        <!-- License Plate Column -->
+        <ng-container matColumnDef="licensePlate">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Stock </th>
+            <td mat-cell *matCellDef="let piece">{{ piece.stock }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="menu">
+            <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+
+            </th>
+            <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+                <a class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
+                [routerLink]="['/pieces/edit', element._id]">
+                <i-tabler name="edit" class="icon-18"></i-tabler>
+                <span>Edit</span>
+                </a>
+                <a href="javascript:void(0)"
+                class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
+                (click)="confirmDelete(element._id)">
+                <i-tabler name="trash" class="icon-18"></i-tabler>
+                <span>Delete</span>
+                </a>
+            </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <!-- LOADING -->
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    </div>
+</mat-card>
