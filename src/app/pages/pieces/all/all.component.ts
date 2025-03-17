@@ -21,7 +21,7 @@ export interface PieceData {
 }
 
 @Component({
-    selector: 'app-all',
+    selector: 'app-list-pieces',
     imports: [
       MaterialModule,
       MatMenuModule,
@@ -36,8 +36,8 @@ export interface PieceData {
 })
 
 export class PieceAllComponent implements OnInit{
-    displayedColumns: string[] = ['brand', 'model', 'year', 'licensePlate', 'fuelType', 'mileage', 'status', 'menu'];
-    @Input() dataSource: PieceData[] = [];
+    displayedColumns: string[] = ['name', 'category', 'description', 'price', 'stock'];
+    @Input() dataSource: any[] = [];
     isLoading = true;
 
     constructor(private pieceService: PieceService,  private cdr: ChangeDetectorRef) { }
@@ -53,9 +53,10 @@ export class PieceAllComponent implements OnInit{
     loadPieces(): void {
     this.isLoading = true;
     this.pieceService.getAllPieces().subscribe({
-        next: (pieces: PieceData[]) => {
+        next: (pieces: any[]) => {
         this.dataSource = pieces;
         this.isLoading = false;
+         console.log(pieces)
         },
         error: () => {
         this.isLoading = false; // même en cas d'erreur, on arrête le chargement

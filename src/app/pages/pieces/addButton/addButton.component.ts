@@ -15,7 +15,7 @@ import { PieceService } from 'src/app/services/piece.service';
 })
 export class PieceAddButtonComponent implements OnInit {
 
-  pieces : PieceData[] = []
+  pieces : any[] = []
 
   constructor(private pieceService: PieceService,private router: Router) { }
 
@@ -24,7 +24,7 @@ export class PieceAddButtonComponent implements OnInit {
   }
 
   loadPieces(): void {
-    this.pieceService.getAllPieces().subscribe((pieces: PieceData[]) => {
+    this.pieceService.getAllPieces().subscribe((pieces: any[]) => {
       this.pieces = pieces;
     });
   }
