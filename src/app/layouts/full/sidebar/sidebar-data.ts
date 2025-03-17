@@ -34,8 +34,8 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Pièces',
     iconName: 'solar:settings-line-duotone',
-    route: '/ui-components/pieces',
-    role :['manager']
+    route: '/pieces/all',
+    role :['manager'],
   },
   {
     navCap: 'Ui Components',

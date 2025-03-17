@@ -4,7 +4,7 @@
 <div mat-subheader class="nav-caption">
   {{ item.navCap }}
 </div>
-} @if(!item.navCap && !item.external &&  (!item.role || authService.hasRole(item.role)) ) {
+} @if(!item.navCap && !item.external &&  (!item.role || authService.hasAnyRole(item.role)) ) {
   <a mat-list-item (click)="onItemSelected(item)"  [ngStyle]="{ 'margin-left.px': depth * 15 , 'width': 'calc(100% - ' + (depth * 15) + 'px)' }"  [ngClass]="{
       activeMenu: item.route ? router.isActive(item.route, true) : false,
       expanded: expanded,
