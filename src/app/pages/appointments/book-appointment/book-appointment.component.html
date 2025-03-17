@@ -1,4 +1,5 @@
 <mat-card class="b-1 shadow-none">
+    <!-- SELECTION SERVICES -->
     <mat-card-header>
         <mat-card-title>Sélectionner des services</mat-card-title>
     </mat-card-header>
@@ -9,7 +10,7 @@
                     <h3>{{ service.name }}</h3>
                     <p><strong>Catégorie :</strong> {{ service.category }}</p>
                     <p>{{ service.description }}</p>
-                    <p><strong>Prix :</strong> {{ service.price |  currency:'MGA':'symbol':'1.0-0' }}</p>
+                    <p><strong>Prix :</strong> {{ service.price | currency:'MGA':'symbol':'1.0-0' }}</p>
                     <p><strong>Disponibilité :</strong> {{ service.availability ? 'Disponible' : 'Indisponible' }}</p>
                 </div>
                 <div class="service-image">
@@ -31,4 +32,44 @@
             </ul>
         </div>
     </mat-card-content>
+
+    <!-- SELECTION VOITURE -->
+    <mat-card-header>
+        <mat-card-title>Sélectionner un véhicule</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="vehicle-list">
+            <div *ngFor="let vehicle of vehicles" (click)="selectVehicle(vehicle)"
+                [ngClass]="{'selected-vehicle': selectedVehicle?._id === vehicle._id}"
+                class="vehicle-item p-8 m-b-8 cursor-pointer border rounded">
+                <strong>{{ vehicle.brand }} {{ vehicle.model }}</strong><br>
+                <small>Immatriculation : {{ vehicle.licensePlate }}</small><br>
+                <small>Statut : {{ vehicle.status }}</small>
+            </div>
+        </div>
+
+        <!-- Affichage du véhicule sélectionné -->
+        <div *ngIf="selectedVehicle" class="mt-16 bg-light-primary rounded p-12 f-w-600">
+            Véhicule sélectionné : {{ selectedVehicle.brand }} {{ selectedVehicle.model }} - {{
+            selectedVehicle.licensePlate }}
+        </div>
+    </mat-card-content>
+
+    <!-- SELECTION DE LA DATE -->
+    <div class="mt-16">
+        <label for="appointment-date" class="f-w-600">Choisir une date de rendez-vous :</label>
+        <input type="date" id="appointment-date" [(ngModel)]="selectedDate" class="p-8 border rounded m-t-8" />
+    </div>
+
+    <!-- Affichage de la date sélectionnée -->
+    <div *ngIf="selectedDate" class="mt-16 bg-light-primary rounded p-12 f-w-600">
+        Date sélectionnée : {{ selectedDate | date: 'fullDate' }}
+    </div>
+    <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <button mat-flat-button color="primary" class="m-r-8" (click)="save()">Enregistrer</button>
+
+
 </mat-card>

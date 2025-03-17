@@ -35,7 +35,7 @@ export interface VehicleData {
     TablerIconsModule,
     MatProgressBarModule,
     NgScrollbarModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './list-vehicles.component.html',
 })

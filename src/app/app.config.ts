@@ -2,6 +2,7 @@ import {
   ApplicationConfig,
   provideZoneChangeDetection,
   importProvidersFrom,
+  LOCALE_ID,
 } from '@angular/core';
 import {
   provideHttpClient,
@@ -48,5 +49,7 @@ export const appConfig: ApplicationConfig = {
       TablerIconsModule.pick(TablerIcons),
       NgScrollbarModule,
     ),
+    // Add the LOCALE_ID provider to set the French locale
+    { provide: LOCALE_ID, useValue: 'fr' },
   ],
 };

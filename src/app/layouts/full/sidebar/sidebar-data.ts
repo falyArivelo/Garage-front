@@ -12,7 +12,19 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Mes Véhicules',
     iconName: 'mingcute:car-line',
-    route: '/vehicles/me',
+    // route: '/vehicles/me',
+    children: [
+      {
+        displayName: 'Tous les Véhicules',
+        route: '/vehicles/me',
+        iconName: 'ic:outline-directions-car', // optionnel
+      },
+      {
+        displayName: 'Ajouter un Véhicule',
+        route: '/vehicles/add',
+        iconName: 'ic:outline-add-circle', // optionnel
+      }
+    ]
   },
   {
     displayName: 'Rendez Vous',
@@ -23,7 +35,7 @@ export const navItems: NavItem[] = [
     displayName: 'Pièces',
     iconName: 'solar:settings-line-duotone',
     route: '/ui-components/pieces',
-    role : 'client'
+    role :['manager']
   },
   {
     navCap: 'Ui Components',

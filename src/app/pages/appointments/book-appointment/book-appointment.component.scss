@@ -71,3 +71,17 @@ mat-selection-list {
     overflow-y: auto;
     /* Ajoute un scroll si nécessaire */
 }
+
+.vehicle-item {
+    transition: 0.3s;
+  }
+  
+  .vehicle-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .selected-vehicle {
+    background-color: #cce5ff;
+    border: 2px solid #007bff;
+  }
+  

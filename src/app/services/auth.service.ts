@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
 export interface User {
-  user_id: number;
+  user_id: string;
   username: string;
   email: string;
   role: string;
@@ -43,6 +43,10 @@ export class AuthService {
     localStorage.removeItem('carcare-token'); // ou le nom de ton token
     localStorage.removeItem('carcare-user');
     this.router.navigate(['/authentication/login']); // ou une autre page publique
+  }
+
+  hasAnyRole(roles: string[]): boolean {
+    return roles.some(role => this.hasRole(role));
   }
 
   hasRole(requiredRole: string): boolean {
