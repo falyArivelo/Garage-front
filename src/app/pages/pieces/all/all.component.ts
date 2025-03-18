@@ -21,7 +21,7 @@ export interface PieceData {
 }
 
 @Component({
-    selector: 'app-list-pieces',
+    selector: 'app-all',
     imports: [
         MaterialModule,
         MatMenuModule,

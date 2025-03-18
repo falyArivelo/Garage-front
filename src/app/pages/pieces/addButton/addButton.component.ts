@@ -30,6 +30,6 @@ export class PieceAddButtonComponent implements OnInit {
   }
 
   goToAddPiece() {
-    this.router.navigate(['/vehicles/add']);
+    this.router.navigate(['/pieces/add']);
   }
 }
