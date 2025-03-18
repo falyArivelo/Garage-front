@@ -89,6 +89,6 @@ export class PieceAddComponent {
       price: 0,
       stock: 0
     };
-    this.router.navigate(['/pieces/add']);
+    this.router.navigate(['/pieces/addButton']);
   }
 }

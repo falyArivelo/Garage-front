@@ -51,9 +51,9 @@ export class PieceService {
     }
 
     // Modifie par piece
-    updatePiece(id: string, piece: any): Observable<any> {
+    updatePiece(piece: any): Observable<any> {
       const headers = this.getAuthHeaders();
-      return this.http.put(`${this.apiUrl}/pieces/${id}`, piece, { headers });
+      return this.http.put(`${this.apiUrl}/pieces/${piece._id}`, piece, { headers });
     }
 
     // Supprime une piece

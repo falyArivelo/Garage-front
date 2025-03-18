@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { PieceAddButtonComponent } from './addButton/addButton.component';
 import { PieceAddComponent } from './add/add.component';
 import { PieceAllComponent } from './all/all.component';
+import { PieceEditComponent } from './edit/edit.component';
 import { RoleGuard } from 'src/app/guards/role.guard';
 
 export const PiecesRoutes: Routes = [
@@ -27,6 +28,12 @@ export const PiecesRoutes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['manager', 'mecanicien'] },
         component: PieceAllComponent, // Affiche toutes les pieces
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager'] },
+        component: PieceEditComponent, // Modidier piece
       }
     ],
   },
