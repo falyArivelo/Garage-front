@@ -52,7 +52,6 @@ export const navItems: NavItem[] = [
     navCap: 'Ui Components',
     divider: true
   },
-
   {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',
