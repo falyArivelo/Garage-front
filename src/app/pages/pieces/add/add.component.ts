@@ -69,7 +69,15 @@ export class PieceAddComponent {
     
     this.pieceService.createPiece(this.piece).subscribe({
         next: () => {
-            this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
+          this.piece = {
+            _id: '',
+            name: '',
+            category: 'Moteur',
+            description: '',
+            price: 0,
+            stock: 0
+          };
+          this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
         },
         error: (err) => {
             console.error("Erreur lors de l'ajout :", err);
