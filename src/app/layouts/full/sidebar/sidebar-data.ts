@@ -49,6 +49,11 @@ export const navItems: NavItem[] = [
     ]
   },
   {
+    displayName: 'Nos Services',
+    iconName: 'material-symbols:schedule-outline-rounded',
+    route: '/services/addButton',
+  },
+  {
     navCap: 'Ui Components',
     divider: true
   },

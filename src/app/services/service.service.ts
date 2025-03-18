@@ -33,7 +33,7 @@ export class ServiceService {
     }
 
     // Liste tous les services
-    getServices(): Observable<any> {
+    getAllServices(): Observable<any> {
       const headers = this.getAuthHeaders();
       return this.http.get<any[]>(`${this.apiUrl}/services`, { headers });
     }
