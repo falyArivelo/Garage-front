@@ -12,6 +12,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { PieceService } from 'src/app/services/piece.service';
 import { PieceData } from '../all/all.component';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-add',
@@ -26,43 +28,67 @@ import { Router } from '@angular/router';
       MatCardModule,
       MatInputModule,
       MatCheckboxModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      MatSnackBarModule,
     ],
     templateUrl: './add.component.html',
     styleUrl: './add.component.scss'
 })
 
 export class PieceAddComponent {
-    piece: PieceData = {
-        _id: '',
-        name: '',
-        category: 'Moteur',
-        description: '',
-        price: 0,
-        stock: 0,
-    };
+  piece: PieceData = {
+      _id: '',
+      name: '',
+      category: 'Moteur',
+      description: '',
+      price: 0,
+      stock: 0,
+  };
 
-    isLoading = false
+  isLoading = false
+  
+  constructor(
+    private pieceService: PieceService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
+
+  save() {
+    // Vérification des champs obligatoires
+    if (!this.piece?.name || !this.piece?.category) {
+        this.snackBar.open("Veuillez remplir tous les champs !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        return;
+    }
+
+    if (this.piece.price <= 0 || this.piece.stock < 0) {
+        this.snackBar.open("Veuillez entrer un prix et un stock valides !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        return;
+    }
+
+    this.isLoading = true;
     
-      constructor(
-        private pieceService: PieceService,
-        private router: Router
-      ) { }
-    
-      save() {
-        this.isLoading = true;
-        this.pieceService.createPiece(this.piece).subscribe({
-          next: () => {
-          },
-          error: () => {
-          }, complete: () => {
-            this.isLoading = false;
-          }
-        });
-      }
-    
-      cancel() {
-        this.router.navigate(['/pieces/all']);
-      }
-    
+    this.pieceService.createPiece(this.piece).subscribe({
+        next: () => {
+            this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
+        },
+        error: (err) => {
+            console.error("Erreur lors de l'ajout :", err);
+            const errorMessage = err.error?.message || "Une erreur inconnue est survenue.";
+            this.snackBar.open(errorMessage, "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        },
+        complete: () => { this.isLoading = false; }
+    });
+  }
+
+  cancel() {
+    this.piece = {
+      _id: '',
+      name: '',
+      category: 'Moteur',
+      description: '',
+      price: 0,
+      stock: 0
+    };
+    this.router.navigate(['/pieces/add']);
+  }
 }

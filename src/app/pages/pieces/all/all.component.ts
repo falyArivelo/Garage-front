@@ -9,6 +9,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { Input } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { PieceService } from 'src/app/services/piece.service';
 
 export interface PieceData {
@@ -40,7 +41,11 @@ export class PieceAllComponent implements OnInit {
     @Input() dataSource: any[] = [];
     isLoading = true;
 
-    constructor(private pieceService: PieceService, private cdr: ChangeDetectorRef) { }
+    constructor(
+        private pieceService: PieceService, 
+        private cdr: ChangeDetectorRef,
+        private router: Router,
+    ) { }
 
     ngOnInit(): void {
         if (!this.dataSource || this.dataSource.length === 0) {
@@ -87,6 +92,7 @@ export class PieceAllComponent implements OnInit {
         console.log(piece_id);
         this.pieceService.deletePiece(piece_id).subscribe({
             next: (response) => {
+                this.router.navigate(['/pieces/all']);
                 console.log('Pièce supprimé avec succès:', response);
                 this.dataSource = this.dataSource.filter(piece => piece_id !== piece_id);
                 this.cdr.detectChanges();

@@ -26,8 +26,10 @@ export class PieceService {
 
     // Ajout piece
     createPiece(piece: any): Observable<any> {
+      const { _id, ...rest } = piece; // Exclut _id
+      const dataToSend = { ...rest }; // Envoie seulement les données nécessaires
       const headers = this.getAuthHeaders();
-      return this.http.post(`${this.apiUrl}/pieces`, piece, { headers });
+      return this.http.post(`${this.apiUrl}/pieces`, dataToSend, { headers });
     }
 
     // Liste toutes les pieces
@@ -40,6 +42,12 @@ export class PieceService {
     getPieceById(id: string): Observable<any> {
       const headers = this.getAuthHeaders();
       return this.http.get<any>(`${this.apiUrl}/pieces/${id}`, { headers });
+    }
+
+    // Obtenir le nom d'une piece
+    getPieceByName(name: string): Observable<any> {
+      const headers = this.getAuthHeaders();
+      return this.http.get<any>(`${this.apiUrl}/pieces/name/${name}`, { headers });
     }
 
     // Modifie par piece
