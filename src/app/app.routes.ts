@@ -40,6 +40,12 @@ export const routes: Routes = [
           import('./pages/pieces/pieces.routes').then((m) => m.PiecesRoutes),
       },
       {
+        path: 'services',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/services/services.routes').then((m) => m.ServicesRoutes),
+      },
+      {
         path: 'ui-components',
         canActivate: [AuthGuard],
         loadChildren: () =>

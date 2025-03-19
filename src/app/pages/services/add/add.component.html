@@ -1,1 +1,69 @@
-<p>add works!</p>
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Ajouter un service</mat-card-title>
+    </mat-card-header>
+  
+    <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <mat-card-content class="b-t-1">
+      <form>
+        <div class="row">
+            <!-- Service -->
+            <div class="col-lg-6">
+                <mat-label class="f-w-600 m-b-8 d-block">Service</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                <input matInput placeholder="ex: Vidange moteur" [(ngModel)]="service.name" name="name" />
+                </mat-form-field>
+
+                <!-- Description -->
+                <mat-label class="f-w-600 m-b-8 d-block mt-3">Description</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <textarea matInput placeholder="Entrez la description..." rows="6" [(ngModel)]="service.description" name="description"></textarea>
+                </mat-form-field>
+
+                <!-- Pièces -->
+                <mat-label class="f-w-600 m-b-8 d-block mt-3">Pièces</mat-label>
+                <mat-card-content class="b-t-1">
+                    <mat-selection-list #piecesList [multiple]="true" [(ngModel)]="selectedPieces" name="selectedPieces">
+                        @for(piece of pieces; track piece) {
+                          <mat-list-option [value]="piece">
+                            {{ piece.name }}
+                          </mat-list-option>
+                        }
+                      </mat-selection-list>
+                </mat-card-content>
+            </div>
+  
+            <div class="col-lg-6">
+                <!-- Catégorie -->
+                <mat-label class="f-w-600 m-b-8 d-block">Catégorie</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                <mat-select [(ngModel)]="service.category" name="category">
+                    <mat-option value="Réparation">Réparation</mat-option>
+                    <mat-option value="Entretien">Entretien</mat-option>
+                    <mat-option value="Diagnostic">Diagnostic</mat-option>
+                </mat-select>
+                </mat-form-field>
+
+                <!-- Prix -->
+                <mat-label class="f-w-600 m-b-8 d-block">Prix</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                <input matInput placeholder="ex: 120000" [(ngModel)]="service.price" name="price" />
+                </mat-form-field>
+  
+                <!-- Durée estimée -->
+                <mat-label class="f-w-600 m-b-8 d-block">Durée estimée</mat-label>
+                <mat-form-field appearance="outline" class="w-100">
+                <input matInput type="number" [(ngModel)]="service.estimatedDuration" name="estimatedDuration" />
+                </mat-form-field>
+            </div>
+        </div>
+  
+        <div class="m-t-12">
+            <button mat-flat-button color="primary" class="m-r-8"  (click)="save()">Enregistrer</button>
+            <button mat-stroked-button color="warn" type="button" (click)="cancel()">Annuler</button>
+        </div>
+      </form>
+    </mat-card-content>
+</mat-card>
