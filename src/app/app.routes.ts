@@ -4,7 +4,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
-
+import { LandingComponent } from './pages/landing/landing.component';
 export const routes: Routes = [
   {
     path: '',
@@ -67,6 +67,16 @@ export const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'landing',
+        component: LandingComponent,
+      },
+    ]
   },
   {
     path: '**',
