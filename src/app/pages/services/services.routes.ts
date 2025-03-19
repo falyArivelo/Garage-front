@@ -25,6 +25,7 @@ export const ServicesRoutes: Routes = [
       {
         path: 'all',
         canActivate: [RoleGuard],
+        data: { roles: ['manager', 'mecanicien', 'client'] },
         component: ServiceAllComponent, // Bouton ajout et Affiche tous les services
       }
 

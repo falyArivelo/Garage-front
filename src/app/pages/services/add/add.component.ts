@@ -41,7 +41,7 @@ export class ServiceAddComponent {
   pieces: any[] = [];
   selectedPieces: any[] = [];  // Liste des pièces sélectionnées
 
-  private defaultService: ServiceData = {
+  service: ServiceData = {
     _id: '',
     name: '',
     category: 'Réparation',
@@ -52,7 +52,6 @@ export class ServiceAddComponent {
     pieces: [],
     image: '',
   };
-  service: ServiceData = { ...this.defaultService };
 
   isLoading = false
   
@@ -102,8 +101,19 @@ export class ServiceAddComponent {
     
     this.serviceService.addService(this.service).subscribe({
         next: () => {
-            this.service = { ...this.defaultService }; // Réinitialisation propre
-            this.snackBar.open("Service ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
+          this.selectedPieces = [];
+          this.service = {
+            _id: '',
+            name: '',
+            category: 'Réparation',
+            description: '',
+            price: 0,
+            estimatedDuration: 0,
+            availability: true,
+            pieces: [],
+            image: '',
+          }
+          this.snackBar.open("Service ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
         },
         error: (err) => {
             console.error("Erreur lors de l'ajout :", err);
@@ -115,7 +125,17 @@ export class ServiceAddComponent {
   }
 
   cancel() {
-    this.service = { ...this.defaultService }; // Réinitialisation propre
-    this.router.navigate(['/services/addButton']);
+    this.service = {
+      _id: '',
+      name: '',
+      category: 'Réparation',
+      description: '',
+      price: 0,
+      estimatedDuration: 0,
+      availability: true,
+      pieces: [],
+      image: '',
+    }
+    this.selectedPieces = []; // Réinitialiser explicitement la sélection
   }
 }

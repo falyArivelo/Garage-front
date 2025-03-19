@@ -53,6 +53,6 @@ export class ServiceService {
     // Supprime un service
     deleteService(id: string): Observable<any> {
       const headers = this.getAuthHeaders();
-      return this.http.delete(`${this.apiUrl}/services/${id}`)
+      return this.http.delete(`${this.apiUrl}/services/${id}`, { headers })
     }
 }
