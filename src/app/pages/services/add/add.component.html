@@ -49,19 +49,14 @@
                 <!-- Prix -->
                 <mat-label class="f-w-600 m-b-8 d-block">Prix</mat-label>
                 <mat-form-field appearance="outline" class="w-100">
-                <input matInput placeholder="ex: AB-123-CD" [(ngModel)]="service.price" name="price" />
+                <input matInput placeholder="ex: 120000" [(ngModel)]="service.price" name="price" />
                 </mat-form-field>
   
                 <!-- Durée estimée -->
                 <mat-label class="f-w-600 m-b-8 d-block">Durée estimée</mat-label>
                 <mat-form-field appearance="outline" class="w-100">
-                <input matInput type="number" placeholder="ex: 120000" [(ngModel)]="service.estimatedDuration" name="estimatedDuration" />
+                <input matInput type="number" [(ngModel)]="service.estimatedDuration" name="estimatedDuration" />
                 </mat-form-field>
-            </div>
-
-            <!-- Piece -->
-            <div class="col-lg-6">
-                
             </div>
         </div>
   

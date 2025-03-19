@@ -76,14 +76,15 @@ export class ServiceAddComponent {
         return;
     }
 
-    // Verification si Prix et estimation n'est pas negatif
+    // Verification si Prix est pas negatif
     if (this.service.price <= 0) {
         this.snackBar.open("Veuillez entrer un prix valide !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
         return;
     }
 
+    // Verification si duree estimation est pas negatif
     if (this.service.estimatedDuration <= 0){
-      this.snackBar.open("Veuillez entrer une duree d'estimation valide !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+      this.snackBar.open("Veuillez entrer une durée d'estimation valide !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
       return;
     }
 
