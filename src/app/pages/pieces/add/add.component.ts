@@ -36,7 +36,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 })
 
 export class PieceAddComponent {
-  private defaultPiece : PieceData = {
+  piece : PieceData = {
       _id: '',
       name: '',
       category: 'Moteur',
@@ -44,7 +44,6 @@ export class PieceAddComponent {
       price: 0,
       stock: 0,
   };
-  piece: PieceData = { ...this.defaultPiece };
   isLoading = false
   
   constructor(
@@ -69,7 +68,14 @@ export class PieceAddComponent {
     
     this.pieceService.createPiece(this.piece).subscribe({
         next: () => {
-          this.piece = { ...this.defaultPiece };
+          this.piece = { 
+            _id: '',
+            name: '',
+            category: 'Moteur',
+            description: '',
+            price: 0,
+            stock: 0, 
+          };
           this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
         },
         error: (err) => {
@@ -82,7 +88,13 @@ export class PieceAddComponent {
   }
 
   cancel() {
-    this.piece = { ...this.defaultPiece }; // Réinitialisation propre
-    this.router.navigate(['/pieces/addButton']);
+    this.piece = { 
+      _id: '',
+      name: '',
+      category: 'Moteur',
+      description: '',
+      price: 0,
+      stock: 0, 
+    }; // Réinitialisation propre
   }
 }
