@@ -72,10 +72,16 @@ export const navItems: NavItem[] = [
         role :['manager', 'mecanicien'],
       },
       {
-        displayName: 'Ajouter une Pièce',
+        displayName: 'Ajouter un Service',
         route: '/services/add',
         iconName: '',
         role :['manager'],
+      },
+      {
+        displayName: 'Nos Cards Services',
+        route: '/services/allCard',
+        iconName: '',
+        role :['manager', 'mecanicien', 'client'],
       }
     ]
   },
