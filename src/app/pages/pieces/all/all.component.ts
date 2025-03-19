@@ -37,7 +37,7 @@ export interface PieceData {
 })
 
 export class PieceAllComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'category', 'price', 'stock',"menu"];
+    displayedColumns: string[] = ['name', 'category', 'price', 'stock', 'menu'];
     @Input() dataSource: any[] = [];
     isLoading = true;
 

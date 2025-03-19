@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { PieceAllComponent, PieceData } from '../all/all.component';
+import { PieceAllComponent } from '../all/all.component';
 import { PieceService } from 'src/app/services/piece.service'; 
 
 @Component({
