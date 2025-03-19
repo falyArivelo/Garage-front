@@ -9,12 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ServiceService } from 'src/app/services/service.service';
-import { ServiceData } from '../all/all.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
+import { ServiceService } from 'src/app/services/service.service';
+import { ServiceData } from '../all/all.component';
+import { PieceService } from 'src/app/services/piece.service';
 
 @Component({
     selector: 'app-add',
@@ -57,6 +58,7 @@ export class ServiceAddComponent {
   
   constructor(
     private serviceService: ServiceService,
+    private pieceService: PieceService,
     private router: Router,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute
@@ -67,6 +69,17 @@ export class ServiceAddComponent {
       this.pieces = navigation.extras.state['pieces'];
       console.log("Pièces reçues :", this.pieces);
     }
+  }
+
+  ngOnInit(): void {
+    // Appel de la fonction pour charger les pièces
+    this.loadPieces();
+  }
+
+  loadPieces(): void {
+    this.pieceService.getAllPieces().subscribe((pieces: any[]) => {
+      this.pieces = pieces;
+    });
   }
 
   save() {

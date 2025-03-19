@@ -34,24 +34,50 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Pièces',
     iconName: 'solar:settings-line-duotone',
-    role :['manager'],
     children: [
       {
         displayName: 'Tous les Pièces',
         route: '/pieces/addButton',
         iconName: '',
+        role :['manager'],
+      },
+      {
+        displayName: 'Nos Pièces',
+        route: '/pieces/all',
+        iconName: '',
+        role :['manager', 'mecanicien'],
       },
       {
         displayName: 'Ajouter une Pièce',
         route: '/pieces/add',
         iconName: '',
+        role :['manager'],
       }
     ]
   },
   {
-    displayName: 'Nos Services',
-    iconName: 'material-symbols:schedule-outline-rounded',
-    route: '/services/addButton',
+    displayName: 'Services',
+    iconName: 'solar:settings-line-duotone',
+    children: [
+      {
+        displayName: 'Tous les Services',
+        route: '/services/addButton',
+        iconName: '',
+        role :['manager'],
+      },
+      {
+        displayName: 'Nos Services',
+        route: '/services/all',
+        iconName: '',
+        role :['manager', 'mecanicien'],
+      },
+      {
+        displayName: 'Ajouter une Pièce',
+        route: '/services/add',
+        iconName: '',
+        role :['manager'],
+      }
+    ]
   },
   {
     navCap: 'Ui Components',
