@@ -20,7 +20,7 @@ export interface ServiceData {
     price: number;
     estimatedDuration: number;
     availability: true;
-    pieces: [];
+    pieces: any[];
     image: string;
 }
 
