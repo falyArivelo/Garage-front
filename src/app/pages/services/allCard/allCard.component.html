@@ -1,0 +1,20 @@
+<div class="card-container">
+  <div class="card" *ngFor="let service of dataSource">
+      <img
+        class="card__background"
+        src="https://i.imgur.com/QYWAcXk.jpeg"
+        alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+        width="1920"
+        height="2193"
+      />
+      <div class="card__content | flow">
+        <div class="card__content--container | flow">
+          <h2 class="card__title" >{{ service.name }}</h2>
+          <p class="card__description">
+            {{ service.description }}
+          </p>
+        </div>
+        <button class="card__button">En savoir plus</button>
+      </div>
+  </div>
+</div>
