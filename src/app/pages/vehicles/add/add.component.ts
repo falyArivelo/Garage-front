@@ -45,6 +45,8 @@ export class VehicleAddComponent {
   };
 
   isLoading = false
+  confirmationMessage: string = '';
+  messageType: 'success' | 'error' = 'success';  // Initialisation par défaut à 'success'
 
   constructor(
     private vehicleService: VehicleService,
@@ -54,10 +56,17 @@ export class VehicleAddComponent {
   save() {
     this.isLoading = true;
     this.vehicleService.saveVehicle(this.vehicle).subscribe({
-      next: () => {
+      next: (response) => {
+        if(response.success){
+          this.confirmationMessage = response.message
+          this.messageType = 'success';  
+        }
       },
-      error: () => {
+      error: (error) => {
+        this.confirmationMessage = error.message
+        this.messageType = 'error';  
       }, complete: () => {
+        
         this.isLoading = false;
       }
     });

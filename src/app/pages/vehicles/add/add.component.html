@@ -83,6 +83,10 @@
         </div>
       </div>
 
+      <div *ngIf="confirmationMessage" [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}" class="confirmation-message">
+        {{ confirmationMessage }}
+      </div>
+
       <div class="m-t-12">
         <button mat-flat-button color="primary" class="m-r-8"  (click)="save()">Enregistrer</button>
         <button mat-stroked-button color="warn" type="button">Annuler</button>

@@ -17,10 +17,10 @@ export interface User {
 })
 export class AuthService {
   private currentUser: User | null = null;
-  
+
   constructor(private http: HttpClient, private router: Router,) {
     this.loadUserFromLocalStorage();
-   }
+  }
 
   login(credentials: { email: string; password: string }): Observable<User> {
     return new Observable<User>(observer => {
@@ -60,9 +60,9 @@ export class AuthService {
     localStorage.setItem('carcare-user', JSON.stringify(user));
   }
 
-  private loadUserFromLocalStorage() : void{
+  private loadUserFromLocalStorage(): void {
     const storedUser = localStorage.getItem('carcare-user')
-    if(storedUser){
+    if (storedUser) {
       this.currentUser = JSON.parse(storedUser)
     }
   }
@@ -72,11 +72,13 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return this.currentUser !== null;
+    const user = localStorage.getItem("carcare-user");
+    const token = localStorage.getItem("carcare-token");
+    return user !== null && token !== null;
   }
 
   getUserRole(): string | null {
     return localStorage.getItem('user-role'); // Récupère le rôle de l'utilisateur
   }
-  
+
 }

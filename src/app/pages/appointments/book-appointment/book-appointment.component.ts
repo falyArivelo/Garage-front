@@ -12,10 +12,17 @@ import { Appointment } from '../appointment';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker'; // Datepicker module
+import { MatInputModule } from '@angular/material/input'; // Input module pour date
+import { MatNativeDateModule } from '@angular/material/core'; // Native date module
 
 @Component({
   selector: 'app-book-appointment',
-  imports: [MatListModule, MatCardModule, DatePipe, MatIconModule, MaterialModule, CommonModule, FormsModule,MatProgressBarModule],
+  imports: [MatListModule, MatCardModule, DatePipe, MatIconModule, MaterialModule, CommonModule, FormsModule, MatProgressBarModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
+  ],
   templateUrl: './book-appointment.component.html',
   styleUrl: './book-appointment.component.scss'
 })
@@ -54,9 +61,19 @@ export class AppointmentAddComponent implements OnInit {
   // Variable pour gérer les services sélectionnés
   selectedServices: any[] = [];
   selectedVehicle: VehicleData | null = null;
-  selectedDate: Date
+  selectedDate: Date ;
+  selectedTime: string = ''; // Format: "HH:mm"
 
+  toISOStringWithTime(date: Date, time: string): string {
+    const [hours, minutes] = time.split(':').map(Number);
+    const result = new Date(date);
+    result.setHours(hours, minutes, 0, 0);
+    return result.toISOString();
+  }
   isLoading = false;
+  confirmationMessage: string = '';
+  messageType: 'success' | 'error' = 'success';  // Initialisation par défaut à 'success'
+
 
   constructor(private vehicleService: VehicleService, private authService: AuthService, private appointmentService: AppointmentService) { }
 
@@ -96,23 +113,28 @@ export class AppointmentAddComponent implements OnInit {
     const user = this.authService.currentUserValue;
     const userId = user?.user_id ?? ''
 
+    const iso = this.toISOStringWithTime(this.selectedDate, this.selectedTime);
+    console.log('Date à envoyer au backend :', iso);
+
     const appointment: any = {
       client: userId,
       vehicle: this.selectedVehicle ? this.selectedVehicle._id : '', // Assurez-vous d'obtenir l'ID du véhicule
       services: this.selectedServices.map(service => service._id), // Mappe les services sélectionnés pour obtenir les IDs
       status: 'En attente', // Initialement, l'appointment est en attente
-      appointmentDate: this.selectedDate, // Assurez-vous que selectedDate est un objet Date
+      appointmentDate: iso, // Assurez-vous que selectedDate est un objet Date
     };
-   
-    
-
-    // console.log(appointment)
+    console.log(appointment)
 
     this.appointmentService.createAppointment(appointment).subscribe({
-      next: () => {
-        
+      next: (response) => {
+        if (response.success) {
+          this.confirmationMessage = response.message
+          this.messageType = 'success';
+        }
       },
-      error: () => {
+      error: (error) => {
+        this.confirmationMessage = error.message
+        this.messageType = 'error';
       }, complete: () => {
         this.isLoading = false;
       }

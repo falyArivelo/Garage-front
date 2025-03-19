@@ -57,10 +57,24 @@
     </mat-card-content>
 
     <!-- SELECTION DE LA DATE -->
-    <div class="mt-16">
+    <!-- <div class="mt-16">
         <label for="appointment-date" class="f-w-600">Choisir une date de rendez-vous :</label>
         <input type="date" id="appointment-date" [(ngModel)]="selectedDate" class="p-8 border rounded m-t-8" />
-    </div>
+    </div> -->
+
+<!-- Date Picker -->
+<mat-form-field appearance="outline">
+    <mat-label>Date du rendez-vous</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" name="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  <!-- Time Picker -->
+  <mat-form-field appearance="outline">
+    <mat-label>Heure</mat-label>
+    <input matInput type="time" [(ngModel)]="selectedTime" name="time">
+  </mat-form-field>
 
     <!-- Affichage de la date sélectionnée -->
     <div *ngIf="selectedDate" class="mt-16 bg-light-primary rounded p-12 f-w-600">
@@ -69,7 +83,10 @@
     <!-- LOADING -->
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-    <button mat-flat-button color="primary" class="m-r-8" (click)="save()">Enregistrer</button>
+    <div *ngIf="confirmationMessage" [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}" class="confirmation-message">
+        {{ confirmationMessage }}
+      </div>
 
+    <button mat-flat-button color="primary" class="m-r-8" (click)="save()">Enregistrer</button>
 
 </mat-card>
