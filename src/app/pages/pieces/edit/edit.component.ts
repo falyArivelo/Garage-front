@@ -35,14 +35,14 @@ import { PieceData } from '../all/all.component';
   styleUrl: './edit.component.scss'
 })
 export class PieceEditComponent {
-    piece: PieceData = {
-        _id: '',
-        name: '',
-        category: 'Moteur',
-        description: '',
-        price: 0,
-        stock: 0,
-    };
+  piece: PieceData = {
+    _id: '',
+    name: '',
+    category: 'Moteur',
+    description: '',
+    price: 0,
+    stock: 0,
+  };
   isLoading = false;
 
 
@@ -67,7 +67,7 @@ export class PieceEditComponent {
     this.pieceService.updatePiece(this.piece).subscribe({
       next: () => {
         this.isLoading = false;
-        this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-success' });
+        this.snackBar.open("Pièce modifier avec succès !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-success' });
       },
       error: () => {
         this.isLoading = false;

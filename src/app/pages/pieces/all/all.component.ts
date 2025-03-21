@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { Input } from '@angular/core';
@@ -34,6 +35,7 @@ export interface PieceData {
         RouterModule
     ],
     templateUrl: './all.component.html',
+    styleUrl: './all.component.scss'
 })
 
 export class PieceAllComponent implements OnInit {
@@ -44,6 +46,7 @@ export class PieceAllComponent implements OnInit {
     constructor(
         private pieceService: PieceService, 
         private cdr: ChangeDetectorRef,
+        private snackBar: MatSnackBar,
         private router: Router,
     ) { }
 
@@ -92,8 +95,8 @@ export class PieceAllComponent implements OnInit {
         console.log(piece_id);
         this.pieceService.deletePiece(piece_id).subscribe({
             next: (response) => {
+                this.snackBar.open("La pièce a bien été supprimée", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-success' });
                 this.router.navigate(['/pieces/all']);
-                console.log('Pièce supprimé avec succès:', response);
                 this.dataSource = this.dataSource.filter(piece => piece_id !== piece_id);
                 this.cdr.detectChanges();
             },

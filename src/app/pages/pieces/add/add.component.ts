@@ -60,9 +60,16 @@ export class PieceAddComponent {
         return;
     }
 
-    if (this.piece.price <= 0 || this.piece.stock < 0) {
-        this.snackBar.open("Veuillez entrer un prix et un stock valides !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
+    // Vérification prix si negatif
+    if (this.piece.price <= 0) {
+        this.snackBar.open("Veuillez entrer un prix valide!", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
         return;
+    }
+
+    // Vérification stock si negatif
+    if (this.piece.stock <= 0) {
+      this.snackBar.open("Veuillez entrer un nombre de stock valide!", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
+      return;
     }
 
     this.isLoading = true;
@@ -83,6 +90,5 @@ export class PieceAddComponent {
 
   cancel() {
     this.piece = { ...this.defaultPiece }; // Réinitialisation propre
-    this.router.navigate(['/pieces/addButton']);
   }
 }
