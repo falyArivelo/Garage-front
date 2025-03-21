@@ -1,0 +1,9 @@
+::ng-deep .alert-success .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+::ng-deep .alert-error .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #f44336 !important;
+    color: white !important;
+}

@@ -95,27 +95,25 @@ export class ServiceEditComponent {
   save() {
     // Vérification des champs obligatoires
     if (!this.service?.name || !this.service?.category) {
-      this.snackBar.open("Veuillez remplir tous les champs !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+      this.snackBar.open("Veuillez remplir tous les champs !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
       return;
     }
 
     // Verification si Prix est pas negatif
     if (this.service.price <= 0) {
-        this.snackBar.open("Veuillez entrer un prix valide !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        this.snackBar.open("Veuillez entrer un prix valide !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
         return;
     }
 
     // Verification si duree estimation est pas negatif
     if (this.service.estimatedDuration <= 0){
-      this.snackBar.open("Veuillez entrer une durée d'estimation valide !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+      this.snackBar.open("Veuillez entrer une durée d'estimation valide !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
       return;
     }
 
     // Vérifier si l'utilisateur a sélectionné des pièces
     if (this.selectedPieces.length === 0) {
-      this.snackBar.open("Veuillez choisir au moins une pièce !", "Fermer", { 
-          duration: 8000, 
-          panelClass: 'alert-error' 
+      this.snackBar.open("Veuillez choisir au moins une pièce !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' 
       });
       return;
     }

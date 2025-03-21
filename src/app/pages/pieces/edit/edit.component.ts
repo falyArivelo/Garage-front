@@ -9,10 +9,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PieceService } from 'src/app/services/piece.service';
-import { PieceData } from '../all/all.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PieceService } from 'src/app/services/piece.service';
+import { PieceData } from '../all/all.component';
 
 @Component({
   selector: 'app-edit',
@@ -28,7 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
@@ -48,7 +49,8 @@ export class PieceEditComponent {
   constructor(
     private route: ActivatedRoute,
     private pieceService: PieceService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -65,11 +67,10 @@ export class PieceEditComponent {
     this.pieceService.updatePiece(this.piece).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/pieces/addButton']);
+        this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-success' });
       },
       error: () => {
         this.isLoading = false;
-        // Gère l’erreur si besoin (snackbar, console, etc.)
       }
     });
   }

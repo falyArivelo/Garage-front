@@ -56,12 +56,12 @@ export class PieceAddComponent {
   save() {
     // Vérification des champs obligatoires
     if (!this.piece?.name || !this.piece?.category) {
-        this.snackBar.open("Veuillez remplir tous les champs !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        this.snackBar.open("Veuillez remplir tous les champs !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
         return;
     }
 
     if (this.piece.price <= 0 || this.piece.stock < 0) {
-        this.snackBar.open("Veuillez entrer un prix et un stock valides !", "Fermer", { duration: 8000, panelClass: 'alert-error' });
+        this.snackBar.open("Veuillez entrer un prix et un stock valides !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
         return;
     }
 
@@ -70,12 +70,12 @@ export class PieceAddComponent {
     this.pieceService.createPiece(this.piece).subscribe({
         next: () => {
           this.piece = { ...this.defaultPiece };
-          this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, panelClass: 'alert-success' });
+          this.snackBar.open("Pièce ajoutée avec succès !", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
         },
         error: (err) => {
             console.error("Erreur lors de l'ajout :", err);
             const errorMessage = err.error?.message || "Une erreur inconnue est survenue.";
-            this.snackBar.open(errorMessage, "Fermer", { duration: 8000, panelClass: 'alert-error' });
+            this.snackBar.open(errorMessage, "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
         },
         complete: () => { this.isLoading = false; }
     });
