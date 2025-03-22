@@ -71,6 +71,7 @@ export class ServiceEditComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.serviceService.getServiceById(id).subscribe((data) => {
+        console.log('Service récupéré :', data);
         this.service = data;
         this.loadPieces();
       });
@@ -111,13 +112,6 @@ export class ServiceEditComponent {
       return;
     }
 
-    // Vérifier si l'utilisateur a sélectionné des pièces
-    if (this.selectedPieces.length === 0) {
-      this.snackBar.open("Veuillez choisir au moins une pièce !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' 
-      });
-      return;
-    }
-
     this.isLoading = true;
     // Associer uniquement les objets complets en fonction de la sélection
     this.service.pieces = this.selectedPieces.map(piece => ({
@@ -128,7 +122,7 @@ export class ServiceEditComponent {
     this.serviceService.updateService(this.service).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/services/addButton']);
+        this.snackBar.open("Service modifier avec succès !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-success' });
       },
       error: () => {
         this.isLoading = false;

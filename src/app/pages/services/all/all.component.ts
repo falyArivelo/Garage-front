@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { Input } from '@angular/core';
@@ -37,6 +38,7 @@ export interface ServiceData {
         RouterModule
     ],
     templateUrl: './all.component.html',
+    styleUrl: './all.component.scss'
 })
 
 export class ServiceAllComponent implements OnInit {
@@ -47,6 +49,7 @@ export class ServiceAllComponent implements OnInit {
     constructor(
         private serviceService: ServiceService, 
         private cdr: ChangeDetectorRef,
+        private snackBar: MatSnackBar,
         private router: Router,
     ) { }
 
@@ -97,6 +100,7 @@ export class ServiceAllComponent implements OnInit {
             next: (response) => {
                 this.router.navigate(['/services/all']);
                 console.log('Pièce supprimé avec succès:', response);
+                this.snackBar.open("Le service a bien été supprimé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
                 this.dataSource = this.dataSource.filter(service => service_id !== service_id);
                 this.cdr.detectChanges();
             },

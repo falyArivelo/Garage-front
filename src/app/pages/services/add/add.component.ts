@@ -42,7 +42,7 @@ export class ServiceAddComponent {
   pieces: any[] = [];
   selectedPieces: any[] = [];  // Liste des pièces sélectionnées
 
-  service: ServiceData = {
+  private defaultService: ServiceData = {
     _id: '',
     name: '',
     category: 'Réparation',
@@ -53,7 +53,7 @@ export class ServiceAddComponent {
     pieces: [],
     image: '',
   };
-
+  service: ServiceData = { ...this.defaultService };
   isLoading = false
   
   constructor(
@@ -101,11 +101,6 @@ export class ServiceAddComponent {
       return;
     }
 
-    // Vérifier si l'utilisateur a sélectionné des pièces
-    if (this.selectedPieces.length === 0) {
-      this.snackBar.open("Veuillez choisir au moins une pièce !", "Fermer", { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
-      return;
-    }
     this.service.pieces = this.selectedPieces; // Associer les pièces sélectionnées au service
 
     this.isLoading = true;
@@ -113,17 +108,7 @@ export class ServiceAddComponent {
     this.serviceService.addService(this.service).subscribe({
         next: () => {
           this.selectedPieces = [];
-          this.service = {
-            _id: '',
-            name: '',
-            category: 'Réparation',
-            description: '',
-            price: 0,
-            estimatedDuration: 0,
-            availability: true,
-            pieces: [],
-            image: '',
-          }
+          this.service = { ...this.defaultService }; // Réinitialisation propre
           this.snackBar.open("Service ajoutée avec succès !", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
         },
         error: (err) => {
@@ -136,17 +121,7 @@ export class ServiceAddComponent {
   }
 
   cancel() {
-    this.service = {
-      _id: '',
-      name: '',
-      category: 'Réparation',
-      description: '',
-      price: 0,
-      estimatedDuration: 0,
-      availability: true,
-      pieces: [],
-      image: '',
-    }
+    this.service = { ...this.defaultService };
     this.selectedPieces = []; // Réinitialiser explicitement la sélection
   }
 }
