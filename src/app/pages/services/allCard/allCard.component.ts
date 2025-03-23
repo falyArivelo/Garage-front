@@ -28,18 +28,11 @@ import { ServiceService } from 'src/app/services/service.service';
 
 export class ServiceAllCardComponent {
     @Input() dataSource: any[] = [];
-    @Input() title: string = 'Card title';
-    @Input() description: string = 'Here are the details of the card';
     isLoading = true;
 
     constructor(
         private serviceService: ServiceService, 
     ) { }
-
-
-    onMoreInfo() {
-        alert('More information about: ' + this.title);
-    }
 
     ngOnInit(): void {
         if (!this.dataSource || this.dataSource.length === 0) {
