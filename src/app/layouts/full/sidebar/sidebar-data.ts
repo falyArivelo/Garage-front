@@ -33,54 +33,54 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Pièces',
-    iconName: 'solar:settings-line-duotone',
+    iconName: 'ic:outline-build',
     children: [
       {
         displayName: 'Tous les Pièces',
         route: '/pieces/addButton',
-        iconName: '',
+        iconName: 'ic:outline-handyman',
         role :['manager'],
       },
       {
         displayName: 'Nos Pièces',
         route: '/pieces/all',
-        iconName: '',
+        iconName: 'ic:outline-handyman',
         role :['manager', 'mecanicien'],
       },
       {
         displayName: 'Ajouter une Pièce',
         route: '/pieces/add',
-        iconName: '',
+        iconName: 'ic:outline-add-circle',
         role :['manager'],
       }
     ]
   },
   {
     displayName: 'Services',
-    iconName: 'solar:settings-line-duotone',
+    iconName: 'ic:outline-settings',
     children: [
       {
         displayName: 'Tous les Services',
         route: '/services/addButton',
-        iconName: '',
+        iconName: 'ic:outline-miscellaneous-services',
         role :['manager'],
       },
       {
         displayName: 'Nos Services',
         route: '/services/all',
-        iconName: '',
+        iconName: 'ic:outline-miscellaneous-services',
         role :['manager', 'mecanicien'],
       },
       {
         displayName: 'Ajouter un Service',
         route: '/services/add',
-        iconName: '',
+        iconName: 'ic:outline-add-business',
         role :['manager'],
       },
       {
-        displayName: 'Nos Cards Services',
+        displayName: 'Tous Nos Services',
         route: '/services/allCard',
-        iconName: '',
+        iconName: 'ic:outline-construction',
         role :['manager', 'mecanicien', 'client'],
       }
     ]
