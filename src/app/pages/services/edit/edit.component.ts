@@ -73,24 +73,9 @@ export class ServiceEditComponent {
       this.serviceService.getServiceById(id).subscribe((data) => {
         console.log('Service récupéré :', data);
         this.service = data;
-        this.loadPieces();
+        this.selectedPieces = this.service.pieces; 
       });
-    } else {
-      this.loadPieces(); // Charger les pièces immédiatement en mode ajout
     }
-  }
-
-  loadPieces(): void {
-    this.pieceService.getAllPieces().subscribe((pieces: any[]) => {
-      this.pieces = pieces;
-  
-      // Vérifier et pré-sélectionner les pièces déjà associées au service
-      if (this.service.pieces && this.service.pieces.length > 0) {
-        this.selectedPieces = this.pieces.filter(piece =>
-          this.service.pieces.some((p: any) => p._id === piece._id)
-        );
-      }
-    });
   }
 
   save() {
