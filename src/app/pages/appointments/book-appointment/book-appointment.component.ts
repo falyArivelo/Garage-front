@@ -113,15 +113,14 @@ export class AppointmentAddComponent implements OnInit {
     const user = this.authService.currentUserValue;
     const userId = user?.user_id ?? ''
 
-    const iso = this.toISOStringWithTime(this.selectedDate, this.selectedTime);
-    console.log('Date à envoyer au backend :', iso);
+  
 
     const appointment: any = {
       client: userId,
       vehicle: this.selectedVehicle ? this.selectedVehicle._id : '', // Assurez-vous d'obtenir l'ID du véhicule
       services: this.selectedServices.map(service => service._id), // Mappe les services sélectionnés pour obtenir les IDs
       status: 'En attente', // Initialement, l'appointment est en attente
-      appointmentDate: iso, // Assurez-vous que selectedDate est un objet Date
+      appointmentDate: this.selectedDate, // Assurez-vous que selectedDate est un objet Date
     };
     console.log(appointment)
 
