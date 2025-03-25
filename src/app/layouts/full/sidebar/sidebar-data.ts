@@ -29,7 +29,27 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Rendez Vous',
     iconName: 'material-symbols:schedule-outline-rounded',
-    route: '/appointments/book',
+  
+    children: [
+      {
+        displayName: 'Prendre Rendez Vous',
+        route: '/appointments/book',
+        iconName: 'ic:outline-handyman',
+        role :['client'],
+      },
+      {
+        displayName: 'Mes Rendez Vous',
+        // route: '/appointments/book',
+        // iconName: 'ic:outline-handyman',
+        role :['client'],
+      },
+      {
+        displayName: 'Liste des Rendez Vous',
+        route: '/appointments/all',
+        // iconName: 'ic:outline-handyman',
+        role :['manager'],
+      },
+    ]
   },
   {
     displayName: 'Pièces',
