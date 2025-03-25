@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, SimpleChanges } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
 import { Input } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { ServiceService } from 'src/app/services/service.service';
 
 export interface ServiceData {
@@ -35,7 +38,9 @@ export interface ServiceData {
         TablerIconsModule,
         MatProgressBarModule,
         NgScrollbarModule,
-        RouterModule
+        FormsModule,
+        RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './all.component.html',
     styleUrl: './all.component.scss'
@@ -44,6 +49,7 @@ export interface ServiceData {
 export class ServiceAllComponent implements OnInit {
     displayedColumns: string[] = ['name', 'category', 'price', 'availability', 'menu'];
     @Input() dataSource: any[] = [];
+    filteredDataSource: MatTableDataSource<any>;
     isLoading = true;
 
     constructor(
@@ -53,11 +59,31 @@ export class ServiceAllComponent implements OnInit {
         private router: Router,
     ) { }
 
+    filterValues = {
+        name: '',
+        category: '',
+        priceMin: null,
+        priceMax: null
+    };
+
     ngOnInit(): void {
-        if (!this.dataSource || this.dataSource.length === 0) {
-            this.loadServices();
+        this.isLoading = true;
+
+        // Vérifier si dataSource est défini et contient des données
+        if (this.dataSource && this.dataSource.length > 0) {
+            this.filteredDataSource = new MatTableDataSource(this.dataSource);
+            this.applyFilter();  // Appliquer le filtre immédiatement si les données sont déjà présentes
+            this.isLoading = false;
         } else {
-            this.isLoading = false
+            this.loadServices();  // Si dataSource est vide ou non défini, charger les services depuis l'API
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        // Si dataSource change, réinitialisez le filtre
+        if (changes['dataSource']) {
+          this.filteredDataSource.data = this.dataSource;
+          this.applyFilter(); // Appliquez le filtre dès que les données changent
         }
     }
 
@@ -66,6 +92,8 @@ export class ServiceAllComponent implements OnInit {
         this.serviceService.getAllServices().subscribe({
             next: (services: any[]) => {
                 this.dataSource = services;
+                this.filteredDataSource = new MatTableDataSource(services);  // Initialisation correcte de filteredDataSource
+                this.applyFilter();  // Appliquer le filtre après que les services aient été chargés
                 this.isLoading = false;
                 console.log(services)
             },
@@ -73,6 +101,28 @@ export class ServiceAllComponent implements OnInit {
                 this.isLoading = false; // même en cas d'erreur, on arrête le chargement
             }
         });
+    }
+
+    // Appliquer le filtre
+    applyFilter() {
+        if (!this.dataSource || this.dataSource.length === 0) {
+            return;  // Ne rien faire si dataSource est vide ou non défini
+        }
+    
+        console.log('🔍 Filtres en cours:', this.filterValues);
+    
+        // Appliquer les filtres sur filteredDataSource
+        this.filteredDataSource.data = this.dataSource.filter(service =>
+            service.name.toLowerCase().includes(this.filterValues.name.toLowerCase()) &&
+            (this.filterValues.category === '' || service.category === this.filterValues.category) &&
+            (this.filterValues.priceMin == null || service.price >= this.filterValues.priceMin) &&
+            (this.filterValues.priceMax == null || service.price <= this.filterValues.priceMax)
+        );
+    
+        // Rafraîchir la table pour afficher les données filtrées
+        this.cdr.detectChanges();
+
+        console.log('📊 Nouvelle dataSource filtrée:', this.filteredDataSource.filteredData);
     }
 
     // Fonction de suppression avec confirmation
@@ -100,6 +150,7 @@ export class ServiceAllComponent implements OnInit {
             next: (response) => {
                 this.snackBar.open("Le service a bien été supprimé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
                 this.dataSource = this.dataSource.filter(service => service_id !== service_id);
+                this.filteredDataSource.data = this.dataSource; // Mettez à jour filteredDataSource
                 this.cdr.detectChanges();
                 // Recharger les services depuis l'API
                 this.loadServices();
