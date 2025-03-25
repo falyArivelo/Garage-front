@@ -98,11 +98,12 @@ export class ServiceAllComponent implements OnInit {
         console.log(service_id);
         this.serviceService.deleteService(service_id).subscribe({
             next: (response) => {
-                this.router.navigate(['/services/all']);
-                console.log('Pièce supprimé avec succès:', response);
                 this.snackBar.open("Le service a bien été supprimé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
                 this.dataSource = this.dataSource.filter(service => service_id !== service_id);
                 this.cdr.detectChanges();
+                // Recharger les services depuis l'API
+                this.loadServices();
+                this.router.navigate(['/services/addButton']);
             },
             error: (error) => {
                 console.error('Erreur lors de la suppression:', error);

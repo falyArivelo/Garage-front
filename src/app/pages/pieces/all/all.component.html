@@ -1,6 +1,6 @@
 <mat-card class="cardWithShadow overflow-hidden">
     <mat-card-content>
-        <mat-card-title class="m-b-4">Mes Pièces</mat-card-title>
+        <mat-card-title class="m-b-4">Nos Pièces</mat-card-title>
         <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
     </mat-card-content>
 
@@ -43,7 +43,7 @@
 
 
             <!-- Weight Column -->
-            <ng-container matColumnDef="menu">
+            <ng-container matColumnDef="menu" *ngIf="user?.role !== 'mecanicien'">
                 <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
 
                 </th>
@@ -56,13 +56,13 @@
                         <a class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
                             [routerLink]="['/pieces/edit', element._id]">
                             <i-tabler name="edit" class="icon-18"></i-tabler>
-                            <span>Edit</span>
+                            <span>Modifier</span>
                         </a>
                         <a href="javascript:void(0)"
                             class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
                             (click)="confirmDelete(element._id)">
                             <i-tabler name="trash" class="icon-18"></i-tabler>
-                            <span>Delete</span>
+                            <span>Supprimer</span>
                         </a>
                     </mat-menu>
                 </td>

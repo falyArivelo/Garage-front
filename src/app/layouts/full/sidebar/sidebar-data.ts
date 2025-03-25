@@ -46,7 +46,7 @@ export const navItems: NavItem[] = [
         displayName: 'Nos Pièces',
         route: '/pieces/all',
         iconName: 'ic:outline-handyman',
-        role :['manager', 'mecanicien'],
+        role :['mecanicien', 'manager'],
       },
       {
         displayName: 'Ajouter une Pièce',
@@ -65,12 +65,6 @@ export const navItems: NavItem[] = [
         route: '/services/addButton',
         iconName: 'ic:outline-miscellaneous-services',
         role :['manager'],
-      },
-      {
-        displayName: 'Nos Services',
-        route: '/services/all',
-        iconName: 'ic:outline-miscellaneous-services',
-        role :['manager', 'mecanicien'],
       },
       {
         displayName: 'Ajouter un Service',
