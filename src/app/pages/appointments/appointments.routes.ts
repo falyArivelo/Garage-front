@@ -5,6 +5,7 @@ import { AppointmentAddComponent } from './book-appointment/book-appointment.com
 // import { AppointmentListComponent } from './list/list.component';
 // import { AppointmentEditComponent } from './edit/edit.component';
 import { RoleGuard } from 'src/app/guards/role.guard';
+import { AllAppointmentComponent } from './all/all.component';
 
 export const AppointmentRoutes: Routes = [
   {
@@ -16,12 +17,12 @@ export const AppointmentRoutes: Routes = [
         data: { roles: ['client'] },
         component: AppointmentAddComponent, // Page pour prendre rendez-vous
       },
-    //   {
-    //     path: 'all',
-    //     canActivate: [RoleGuard],
-    //     data: { roles: ['manager', 'mecanicien'] },
-    //     component: AppointmentListComponent, // Liste de tous les rendez-vous
-    //   },
+      {
+        path: 'all',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager', 'mecanicien'] },
+        component: AllAppointmentComponent, // Liste de tous les rendez-vous
+      },
     //   {
     //     path: 'edit/:id',
     //     canActivate: [RoleGuard],
