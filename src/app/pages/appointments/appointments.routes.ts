@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 // Composants
 import { AppointmentAddComponent } from './book-appointment/book-appointment.component';
+import { AppointmentClientAllComponent } from './client-appointment/all/all.component';
 // import { AppointmentListComponent } from './list/list.component';
 // import { AppointmentEditComponent } from './edit/edit.component';
 import { RoleGuard } from 'src/app/guards/role.guard';
@@ -16,6 +17,12 @@ export const AppointmentRoutes: Routes = [
         data: { roles: ['client'] },
         component: AppointmentAddComponent, // Page pour prendre rendez-vous
       },
+      {
+        path: 'allClient',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: AppointmentClientAllComponent,
+      }
     //   {
     //     path: 'all',
     //     canActivate: [RoleGuard],

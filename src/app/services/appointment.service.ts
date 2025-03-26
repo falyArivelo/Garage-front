@@ -36,9 +36,11 @@ export class AppointmentService {
   }
 
   // Obtenir les rendez-vous d'un client par clientId
-  getAppointmentsByClient(clientId: string): Observable<any[]> {
+  getAppointmentsByClient(): Observable<any[]> {
+    const user = this.authService.currentUserValue; // Récupérer l'utilisateur connecté
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}/appointments/client/${clientId}`, { headers });
+    const params = new HttpParams().set('user_id', user?.user_id ?? '');
+    return this.http.get<any[]>(`${this.apiUrl}/appointments/client/`, { headers, params });
   }
 
   // Obtenir un rendez-vous par son ID

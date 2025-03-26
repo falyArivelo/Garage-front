@@ -29,7 +29,19 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Rendez Vous',
     iconName: 'material-symbols:schedule-outline-rounded',
-    route: '/appointments/book',
+    children: [
+      {
+        displayName: 'Rendez Vous',
+        iconName: 'material-symbols:schedule-outline-rounded',
+        route: '/appointments/book',
+      },
+      {
+        displayName: 'Mes Rendez-Vous',
+        route: '/appointments/allClient',
+        iconName: 'ic:outline-handyman',
+        role :['client'],
+      }
+    ]
   },
   {
     displayName: 'Pièces',
