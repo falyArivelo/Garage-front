@@ -12,7 +12,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Mes Véhicules',
     iconName: 'mingcute:car-line',
-    // route: '/vehicles/me',
+    role :['client'],
     children: [
       {
         displayName: 'Tous les Véhicules',
@@ -29,7 +29,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Rendez Vous',
     iconName: 'material-symbols:schedule-outline-rounded',
-  
+    role :['client'],
     children: [
       {
         displayName: 'Prendre Rendez Vous',
@@ -66,7 +66,7 @@ export const navItems: NavItem[] = [
         displayName: 'Nos Pièces',
         route: '/pieces/all',
         iconName: 'ic:outline-handyman',
-        role :['mecanicien', 'manager'],
+        role :['mecanicien'],
       },
       {
         displayName: 'Ajouter une Pièce',

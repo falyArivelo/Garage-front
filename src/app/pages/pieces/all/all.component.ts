@@ -98,7 +98,7 @@ export class PieceAllComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, supprimez-la!',
+            confirmButtonText: 'Confirmer la suppression',
             cancelButtonText: 'Annuler'
         }).then((result) => {
             if (result.isConfirmed) {
