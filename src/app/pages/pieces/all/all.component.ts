@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { Input } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { PieceService } from 'src/app/services/piece.service';
 
@@ -33,7 +34,8 @@ export interface PieceData {
         TablerIconsModule,
         MatProgressBarModule,
         NgScrollbarModule,
-        RouterModule
+        RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './all.component.html',
     styleUrl: './all.component.scss'
@@ -68,10 +70,10 @@ export class PieceAllComponent implements OnInit {
     setDisplayedColumns(): void {
         if (this.user?.role.includes('manager')) {
         // Si l'utilisateur est un manager
-        this.displayedColumns = ['name', 'category', 'price', 'stock', 'menu'];
+        this.displayedColumns = ['name', 'category', 'description', 'price', 'stock', 'menu'];
         } else if (this.user?.role.includes('mecanicien')) {
         // Si l'utilisateur est un mécanicien
-        this.displayedColumns = ['name', 'category', 'price', 'stock'];
+        this.displayedColumns = ['name', 'category', 'description', 'price', 'stock'];
         }
     }
 

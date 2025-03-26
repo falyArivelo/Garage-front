@@ -46,34 +46,29 @@
 
         <table mat-table [dataSource]="filteredDataSource" class="w-100">
 
-            <!-- Brand Column -->
+            <!-- Service Column -->
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Service </th>
                 <td mat-cell *matCellDef="let service">
                     <div class="d-flex align-items-center">
                         <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 lh-sm">{{ service.name }}</h6>
-
-                        <!-- <img [src]="service.imagePath" alt="service" width="60" class="rounded-7" /> -->
-                        <!-- <div class="m-l-16">
-                    <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 lh-sm">{{ service.brand }}</h6>
-                </div> -->
                     </div>
                 </td>
             </ng-container>
 
-            <!-- Model Column -->
+            <!-- Catégorie Column -->
             <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Catégorie </th>
                 <td mat-cell *matCellDef="let service">{{ service.category }}</td>
             </ng-container>
 
-            <!-- Year Column -->
+            <!-- Prix Column -->
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Prix </th>
                 <td mat-cell *matCellDef="let service">{{ service.price | currencyAr }}</td>
             </ng-container>
 
-            <!-- License Plate Column -->
+            <!-- Statut Column -->
             <ng-container matColumnDef="availability">
                 <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Statut </th>
                 <td mat-cell *matCellDef="let service">
@@ -86,7 +81,7 @@
                 </td>
             </ng-container>
 
-            <!-- Weight Column -->
+            <!-- Menu Column -->
             <ng-container matColumnDef="menu">
                 <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
                 </th>
