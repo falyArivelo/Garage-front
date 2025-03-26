@@ -4,9 +4,47 @@
         <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
     </mat-card-content>
 
+     <!-- Zone de filtrage -->
+     <div class="filter-container d-flex gap-3">
+        <!-- Nom du service -->
+        <mat-form-field appearance="outline" class="flex-grow-1">
+            <mat-label>Nom du service</mat-label>
+            <input matInput [(ngModel)]="filterValues.name" placeholder="Rechercher un service">
+        </mat-form-field>
+
+        <!-- Catégorie -->
+        <mat-form-field appearance="outline">
+            <mat-label>Catégorie</mat-label>
+            <mat-select [(ngModel)]="filterValues.category">
+                <mat-option value="">Toutes</mat-option>
+                <mat-option value="Moteur">Moteur</mat-option>
+                <mat-option value="Système de freinage">Système de freinage</mat-option>
+                <mat-option value="Électrique et Électronique">Électrique et Électronique</mat-option>
+                <mat-option value="Échappement">Échappement</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Prix minimum -->
+        <mat-form-field appearance="outline">
+            <mat-label>Prix min</mat-label>
+            <input matInput type="number" [(ngModel)]="filterValues.priceMin">
+        </mat-form-field>
+
+        <!-- Prix maximum -->
+        <mat-form-field appearance="outline">
+            <mat-label>Prix max</mat-label>
+            <input matInput type="number" [(ngModel)]="filterValues.priceMax">
+        </mat-form-field>
+
+        <!-- Bouton Filtrer -->
+        <button mat-raised-button color="primary" (click)="applyFilter()">
+            Filtrer
+        </button>
+    </div>
+
     <div class="table-responsive">
 
-        <table mat-table [dataSource]="dataSource" class="w-100">
+        <table mat-table [dataSource]="pagedData" class="w-100">
 
             <!-- Pièce Column -->
             <ng-container matColumnDef="name">
@@ -74,6 +112,16 @@
         </table>
         <!-- LOADING -->
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    </div>
 
+    <!-- Pagination -->
+    <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+        <span *ngFor="let pageNumber of getPageNumbers()">
+            <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+                {{ pageNumber }}
+            </button>
+        </span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
     </div>
 </mat-card>
