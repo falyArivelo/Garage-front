@@ -49,6 +49,12 @@ export const navItems: NavItem[] = [
         // iconName: 'ic:outline-handyman',
         role :['manager'],
       },
+      {
+        displayName: 'Mes Rendez-Vous',
+        route: '/appointments/allClient',
+        iconName: 'ic:outline-handyman',
+        role :['client'],
+      }
     ]
   },
   {
