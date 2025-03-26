@@ -1,6 +1,6 @@
 <mat-card class="cardWithShadow overflow-hidden">
   <mat-card-content>
-      <mat-card-title class="m-b-4">Les Services</mat-card-title>
+      <mat-card-title class="m-b-4">Nos Services</mat-card-title>
       <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
   </mat-card-content>
 
@@ -40,8 +40,9 @@
         Filtrer
     </button>
   </div>
+
   <div class="row justify-content-center">
-    <div class="col-lg-4"  *ngFor="let service of filteredDataSource.data">
+    <div class="col-lg-4"  *ngFor="let service of pagedData">
       <mat-card class="cardWithShadow position-relative overflow-hidden">
         <div class="position-relative">
           <img
@@ -68,8 +69,8 @@
           <div class="d-flex align-items-center justify-content-center m-t-24">
             <div class="d-flex align-items-center">
               <span class="m-r-12 f-s-14 d-flex align-items-center">
-                <i-tabler name="eye" class="icon-18 m-r-4"></i-tabler>
-                9,125
+                <i-tabler name="clock" class="icon-18 m-r-4"></i-tabler>
+                {{ service.estimatedDuration }} h
               </span>
               <span class="f-s-14 d-flex align-items-center">
                 <i-tabler name="coins" class="icon-18 m-r-4"></i-tabler>
@@ -91,6 +92,17 @@
         </mat-card-content>
       </mat-card>
     </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span *ngFor="let pageNumber of getPageNumbers()">
+        <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+            {{ pageNumber }}
+        </button>
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
   </div>
 </mat-card>
 

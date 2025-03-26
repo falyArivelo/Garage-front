@@ -29,12 +29,16 @@ import { ServiceService } from 'src/app/services/service.service';
         CurrencyFormatPipe
     ],
     templateUrl: './allCard.component.html',
-    styleUrls: ['./allCard.component.css'],
+    styleUrls: ['./allCard.component.scss'],
 })
 
 export class ServiceAllCardComponent {
     @Input() dataSource: any[] = [];
     filteredDataSource: MatTableDataSource<any>;
+    pagedData: any[] = []; // Variable pour stocker les données paginées
+    currentPage = 0; // Page courante
+    pageSize = 3; // Nombre d'éléments par page
+    totalPages: number = 0; // Total des pages
     isLoading = true;
 
     constructor(
@@ -91,20 +95,55 @@ export class ServiceAllCardComponent {
         if (!this.dataSource || this.dataSource.length === 0) {
             return;  // Ne rien faire si dataSource est vide ou non défini
         }
-    
-        console.log('🔍 Filtres en cours:', this.filterValues);
-    
-        // Appliquer les filtres sur filteredDataSource
-        this.filteredDataSource.data = this.dataSource.filter(service =>
+     
+        const filtered = this.dataSource.filter(service =>
             service.name.toLowerCase().includes(this.filterValues.name.toLowerCase()) &&
             (this.filterValues.category === '' || service.category === this.filterValues.category) &&
             (this.filterValues.priceMin == null || service.price >= this.filterValues.priceMin) &&
             (this.filterValues.priceMax == null || service.price <= this.filterValues.priceMax)
         );
+        
+        console.log('🔍 Données filtrées:', filtered); // Ajout d'un log pour vérifier les données filtrées
     
-        // Rafraîchir la table pour afficher les données filtrées
+        this.filteredDataSource.data = filtered;
+        this.totalPages = Math.ceil(this.filteredDataSource.data.length / this.pageSize);
+        this.updatePagedData();
         this.cdr.detectChanges();
+    }
 
-        console.log('📊 Nouvelle dataSource filtrée:', this.filteredDataSource.filteredData);
+    updatePagedData() {
+        // Assurez-vous que filteredDataSource contient les données filtrées
+        const startIndex = this.currentPage * this.pageSize;
+        const endIndex = startIndex + this.pageSize;
+        this.pagedData = this.filteredDataSource.data.slice(startIndex, endIndex); // Utiliser pagedData ici
+    }
+
+    // Passer à la page suivante
+    nextPage() {
+        if (this.currentPage < this.totalPages - 1) {
+            this.currentPage++;
+            this.updatePagedData();
+        }
+    }
+
+    // Passer à la page précédente
+    previousPage() {
+        if (this.currentPage > 0) {
+            this.currentPage--;
+            this.updatePagedData();
+        }
+    }
+
+    // Aller à une page spécifique
+    goToPage(page: number) {
+        if (page >= 1 && page <= this.totalPages) {
+            this.currentPage = page - 1;
+            this.updatePagedData();
+        }
+    }
+
+    // Obtenir les numéros de page à afficher pour la pagination
+    getPageNumbers() {
+        return Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
 }

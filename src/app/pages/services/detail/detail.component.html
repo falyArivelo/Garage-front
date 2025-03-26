@@ -12,15 +12,15 @@
           <p class="sub">{{ service.category }}</p>
           <p class="price">{{ service.price | currencyAr }}</p>
         </div>
-        <div class="image">
+        <!-- <div class="image">
           <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg" alt="">
-        </div>
+        </div> -->
       </div>
       <div class="half">
         <div class="description">
           <p>{{ service.description }}</p>
         </div>
-        <div class="pieces">
+        <div *ngIf="service.pieces && service.pieces.length > 0" class="pieces">
           <h6>Les pièces utiles :</h6>
           <ul *ngFor="let piece of service.pieces" class="list">
             <li class="piece-item">

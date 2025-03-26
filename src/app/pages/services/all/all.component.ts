@@ -50,6 +50,10 @@ export class ServiceAllComponent implements OnInit {
     displayedColumns: string[] = ['name', 'category', 'price', 'availability', 'menu'];
     @Input() dataSource: any[] = [];
     filteredDataSource: MatTableDataSource<any>;
+    pagedData: any[] = []; // Variable pour stocker les données paginées
+    currentPage = 0; // Page courante
+    pageSize = 5; // Nombre d'éléments par page
+    totalPages: number = 0; // Total des pages
     isLoading = true;
 
     constructor(
@@ -109,20 +113,17 @@ export class ServiceAllComponent implements OnInit {
             return;  // Ne rien faire si dataSource est vide ou non défini
         }
     
-        console.log('🔍 Filtres en cours:', this.filterValues);
-    
         // Appliquer les filtres sur filteredDataSource
-        this.filteredDataSource.data = this.dataSource.filter(service =>
+        const filtered = this.dataSource.filter(service =>
             service.name.toLowerCase().includes(this.filterValues.name.toLowerCase()) &&
             (this.filterValues.category === '' || service.category === this.filterValues.category) &&
             (this.filterValues.priceMin == null || service.price >= this.filterValues.priceMin) &&
             (this.filterValues.priceMax == null || service.price <= this.filterValues.priceMax)
         );
-    
-        // Rafraîchir la table pour afficher les données filtrées
-        this.cdr.detectChanges();
-
-        console.log('📊 Nouvelle dataSource filtrée:', this.filteredDataSource.filteredData);
+        this.filteredDataSource.data = filtered;
+        this.totalPages = Math.ceil(this.filteredDataSource.data.length / this.pageSize); // Calculer le nombre de pages total
+        this.updatePagedData();
+        this.cdr.detectChanges(); // Déclencher un rafraîchissement du composant
     }
 
     // Fonction de suppression avec confirmation
@@ -134,7 +135,7 @@ export class ServiceAllComponent implements OnInit {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, supprimez-la!',
+            confirmButtonText: 'Confirmer la suppression',
             cancelButtonText: 'Annuler'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -151,6 +152,7 @@ export class ServiceAllComponent implements OnInit {
                 this.snackBar.open("Le service a bien été supprimé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
                 this.dataSource = this.dataSource.filter(service => service_id !== service_id);
                 this.filteredDataSource.data = this.dataSource; // Mettez à jour filteredDataSource
+                this.applyFilter();
                 this.cdr.detectChanges();
                 // Recharger les services depuis l'API
                 this.loadServices();
@@ -160,5 +162,41 @@ export class ServiceAllComponent implements OnInit {
                 console.error('Erreur lors de la suppression:', error);
             }
         });
+    }
+
+    updatePagedData() {
+        // Assurez-vous que filteredDataSource contient les données filtrées
+        const startIndex = this.currentPage * this.pageSize;
+        const endIndex = startIndex + this.pageSize;
+        this.pagedData = this.filteredDataSource.data.slice(startIndex, endIndex); // Utiliser pagedData ici
+    }
+
+    // Passer à la page suivante
+    nextPage() {
+        if (this.currentPage < this.totalPages - 1) {
+            this.currentPage++;
+            this.updatePagedData();
+        }
+    }
+
+    // Passer à la page précédente
+    previousPage() {
+        if (this.currentPage > 0) {
+            this.currentPage--;
+            this.updatePagedData();
+        }
+    }
+
+    // Aller à une page spécifique
+    goToPage(page: number) {
+        if (page >= 1 && page <= this.totalPages) {
+            this.currentPage = page - 1;
+            this.updatePagedData();
+        }
+    }
+
+    // Obtenir les numéros de page à afficher pour la pagination
+    getPageNumbers() {
+        return Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
 }
