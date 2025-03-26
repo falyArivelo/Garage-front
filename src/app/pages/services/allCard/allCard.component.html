@@ -40,8 +40,9 @@
         Filtrer
     </button>
   </div>
+
   <div class="row justify-content-center">
-    <div class="col-lg-4"  *ngFor="let service of filteredDataSource.data">
+    <div class="col-lg-4"  *ngFor="let service of pagedData">
       <mat-card class="cardWithShadow position-relative overflow-hidden">
         <div class="position-relative">
           <img
@@ -91,6 +92,17 @@
         </mat-card-content>
       </mat-card>
     </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span *ngFor="let pageNumber of getPageNumbers()">
+        <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+            {{ pageNumber }}
+        </button>
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
   </div>
 </mat-card>
 
