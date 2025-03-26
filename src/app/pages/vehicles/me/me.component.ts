@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ListVehiclesComponent, VehicleData } from 'src/app/components/list-vehicles/list-vehicles.component';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
@@ -17,7 +18,7 @@ export class VehiclesMeComponent implements OnInit {
 
   myVehicles: VehicleData[] = []
 
-  constructor(private vehicleService: VehicleService,private router: Router) { }
+  constructor(private vehicleService: VehicleService,private router: Router,private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadVehicles();
@@ -30,6 +31,7 @@ export class VehiclesMeComponent implements OnInit {
   }
 
   goToAddVehicle() {
+    this.snackBar.open("Véhicule ajouté avec succès !", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
     this.router.navigate(['/vehicles/add']);
   }
 }
