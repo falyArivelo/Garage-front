@@ -15,6 +15,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker'; // Datepicker module
 import { MatInputModule } from '@angular/material/input'; // Input module pour date
 import { MatNativeDateModule } from '@angular/material/core'; // Native date module
+import { ServiceService } from 'src/app/services/service.service';
+import { Service } from '../../services/service';
 
 @Component({
   selector: 'app-book-appointment',
@@ -29,39 +31,41 @@ import { MatNativeDateModule } from '@angular/material/core'; // Native date mod
 
 export class AppointmentAddComponent implements OnInit {
   // Liste fictive de services comme donnée statique
-  services = [
-    {
-      _id: "67cc26038819432e26e25651",
-      name: "Réparation du moteur",
-      description: "Réparation du moteur V8.",
-      price: 180000,
-      category: "Réparation",
-      availability: true,
-      image: null,
-      createdAt: "2025-03-08T11:12:03.208Z",
-      updatedAt: "2025-03-08T11:17:33.995Z",
-      __v: 0
-    },
-    {
-      _id: "67d6f68079c86915204b72df",
-      name: "Vidange moteur",
-      description: "Changement d’huile moteur et remplacement du filtre.",
-      price: 80000,
-      estimatedDuration: 60,
-      availability: true,
-      image: "https://example.com/images/vidange.jpg",
-      createdAt: "2025-03-16T16:04:16.816Z",
-      updatedAt: "2025-03-16T16:04:16.816Z",
-      __v: 0
-    }
-  ];
+  // services = [
+  //   {
+  //     _id: "67cc26038819432e26e25651",
+  //     name: "Réparation du moteur",
+  //     description: "Réparation du moteur V8.",
+  //     price: 180000,
+  //     category: "Réparation",
+  //     availability: true,
+  //     image: null,
+  //     createdAt: "2025-03-08T11:12:03.208Z",
+  //     updatedAt: "2025-03-08T11:17:33.995Z",
+  //     __v: 0
+  //   },
+  //   {
+  //     _id: "67d6f68079c86915204b72df",
+  //     name: "Vidange moteur",
+  //     description: "Changement d’huile moteur et remplacement du filtre.",
+  //     price: 80000,
+  //     estimatedDuration: 60,
+  //     availability: true,
+  //     image: "https://example.com/images/vidange.jpg",
+  //     createdAt: "2025-03-16T16:04:16.816Z",
+  //     updatedAt: "2025-03-16T16:04:16.816Z",
+  //     __v: 0
+  //   }
+  // ];
+
+  services: Service[]  = []
 
   vehicles: VehicleData[] = []
 
   // Variable pour gérer les services sélectionnés
   selectedServices: any[] = [];
   selectedVehicle: VehicleData | null = null;
-  selectedDate: Date ;
+  selectedDate: Date;
   selectedTime: string = ''; // Format: "HH:mm"
 
   toISOStringWithTime(date: Date, time: string): string {
@@ -75,10 +79,13 @@ export class AppointmentAddComponent implements OnInit {
   messageType: 'success' | 'error' = 'success';  // Initialisation par défaut à 'success'
 
 
-  constructor(private vehicleService: VehicleService, private authService: AuthService, private appointmentService: AppointmentService) { }
+  constructor(private vehicleService: VehicleService, private authService: AuthService, private appointmentService: AppointmentService,
+            private serviceService: ServiceService, 
+  ) { }
 
   ngOnInit(): void {
     this.loadVehicles();
+    this.loadServices()
   }
 
   onServiceSelect(service: any) {
@@ -98,6 +105,19 @@ export class AppointmentAddComponent implements OnInit {
     this.selectedVehicle = vehicle;
   }
 
+  loadServices(): void {
+    this.isLoading = true;
+    this.serviceService.getAllServices().subscribe({
+      next: (services: any[]) => {
+        this.services = services;
+        console.log(services)
+      },
+      error: () => {
+        this.isLoading = false; // même en cas d'erreur, on arrête le chargement
+      }
+    });
+  }
+
   loadVehicles(): void {
     this.vehicleService.getAllVehiclesMe().subscribe({
       next: (vehicles: VehicleData[]) => {
@@ -113,7 +133,7 @@ export class AppointmentAddComponent implements OnInit {
     const user = this.authService.currentUserValue;
     const userId = user?.user_id ?? ''
 
-  
+
 
     const appointment: any = {
       client: userId,
