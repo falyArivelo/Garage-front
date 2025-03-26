@@ -35,7 +35,7 @@ export class ServiceService {
     // Liste tous les services
     getAllServices(): Observable<any> {
       const headers = this.getAuthHeaders();
-      return this.http.get<any[]>(`${this.apiUrl}/services`, { headers });
+      return this.http.get<any[]>(`${this.apiUrl}/services/all/available`, { headers });
     }
 
     // Obtenir un service par son ID
