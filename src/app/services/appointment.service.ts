@@ -15,6 +15,7 @@ export class AppointmentService {
   // Méthode utilitaire pour obtenir les en-têtes d'authentification
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('carcare-token'); // Récupérer le token depuis le localStorage
+    console.log('Token récupéré:', token);
     if (!token) {
       throw new Error('Token manquant');
     }
@@ -38,9 +39,10 @@ export class AppointmentService {
   // Obtenir les rendez-vous d'un client par clientId
   getAppointmentsByClient(): Observable<any[]> {
     const user = this.authService.currentUserValue; // Récupérer l'utilisateur connecté
+    console.log('User ID envoyé:', user?.user_id);
     const headers = this.getAuthHeaders();
     const params = new HttpParams().set('user_id', user?.user_id ?? '');
-    return this.http.get<any[]>(`${this.apiUrl}/appointments/client/`, { headers, params });
+    return this.http.get<any[]>(`${this.apiUrl}/appointments/client`, { headers, params });
   }
 
   // Obtenir un rendez-vous par son ID

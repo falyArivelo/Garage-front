@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 export interface AppointmentData {
     _id: string;
@@ -47,7 +48,7 @@ export class AppointmentClientAllComponent implements OnInit {
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService, 
+        private appointmentService: AppointmentService,
         private cdr: ChangeDetectorRef,
         private snackBar: MatSnackBar,
         private router: Router,
@@ -89,18 +90,18 @@ export class AppointmentClientAllComponent implements OnInit {
             cancelButtonText: 'Annuler'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.deleteService(appointment_id);
+                this.deleteAppointment(appointment_id);
             }
         });
     }
 
     // Logique pour supprimer la pièce
-    deleteService(appointment_id: string): void {
+    deleteAppointment(appointment_id: string): void {
         console.log(appointment_id);
         this.appointmentService.deleteAppointment(appointment_id).subscribe({
             next: (response) => {
                 this.snackBar.open("Votre rendez-vous a été annulé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
-                this.dataSource = this.dataSource.filter(service => appointment_id !== appointment_id);
+                this.dataSource = this.dataSource.filter(appointment => appointment_id !== appointment_id);
                 this.cdr.detectChanges();
                 this.loadAppointment();
                 this.router.navigate(['/appointment/allClient']);

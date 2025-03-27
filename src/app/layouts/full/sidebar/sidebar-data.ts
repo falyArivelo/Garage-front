@@ -38,12 +38,6 @@ export const navItems: NavItem[] = [
         role :['client'],
       },
       {
-        displayName: 'Mes Rendez Vous',
-        // route: '/appointments/book',
-        // iconName: 'ic:outline-handyman',
-        role :['client'],
-      },
-      {
         displayName: 'Liste des Rendez Vous',
         route: '/appointments/all',
         // iconName: 'ic:outline-handyman',
@@ -52,7 +46,7 @@ export const navItems: NavItem[] = [
       {
         displayName: 'Mes Rendez-Vous',
         route: '/appointments/allClient',
-        iconName: 'ic:outline-handyman',
+        iconName: 'ic:outline-date-range',
         role :['client'],
       }
     ]
