@@ -1,18 +1,38 @@
-<form (ngSubmit)="sendEmail()">
-  <mat-form-field>
-    <mat-label>Destinataire</mat-label>
-    <input matInput [(ngModel)]="to" name="to" required>
-  </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Objet</mat-label>
-    <input matInput [(ngModel)]="subject" name="subject" required>
-  </mat-form-field>
+  <div class="email-container">
+    <mat-card class="email-card">
+      <mat-card-header>
+        <mat-card-title>Envoyer un email</mat-card-title>
+        <mat-card-subtitle>Rédigez votre message personnalisé</mat-card-subtitle>
+      </mat-card-header>
 
-  <mat-form-field>
-    <mat-label>Message</mat-label>
-    <textarea matInput [(ngModel)]="text" name="text" required></textarea>
-  </mat-form-field>
+      <mat-card-content>
+        <form (ngSubmit)="sendEmail()">
+          <!-- Champ destinataire -->
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Destinataire</mat-label>
+            <input matInput [(ngModel)]="to" name="to" required placeholder="email@exemple.com">
+          </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Envoyer</button>
-</form>
+          <!-- Champ sujet -->
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Objet</mat-label>
+            <input matInput [(ngModel)]="subject" name="subject" required placeholder="Objet de votre email">
+          </mat-form-field>
+
+          <!-- Champ message -->
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Message</mat-label>
+            <textarea matInput [(ngModel)]="text" name="text" required placeholder="Écrivez votre message ici"></textarea>
+          </mat-form-field>
+
+          <!-- Bouton envoyer -->
+          <div class="email-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!to || !subject || !text">
+              Envoyer
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

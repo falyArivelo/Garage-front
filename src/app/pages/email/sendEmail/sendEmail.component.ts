@@ -13,6 +13,7 @@ import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-sendEmail',
+  standalone: true, // Déclare ce composant comme standalone
   imports: [
         CommonModule,
         MatFormFieldModule,
@@ -25,9 +26,10 @@ import { EmailService } from 'src/app/services/email.service';
         MatInputModule,
         MatCheckboxModule,
         MatProgressBarModule,
-        FormsModule,
+        FormsModule
       ],
   templateUrl: './sendEmail.component.html',
+  styleUrls: ['./sendEmail.component.scss'],
 })
 export class EmailComponent {
   to = '';
