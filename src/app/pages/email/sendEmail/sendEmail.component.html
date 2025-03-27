@@ -1,0 +1,18 @@
+<form (ngSubmit)="sendEmail()">
+  <mat-form-field>
+    <mat-label>Destinataire</mat-label>
+    <input matInput [(ngModel)]="to" name="to" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Objet</mat-label>
+    <input matInput [(ngModel)]="subject" name="subject" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Message</mat-label>
+    <textarea matInput [(ngModel)]="text" name="text" required></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Envoyer</button>
+</form>

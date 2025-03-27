@@ -22,6 +22,12 @@ export const routes: Routes = [
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
       },
       {
+        path: 'email',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/email/email.routes').then((m) => m.EmailRoutes),
+      },
+      {
         path: 'vehicles',
         canActivate: [AuthGuard], 
         loadChildren: () =>
