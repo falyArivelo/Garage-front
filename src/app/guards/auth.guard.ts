@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     }
 
     // Sinon, rediriger vers la page de login
-    this.router.navigate(['/authentication/login']);
+    this.router.navigate(['/authentication/landing']);
     return false;
   }
 }
