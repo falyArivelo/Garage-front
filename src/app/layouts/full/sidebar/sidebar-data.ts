@@ -10,6 +10,11 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
+    displayName: 'Envoyer Email',
+    iconName: 'bx:stats',
+    route: '/email/sendEmail',
+  },
+  {
     displayName: 'Mes Véhicules',
     iconName: 'mingcute:car-line',
     role :['client'],

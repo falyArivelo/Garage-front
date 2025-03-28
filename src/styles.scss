@@ -7,17 +7,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Custom Scrollbar for the entire page */
 ::-webkit-scrollbar {
     width: 0px; /* Largeur de la scrollbar */
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Couleur de fond de la barre de défilement */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #f7f7f7; /* Couleur de la barre de défilement */
-    border-radius: 10px; /* Arrondir les coins de la barre de défilement */
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #d3d3d3; /* Couleur de la barre de défilement lorsque la souris passe dessus */
-  }
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Couleur de fond de la barre de défilement */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f7f7f7; /* Couleur de la barre de défilement */
+  border-radius: 10px; /* Arrondir les coins de la barre de défilement */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d3d3d3; /* Couleur de la barre de défilement lorsque la souris passe dessus */
+}
+
+/* Cache le logo TinyMCE */
+.tox-statusbar__branding {
+  display: none !important;
+}
+
+/* Cacher le texte "p" dans la barre d'état de TinyMCE */
+.tox-statusbar__path-item {
+  display: none !important;
+}
