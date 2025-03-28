@@ -42,7 +42,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('carcare-token'); // ou le nom de ton token
     localStorage.removeItem('carcare-user');
-    this.router.navigate(['/authentication/landing']); // ou une autre page publique
+    this.router.navigate(['/landing']); // ou une autre page publique
   }
 
   hasAnyRole(roles: string[]): boolean {

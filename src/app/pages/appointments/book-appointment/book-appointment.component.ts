@@ -15,15 +15,18 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker'; // Datepicker module
 import { MatInputModule } from '@angular/material/input'; // Input module pour date
 import { MatNativeDateModule } from '@angular/material/core'; // Native date module
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ServiceService } from 'src/app/services/service.service';
 import { Service } from '../../services/service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book-appointment',
   imports: [MatListModule, MatCardModule, DatePipe, MatIconModule, MaterialModule, CommonModule, FormsModule, MatProgressBarModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   templateUrl: './book-appointment.component.html',
   styleUrl: './book-appointment.component.scss'
@@ -58,7 +61,7 @@ export class AppointmentAddComponent implements OnInit {
   //   }
   // ];
 
-  services: Service[]  = []
+  services: Service[] = []
 
   vehicles: VehicleData[] = []
 
@@ -80,7 +83,8 @@ export class AppointmentAddComponent implements OnInit {
 
 
   constructor(private vehicleService: VehicleService, private authService: AuthService, private appointmentService: AppointmentService,
-            private serviceService: ServiceService, 
+    private serviceService: ServiceService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -106,14 +110,12 @@ export class AppointmentAddComponent implements OnInit {
   }
 
   loadServices(): void {
-    this.isLoading = true;
     this.serviceService.getAllServices().subscribe({
       next: (services: any[]) => {
         this.services = services;
         console.log(services)
       },
       error: () => {
-        this.isLoading = false; // même en cas d'erreur, on arrête le chargement
       }
     });
   }
@@ -133,32 +135,40 @@ export class AppointmentAddComponent implements OnInit {
     const user = this.authService.currentUserValue;
     const userId = user?.user_id ?? ''
 
-
-
+    const formatedDate = this.formatDate(this.selectedDate)
+    console.log(formatedDate)
+    const localDateTime = new Date(`${formatedDate}T${this.selectedTime}`);
+    const utcDateTimeString = localDateTime.toISOString();
+    console.log('Date UTC:', utcDateTimeString);
     const appointment: any = {
       client: userId,
       vehicle: this.selectedVehicle ? this.selectedVehicle._id : '', // Assurez-vous d'obtenir l'ID du véhicule
       services: this.selectedServices.map(service => service._id), // Mappe les services sélectionnés pour obtenir les IDs
       status: 'En attente', // Initialement, l'appointment est en attente
-      appointmentDate: this.selectedDate, // Assurez-vous que selectedDate est un objet Date
+      appointmentDate: localDateTime, // Assurez-vous que selectedDate est un objet Date
     };
     console.log(appointment)
 
     this.appointmentService.createAppointment(appointment).subscribe({
       next: (response) => {
         if (response.success) {
-          this.confirmationMessage = response.message
-          this.messageType = 'success';
+          // this.confirmationMessage = response.message
+          // this.messageType = 'success';
+          this.snackBar.open(response.message, "Fermer", { duration: 10000, verticalPosition: 'top', panelClass: 'alert-success' });
         }
       },
       error: (error) => {
-        this.confirmationMessage = error.message
-        this.messageType = 'error';
+        // this.confirmationMessage = error.message
+        // this.messageType = 'error';
+        this.snackBar.open(error.message,"Fermer", { duration: 10000, verticalPosition: 'top', panelClass: 'alert-error' });
       }, complete: () => {
         this.isLoading = false;
       }
     });
   }
 
+  formatDate(date: Date): string {
+    return date.toISOString().split('T')[0]; // YYYY-MM-DD
+  }
 
 }
