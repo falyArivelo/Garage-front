@@ -11,7 +11,7 @@ export const EmailRoutes: Routes = [
       {
         path: 'sendEmail',
         canActivate: [RoleGuard],
-        data: { roles: ['manager'] },
+        data: { roles: ['manager', 'mecanicien', 'client'] },
         component: EmailComponent,
       },
     ],
