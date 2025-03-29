@@ -15,12 +15,12 @@ export class AppointmentService {
   // Méthode utilitaire pour obtenir les en-têtes d'authentification
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('carcare-token'); // Récupérer le token depuis le localStorage
-    console.log('Token récupéré:', token);
     if (!token) {
       throw new Error('Token manquant');
     }
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
   }
 
@@ -54,12 +54,18 @@ export class AppointmentService {
   // Mettre à jour un rendez-vous
   updateAppointment(id: string, appointmentData: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/appointments/${id}`, appointmentData, { headers });
+    return this.http.put(`${this.apiUrl}/appointments/${id}`,appointmentData, { headers });
   }
 
   // Supprimer un rendez-vous
-  deleteAppointment(id: string): Observable<any> {
+  cancelAppointment(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}/appointments/${id}`, { headers });
+    return this.http.put(`${this.apiUrl}/appointments/cancel/${id}`,{},{ headers });
+  }
+
+  changingStatusAppointmentByManager(id: string, status: string, message: string, userId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const body = { status, message, userId };  // Envoie le statut, message et l'ID de l'utilisateur
+    return this.http.put(`${this.apiUrl}/appointments/changing-status-manager/${id}`, body,{headers});
   }
 }

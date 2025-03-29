@@ -17,11 +17,11 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 
 export interface AppointmentData {
     _id: string;
+    client : any;
     vehicle: any;
     services: any[];
     status: 'En attente' | 'Confirmé' | 'En cours' | 'Terminé' | 'Annulé';
-    appointmentDate: Date;
-    estimatedDuration: number;
+    appointmentDate: any;
     notes: any[];
     invoice: any;
 }
@@ -98,17 +98,19 @@ export class AppointmentClientAllComponent implements OnInit {
     // Logique pour supprimer la pièce
     deleteAppointment(appointment_id: string): void {
         console.log(appointment_id);
-        this.appointmentService.deleteAppointment(appointment_id).subscribe({
+        this.appointmentService.cancelAppointment(appointment_id).subscribe({
             next: (response) => {
                 this.snackBar.open("Votre rendez-vous a été annulé", "Fermer", { duration: 2000, verticalPosition: 'top', panelClass: 'alert-success' });
-                this.dataSource = this.dataSource.filter(appointment => appointment_id !== appointment_id);
-                this.cdr.detectChanges();
+                // this.dataSource = this.dataSource.filter(appointment => appointment._id !== appointment_id);
+                // this.cdr.detectChanges();
                 this.loadAppointment();
-                this.router.navigate(['/appointment/allClient']);
             },
             error: (error) => {
-                console.error('Erreur lors de la suppression:', error);
+                // console.error('Erreur lors de la suppression:', error);
+            }, complete : () => {
+                this.loadAppointment();
             }
+
         });
     }
 }

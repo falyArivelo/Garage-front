@@ -1,4 +1,6 @@
 /* Container pour la liste des services */
+@import "../../../../assets/scss/variables";
+
 .service-list {
     display: flex;
     flex-direction: column;
@@ -8,14 +10,12 @@
 .service-item {
     display: flex;
     justify-content: space-between;
-    /* Espacement entre les informations du service et le bouton de sélection */
     align-items: center;
-    padding: 5px ;
+    padding: 15px ;
     border: 1px solid #f0f0f0;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: #fcfcfc;
     min-height: 100px;
-    /* Hauteur minimale ajustable */
     height: auto;
     box-sizing: border-box;
 }
@@ -23,12 +23,11 @@
 .service-info {
     flex: 1;
     padding-right: 16px;
-    /* Espacement entre la description et l'image */
     font-size: 14px;
     color: #383838;
 
     h3 {
-        color: rgb(150, 0, 180);
+        color:$primary;
     }
 }
 
@@ -64,12 +63,9 @@ mat-card-content {
     gap: 16px;
 }
 
-/* Gérer l'affichage de la section des services sélectionnés */
 mat-selection-list {
     max-height: 600px;
-    /* Limite la hauteur de la liste si elle est trop grande */
     overflow-y: auto;
-    /* Ajoute un scroll si nécessaire */
 }
 
 .vehicle-item {
@@ -102,3 +98,11 @@ mat-selection-list {
     background-color: #f44336; /* Rouge */
   }
   
+  ::ng-deep .alert-success .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+::ng-deep .alert-error .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #f44336 !important;
+}

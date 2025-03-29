@@ -7,6 +7,8 @@ import { AppointmentClientAllComponent } from './client-appointment/all/all.comp
 // import { AppointmentEditComponent } from './edit/edit.component';
 import { RoleGuard } from 'src/app/guards/role.guard';
 import { AllAppointmentComponent } from './all/all.component';
+import { EditAppointmentComponent } from './edit/edit.component';
+import { ChangeStatusComponent } from './change-status/change-status.component';
 
 export const AppointmentRoutes: Routes = [
   {
@@ -30,12 +32,18 @@ export const AppointmentRoutes: Routes = [
         data: { roles: ['client'] },
         component: AppointmentClientAllComponent,
       },
-    //   {
-    //     path: 'edit/:id',
-    //     canActivate: [RoleGuard],
-    //     data: { roles: ['client'] },
-    //     component: AppointmentEditComponent, // Modifier un rendez-vous
-    //   },
+      {
+        path: 'edit/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: EditAppointmentComponent, // Modifier un rendez-vous
+      },
+      {
+        path: 'status-change/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager'] },
+        component: ChangeStatusComponent, // Modifier un rendez-vous
+      },
     ],
   },
 ];

@@ -8,10 +8,9 @@
             <div *ngFor="let service of services" class="service-item">
                 <div class="service-info">
                     <h3>{{ service.name }}</h3>
-                    <p><strong>Catégorie :</strong> {{ service.category }}</p>
+                    <p>{{ service.category }}</p>
                     <p>{{ service.description }}</p>
-                    <p><strong>Prix :</strong> {{ service.price | currency:'MGA':'symbol':'1.0-0' }}</p>
-                    <p><strong>Disponibilité :</strong> {{ service.availability ? 'Disponible' : 'Indisponible' }}</p>
+                    <p>{{ service.price | currency:'MGA':'symbol':'1.0-0' }}</p>
                 </div>
                 <div class="service-image">
                     <img *ngIf="service.image" [src]="service.image" alt="Image du service" />
@@ -23,7 +22,7 @@
         </div>
 
         <!-- Affichage des services sélectionnés -->
-        <div class="f-w-600 p-16 bg-light-primary rounded">
+        <div class="f-w-600 p-16 bg-light-primary">
             Services sélectionnés :
             <ul>
                 <li *ngFor="let selectedService of selectedServices">
@@ -42,7 +41,7 @@
         <div class="vehicle-list">
             <div *ngFor="let vehicle of vehicles" (click)="selectVehicle(vehicle)"
                 [ngClass]="{'selected-vehicle': selectedVehicle?._id === vehicle._id}"
-                class="vehicle-item p-8 m-b-8 cursor-pointer border rounded">
+                class="vehicle-item p-8 m-b-8 cursor-pointer border">
                 <strong>{{ vehicle.brand }} {{ vehicle.model }}</strong><br>
                 <small>Immatriculation : {{ vehicle.licensePlate }}</small><br>
                 <small>Statut : {{ vehicle.status }}</small>
@@ -50,31 +49,34 @@
         </div>
 
         <!-- Affichage du véhicule sélectionné -->
-        <div *ngIf="selectedVehicle" class="mt-16 bg-light-primary rounded p-12 f-w-600">
+        <div *ngIf="selectedVehicle" class="mt-16 bg-light-primary p-12 f-w-600">
             Véhicule sélectionné : {{ selectedVehicle.brand }} {{ selectedVehicle.model }} - {{
             selectedVehicle.licensePlate }}
         </div>
     </mat-card-content>
 
     <!-- SELECTION DE LA DATE -->
-    <div class="mt-16">
-        <label for="appointment-date" class="f-w-600">Choisir une date de rendez-vous :</label>
+    <mat-card-header>
+        <mat-card-title>Choisir une date de rendez-vous</mat-card-title>
+    </mat-card-header>
+
+    <!-- <div class="mt-16">
         <input type="date" id="appointment-date" [(ngModel)]="selectedDate" class="p-8 border rounded m-t-8" />
-    </div>
+    </div> -->
 
     <!-- Date Picker -->
-    <!-- <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline">
         <mat-label>Date du rendez-vous</mat-label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" name="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field> -->
+    </mat-form-field>
 
     <!-- Time Picker -->
-    <!-- <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline">
         <mat-label>Heure</mat-label>
         <input matInput type="time" [(ngModel)]="selectedTime" name="time">
-    </mat-form-field> -->
+    </mat-form-field>
 
     <!-- Affichage de la date sélectionnée -->
     <div *ngIf="selectedDate" class="mt-16 bg-light-primary rounded p-12 f-w-600">
@@ -83,11 +85,11 @@
     <!-- LOADING -->
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-    <div *ngIf="confirmationMessage"
+    <!-- <div *ngIf="confirmationMessage"
         [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}"
         class="confirmation-message">
         {{ confirmationMessage }}
-    </div>
+    </div> -->
 
     <button mat-flat-button color="primary" class="m-r-8" (click)="save()">Enregistrer</button>
 

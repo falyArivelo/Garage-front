@@ -8,6 +8,7 @@ export const navItems: NavItem[] = [
     displayName: 'Tableau de Bord',
     iconName: 'bx:stats',
     route: '/dashboard',
+    role : ['manager']
   },
   {
     displayName: 'Envoyer Email',
@@ -34,18 +35,18 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Rendez Vous',
     iconName: 'material-symbols:schedule-outline-rounded',
-    role :['client'],
+    role :['client','manager'],
     children: [
       {
         displayName: 'Prendre Rendez Vous',
         route: '/appointments/book',
-        iconName: 'ic:outline-handyman',
+        iconName: 'tabler:calendar-plus',
         role :['client'],
       },
       {
         displayName: 'Liste des Rendez Vous',
         route: '/appointments/all',
-        // iconName: 'ic:outline-handyman',
+        iconName: 'ic:outline-handyman',
         role :['manager'],
       },
       {
