@@ -1,0 +1,51 @@
+.status-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .status-form {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .status-card {
+    width: 100%;
+  }
+  
+  .status-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .status-radio-button {
+    margin: 8px 0;
+  }
+  
+  .message-container {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .message-input {
+    width: 100%;
+  }
+  
+  .confirm-button {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  button {
+    width: 100%;
+  }
+  

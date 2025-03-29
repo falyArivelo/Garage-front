@@ -17,11 +17,11 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 
 export interface AppointmentData {
     _id: string;
+    client : any;
     vehicle: any;
     services: any[];
     status: 'En attente' | 'Confirmé' | 'En cours' | 'Terminé' | 'Annulé';
     appointmentDate: any;
-    estimatedDuration: number;
     notes: any[];
     invoice: any;
 }

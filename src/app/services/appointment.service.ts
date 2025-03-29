@@ -60,7 +60,12 @@ export class AppointmentService {
   // Supprimer un rendez-vous
   cancelAppointment(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    console.log(headers.has)
     return this.http.put(`${this.apiUrl}/appointments/cancel/${id}`,{},{ headers });
+  }
+
+  changingStatusAppointmentByManager(id: string, status: string, message: string, userId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const body = { status, message, userId };  // Envoie le statut, message et l'ID de l'utilisateur
+    return this.http.put(`${this.apiUrl}/appointments/changing-status-manager/${id}`, body,{headers});
   }
 }
