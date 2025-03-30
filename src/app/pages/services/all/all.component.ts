@@ -52,7 +52,7 @@ export class ServiceAllComponent implements OnInit {
     filteredDataSource: MatTableDataSource<any>;
     pagedData: any[] = []; // Variable pour stocker les données paginées
     currentPage = 0; // Page courante
-    pageSize = 6; // Nombre d'éléments par page
+    pageSize = 5; // Nombre d'éléments par page
     totalPages: number = 0; // Total des pages
     isLoading = true;
 
@@ -95,13 +95,16 @@ export class ServiceAllComponent implements OnInit {
         this.isLoading = true;
         this.serviceService.getAllServices().subscribe({
             next: (services: any[]) => {
+                console.log("Services récupérés depuis l'API :", services); // Vérifie les données ici
                 this.dataSource = services;
                 this.filteredDataSource = new MatTableDataSource(services);  // Initialisation correcte de filteredDataSource
+                this.filteredDataSource.data = services; // Mettre à jour filteredDataSource avec les services
                 this.applyFilter();  // Appliquer le filtre après que les services aient été chargés
                 this.isLoading = false;
                 console.log(services)
             },
-            error: () => {
+            error: (err) => {
+                console.error("Erreur lors du chargement des services :", err);
                 this.isLoading = false; // même en cas d'erreur, on arrête le chargement
             }
         });
@@ -112,7 +115,7 @@ export class ServiceAllComponent implements OnInit {
         if (!this.dataSource || this.dataSource.length === 0) {
             return;  // Ne rien faire si dataSource est vide ou non défini
         }
-    
+        console.log("Filtre appliqué", this.filterValues);
         // Appliquer les filtres sur filteredDataSource
         const filtered = this.dataSource.filter(service =>
             service.name.toLowerCase().includes(this.filterValues.name.toLowerCase()) &&
@@ -120,7 +123,10 @@ export class ServiceAllComponent implements OnInit {
             (this.filterValues.priceMin == null || service.price >= this.filterValues.priceMin) &&
             (this.filterValues.priceMax == null || service.price <= this.filterValues.priceMax)
         );
+        console.log("Services filtrés:", filtered); // Vérifie les services après filtrage
         this.filteredDataSource.data = filtered;
+        // Réinitialiser la page courante si les résultats filtrés changent
+        this.currentPage = 0;
         this.totalPages = Math.ceil(this.filteredDataSource.data.length / this.pageSize); // Calculer le nombre de pages total
         this.updatePagedData();
         this.cdr.detectChanges(); // Déclencher un rafraîchissement du composant

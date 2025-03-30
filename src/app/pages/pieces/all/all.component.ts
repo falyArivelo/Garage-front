@@ -50,7 +50,7 @@ export class PieceAllComponent implements OnInit {
     filteredDataSource: MatTableDataSource<any>;
     pagedData: any[] = []; // Variable pour stocker les données paginées
     currentPage = 0; // Page courante
-    pageSize = 6; // Nombre d'éléments par page
+    pageSize = 5; // Nombre d'éléments par page
     totalPages: number = 0; // Total des pages
     user: any;
     isLoading = true;

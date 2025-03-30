@@ -63,19 +63,29 @@ export class ServiceEditComponent {
     private pieceService: PieceService,
   ) {}
 
-  // comparePieces(piece1: any, piece2: any): boolean {
-  //   return piece1 && piece2 ? piece1._id === piece2._id : piece1 === piece2;
-  // }
-
   ngOnInit(): void {
+    this.loadPieces(); // Charger toutes les pièces
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.serviceService.getServiceById(id).subscribe((data) => {
-        console.log('Service récupéré :', data);
         this.service = data;
-        this.selectedPieces = this.service.pieces; 
+        this.syncSelectedPieces(); // Synchroniser les pièces après chargement
       });
     }
+  }
+
+  syncSelectedPieces(): void {
+    if (!this.service.pieces) return;
+  
+    this.selectedPieces = this.service.pieces.map(sp => {
+      return this.pieces.find(p => p._id === sp._id) || sp;
+    });
+  }
+
+  loadPieces(): void {
+    this.pieceService.getAllPieces().subscribe((data: any[]) => {
+      this.pieces = data;
+    });
   }
 
   save() {
@@ -111,7 +121,7 @@ export class ServiceEditComponent {
       },
       error: () => {
         this.isLoading = false;
-        // Gère l’erreur si besoin (snackbar, console, etc.)
+        this.snackBar.open("Modification interrommpu", "Fermer" , { duration: 8000, verticalPosition: 'top', panelClass: 'alert-error' });
       }
     });
   }

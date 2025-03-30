@@ -8,3 +8,28 @@
     color: white !important;
 }
 
+.scrollable-list {
+    max-height: 300px;  /* Hauteur maximale */
+    overflow-y: scroll; /* Toujours afficher la barre de défilement */
+    border: 1px solid #ccc; /* Optionnel : ajouter une bordure */
+    padding: 8px;
+}
+
+/* Personnaliser la scrollbar pour Chrome, Edge et Safari */
+.scrollable-list::-webkit-scrollbar {
+    width: 8px; /* Largeur de la barre de défilement */
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Couleur du fond de la scrollbar */
+    border-radius: 4px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+    background: #888; /* Couleur de la barre */
+    border-radius: 4px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Couleur au survol */
+}
