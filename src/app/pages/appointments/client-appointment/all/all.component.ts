@@ -43,7 +43,7 @@ export interface AppointmentData {
 })
 
 export class AppointmentClientAllComponent implements OnInit {
-    displayedColumns: string[] = ['vehicle', 'appointmentDate', 'status', 'menu'];
+    displayedColumns: string[] = ['vehicle', 'services', 'appointmentDate', 'status', 'menu'];
     @Input() dataSource: any[] = [];
     isLoading = true;
 
