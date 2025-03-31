@@ -5,10 +5,10 @@
     <div class="banner text-center p-16  text-black">
         <div class="slogan">
             <div class="text">
-                Fini les files d’attente, vos réparations commencent par un clic !
+                Fini les files d’attente, vos réparations commencent en un clic !
             </div>
             <a class="btn btn-light btn-rounded" [routerLink]="['/dashboard']">
-                Allons-y !
+                Allons-y ! <a href="#" style="color: #0070cc;"><i class="fa fa-arrow-right"></i></a>
             </a>
             <!-- <button mat-raised-button color="primary" (click)="openServiceModal()">Voir plus</button> -->
 
@@ -17,11 +17,13 @@
 
     <!-- Présentation de l’application -->
     <section class="app-intro text-center p-16">
-        <h2>Bienvenue chez CARCARE</h2>
-        <p>
-            CARCARE est une solution moderne pour prendre rendez-vous avec notre garage en quelques clics.
-            Gagnez du temps et évitez les files d’attente grâce à notre plateforme de prise de rendez-vous en ligne.
-        </p>
+        <h2 class="intro-title"><span>Bienvenue chez</span><span> CARCARE</span></h2>
+        <div class="intro-text">
+            <p>Une solution moderne pour votre garage.</p>
+            <p>Gagnez du temps et simplifiez vos démarches.</p>
+            <p>Prenez rendez-vous en quelques clics, rapidement et facilement.</p>
+            <p>Évitez les files d'attente avec notre plateforme de réservation en ligne.</p>
+        </div>
     </section>
 
     <!-- Nos Services -->
@@ -111,19 +113,23 @@
         <h3>Comment ça marche ?</h3>
         <div class="steps">
             <div class="step">
-                <h4>1. Choisissez un service</h4>
+                <span class="step-number">1</span>
+                <h4>Choisissez un service</h4>
                 <p>Définissez le type de réparation ou d'entretien.</p>
             </div>
             <div class="step">
-                <h4>2. Sélectionnez une date</h4>
+                <span class="step-number">2</span>
+                <h4>Sélectionnez une date</h4>
                 <p>Choisissez le créneau horaire qui vous convient.</p>
             </div>
             <div class="step">
-                <h4>3. Recevez une confirmation instantanée</h4>
+                <span class="step-number">3</span>
+                <h4>Recevez une confirmation instantanée</h4>
                 <p>Vous êtes prêt pour votre rendez-vous !</p>
             </div>
         </div>
     </section>
+    
 
     <!-- Témoignages -->
     <section class="testimonials text-center p-16">
@@ -141,18 +147,30 @@
         <h2>Prêt à prendre rendez-vous ?</h2>
         <a class="btn btn-light" routerLink="/dashboard">Réservez maintenant</a>
 
-
-
         <!-- Informations de contact fictives pour Carcare -->
         <div class="footer-contact mt-4">
             <p><strong>Contactez-nous :</strong></p>
             <p>
                 <a href="mailto:contact&#64;carcare.com">contact&#64;carcare.com</a>
-
             </p>
             <p>
                 <strong>Téléphone :</strong> +33 1 23 45 67 89
             </p>
+        </div>
+
+        <!-- Adresse et horaires -->
+        <div class="footer-address mt-4">
+            <!-- <p><strong>Adresse :</strong> 123 Rue du Garage, 75000 Paris</p> -->
+            <p><strong>Horaires d'ouverture :</strong></p>
+            <p>Lundi - Vendredi : 8h00 - 18h00</p>
+            <p>Samedi : 9h00 - 13h00</p>
+            <p>Dimanche : Fermé</p>
+        </div>
+
+        <!-- Garanties -->
+        <div class="footer-assurances mt-4">
+            <p><strong>Assurances & Garanties</strong></p>
+            <p>Nous offrons des garanties sur toutes nos réparations. Votre satisfaction est notre priorité.</p>
         </div>
 
         <!-- Informations des étudiants -->

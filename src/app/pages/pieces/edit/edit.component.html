@@ -12,7 +12,7 @@
             <div class="row">
                 <!-- Pièce -->
                 <div class="col-lg-6">
-                    <mat-label class="f-w-600 m-b-8 d-block">Pièce</mat-label>
+                    <mat-label class="f-w-600 m-b-8 d-block">Pièce<span style="color: red;">*</span></mat-label>
                     <mat-form-field appearance="outline" class="w-100">
                         <input matInput placeholder="ex: Radiateur" [(ngModel)]="piece.name" name="name" />
                     </mat-form-field>
@@ -26,7 +26,7 @@
                 
                 <div class="col-lg-6">
                     <!-- Catégorie -->
-                    <mat-label class="f-w-600 m-b-8 d-block">Catégorie</mat-label>
+                    <mat-label class="f-w-600 m-b-8 d-block">Catégorie<span style="color: red;">*</span></mat-label>
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-select [(ngModel)]="piece.category" name="category">
                             <mat-option value="Moteur">Moteur</mat-option>
@@ -37,13 +37,13 @@
                     </mat-form-field>
 
                     <!-- Prix -->
-                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Prix</mat-label>
+                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Prix<span style="color: red;">*</span></mat-label>
                     <mat-form-field appearance="outline" class="w-100">
                         <input matInput placeholder="ex: 15000" [(ngModel)]="piece.price" name="price" />
                     </mat-form-field>
 
                     <!-- Stock -->
-                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Stock</mat-label>
+                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Stock<span style="color: red;">*</span></mat-label>
                     <mat-form-field appearance="outline" class="w-100">
                         <input matInput type="number"[(ngModel)]="piece.stock" name="stock" />
                     </mat-form-field>

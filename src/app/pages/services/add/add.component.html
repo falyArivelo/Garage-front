@@ -11,7 +11,7 @@
         <div class="row">
             <!-- Service -->
             <div class="col-lg-6">
-                <mat-label class="f-w-600 m-b-8 d-block">Service</mat-label>
+                <mat-label class="f-w-600 m-b-8 d-block">Service<span style="color: red;">*</span></mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                 <input matInput placeholder="ex: Vidange moteur" [(ngModel)]="service.name" name="name" />
                 </mat-form-field>
@@ -31,7 +31,7 @@
   
             <div class="col-lg-6">
                 <!-- Catégorie -->
-                <mat-label class="f-w-600 m-b-8 d-block">Catégorie</mat-label>
+                <mat-label class="f-w-600 m-b-8 d-block">Catégorie<span style="color: red;">*</span></mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                 <mat-select [(ngModel)]="service.category" name="category">
                     <mat-option value="Réparation">Réparation</mat-option>
@@ -41,19 +41,19 @@
                 </mat-form-field>
 
                 <!-- Description -->
-                <mat-label class="f-w-600 m-b-8 d-block mt-3">Description</mat-label>
+                <mat-label class="f-w-600 m-b-8 d-block mt-3">Description<span style="color: red;">*</span></mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                     <textarea matInput placeholder="Entrez la description..." rows="6" [(ngModel)]="service.description" name="description"></textarea>
                 </mat-form-field>
 
                 <!-- Prix -->
-                <mat-label class="f-w-600 m-b-8 d-block">Prix</mat-label>
+                <mat-label class="f-w-600 m-b-8 d-block">Prix<span style="color: red;">*</span></mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                 <input matInput placeholder="ex: 120000" [(ngModel)]="service.price" name="price" />
                 </mat-form-field>
   
                 <!-- Durée estimée -->
-                <mat-label class="f-w-600 m-b-8 d-block">Durée estimée</mat-label>
+                <mat-label class="f-w-600 m-b-8 d-block">Durée estimée<span style="color: red;">*</span></mat-label>
                 <mat-form-field appearance="outline" class="w-100">
                 <input matInput type="number" [(ngModel)]="service.estimatedDuration" name="estimatedDuration" />
                 </mat-form-field>
