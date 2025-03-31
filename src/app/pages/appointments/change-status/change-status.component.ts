@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';  // Pour l'input du me
 import { MatCardModule } from '@angular/material/card';  // Pour la carte
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-change-status',
@@ -24,14 +25,17 @@ export class ChangeStatusComponent implements OnInit {
   statusMessage: string = ''; // Le message pour le statut
   emailMessage: string = ''; // Message sélectionné pour l'email
   appointmentId: string;  // Variable pour stocker l'ID du rendez-vous
+  clientEmail: any;
 
   constructor(private snackBar: MatSnackBar, private appointmentService: AppointmentService,
+    private emailService: EmailService,
     private route: ActivatedRoute,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.appointmentId = this.route.snapshot.paramMap.get('id')!;
+    this.getclientEmail()
   }
 
   // Messages associés à chaque statut
@@ -61,7 +65,7 @@ export class ChangeStatusComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.snackBar.open('Rendez-vous mis à jour avec succès.', 'Fermer', { duration: 3000 });
-        //  this.sendEmail(this.statusMessage,)
+          this.sendEmail()
           // Votre logique de confirmation et envoi de mail
         },
         error: (error) => {
@@ -71,11 +75,34 @@ export class ChangeStatusComponent implements OnInit {
   }
 
   // Fonction pour envoyer un mail (logique à ajouter)
-  sendEmail(emailMessage: string, statusMessage: string) {
-    console.log(`Envoi de mail avec le message: ${emailMessage} et le statut: ${statusMessage}`);
+  sendEmail() {
+    // this.snackBar.open('Email envoyé avec succès.', 'Fermer', { duration: 3000 });
 
-    // Logique pour appeler un service qui enverra l'email
-    // par exemple : this.emailService.sendMail(emailMessage, statusMessage);
-    this.snackBar.open('Email envoyé avec succès.', 'Fermer', { duration: 3000 });
+    this.emailService.sendEmail(this.clientEmail, this.selectedStatus, this.statusMessage)
+      .subscribe({
+        next: (res) =>{
+          this.snackBar.open('Email envoyé avec succès !', 'Fermer', { duration: 3000 });
+
+        },
+        error: (err) => {
+          console.error('Erreur:', err);
+          this.snackBar.open('Erreur lors de l\'envoi de l\'email', 'Fermer', { duration: 3000 });
+        },
+      });
+
   }
+
+  getclientEmail() {
+    this.appointmentService.getAppointmentById(this.appointmentId).subscribe({
+      next: (response) => {
+        // Récupère l'email du client
+        this.clientEmail = response.client.email;
+        console.log('Email du client :', this.clientEmail);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération du rendez-vous :', err);
+      }
+    });
+  }
+
 }

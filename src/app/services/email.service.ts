@@ -24,6 +24,7 @@ export class EmailService {
         return new HttpHeaders({
           'Authorization': `Bearer ${token}`,
         });
+      
     }
 
     // Envoyer e-mail

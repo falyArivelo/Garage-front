@@ -84,10 +84,11 @@ export class AllAppointmentComponent {
 
   getStatusColor(status: string): string {
     switch (status) {
-      case 'Confirmé': return 'accent';
-      case 'En cours': return 'primary';
-      case 'Terminé': return 'green';
-      case 'Annulé': return 'warn';
+      case 'Confirmé': return 'primary';
+      case 'En cours': return 'warning';
+      case 'En attente': return 'warning';
+      case 'Terminé': return 'success';
+      case 'Annulé': return 'error';
       default: return 'default';
     }
   }
