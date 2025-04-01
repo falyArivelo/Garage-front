@@ -90,7 +90,6 @@ export class AppointmentClientAllComponent implements OnInit {
      ngOnChanges(changes: SimpleChanges): void {
         // Si dataSource change, réinitialisez le filtre
         if (changes['dataSource'] && this.dataSource) {
-            console.log('Données après changement:', this.dataSource); 
             this.filteredDataSource.data = this.dataSource;
             this.applyFilter(); // Appliquez le filtre dès que les données changent
         }
@@ -98,17 +97,14 @@ export class AppointmentClientAllComponent implements OnInit {
 
     loadAppointment(): void {
         this.isLoading = true;
-        console.log('Chargement des rendez-vous...');
         this.appointmentService.getAppointmentsByClient().subscribe({
             next: (appointments: any[]) => {
-                console.log('Données reçues:', appointments); 
                 this.dataSource = appointments;
                 this.filteredDataSource = new MatTableDataSource(appointments);  // Initialisation correcte de filteredDataSource
                 this.applyFilter();  // Appliquer le filtre après que les services aient été chargés
                 this.isLoading = false;
             },
             error: (err) => {
-                console.error('Erreur lors du chargement des rendez-vous:', err); 
                 this.isLoading = false; // même en cas d'erreur, on arrête le chargement
             }
         });
@@ -117,20 +113,15 @@ export class AppointmentClientAllComponent implements OnInit {
     // Appliquer le filtre
     applyFilter() {
         if (!this.dataSource || this.dataSource.length === 0) {
-            console.log('Aucune donnée disponible pour filtrer');
             return;  // Ne rien faire si dataSource est vide ou non défini
         }
-    
-        console.log('Données avant filtre:', this.dataSource);
     
         const filtered = this.dataSource.filter(appointment => {
             // Vérification si vehicle existe et si vehicle.brand existe
             const vehicleBrand = appointment.vehicle && appointment.vehicle.brand ? appointment.vehicle.brand.trim().toLowerCase() : '';
-            console.log(`Véhicule: "${vehicleBrand}", Recherche: "${this.filterValues.vehicle.trim().toLowerCase()}"`);
 
             // Filtrage du véhicule si 'vehicle' est défini et le filtre est non vide
             const vehicleMatches = vehicleBrand.includes(this.filterValues.vehicle.toLowerCase()) || !this.filterValues.vehicle;
-            console.log(`Filtre véhicule: ${vehicleMatches}`);
 
             // Vérification des services uniquement si services existe et est un tableau
             let servicesMatch = true;
@@ -146,13 +137,10 @@ export class AppointmentClientAllComponent implements OnInit {
     
             // Filtrage du statut
             const statusMatches = this.filterValues.status === '' || appointment.status === this.filterValues.status;
-            console.log(`Filtre statut: ${statusMatches}`);
 
             // Retourner true si toutes les conditions sont remplies
             return vehicleMatches && servicesMatch && dateMatches && statusMatches;
         });
-    
-        console.log('🔍 Données filtrées:', filtered); // Vérifiez les résultats du filtrage
     
         // Mise à jour de filteredDataSource
         this.filteredDataSource.data = filtered;

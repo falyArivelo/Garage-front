@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
-import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { ServiceService } from 'src/app/services/service.service';
 
 export interface ServiceData {
@@ -40,7 +39,6 @@ export interface ServiceData {
         NgScrollbarModule,
         FormsModule,
         RouterModule,
-        CurrencyFormatPipe
     ],
     templateUrl: './all.component.html',
     styleUrl: './all.component.scss'

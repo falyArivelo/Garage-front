@@ -7,9 +7,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
-import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { ServiceService } from 'src/app/services/service.service';
 import { ServiceData } from '../all/all.component';
 
@@ -25,7 +23,6 @@ import { ServiceData } from '../all/all.component';
         MatProgressBarModule,
         NgScrollbarModule,
         RouterModule,
-        CurrencyFormatPipe
     ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],

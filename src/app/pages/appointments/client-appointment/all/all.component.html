@@ -106,7 +106,7 @@
                         </span>
                       }
                       @case('Terminé') {
-                        <span class="bg-light-secondary text-secondary rounded f-w-600 p-6 p-y-4 f-s-12">
+                        <span class="bg-light-secondary text-dark rounded f-w-600 p-6 p-y-4 f-s-12">
                           Terminé
                         </span>
                       }
@@ -116,7 +116,7 @@
                         </span>
                       }
                       @default {
-                        <span class="bg-light-gray text-dark rounded f-w-600 p-6 p-y-4 f-s-12">
+                        <span class="bg-light-gray text-secondary rounded f-w-600 p-6 p-y-4 f-s-12">
                           Inconnu
                         </span>
                       }
@@ -135,7 +135,7 @@
                     </button>
                     <mat-menu #menu="matMenu" xPosition="before">
                         <a class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
-                            [routerLink]="['/services/edit', element._id]">
+                            [routerLink]="['/appointments/detailClient', element._id]">
                             <i-tabler name="edit" class="icon-18"></i-tabler>
                             <span>En savoir plus</span>
                         </a>
