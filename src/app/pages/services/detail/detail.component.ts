@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/services/service.service';
 import { ServiceData } from '../all/all.component';
-
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 @Component({
     selector: 'app-detail',
     standalone: true,
@@ -23,6 +23,7 @@ import { ServiceData } from '../all/all.component';
         MatProgressBarModule,
         NgScrollbarModule,
         RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],

@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { PieceService } from 'src/app/services/piece.service';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
+
 
 export interface PieceData {
     _id: string;
@@ -37,6 +39,7 @@ export interface PieceData {
         NgScrollbarModule,
         RouterModule,
         FormsModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './all.component.html',
     styleUrl: './all.component.scss'

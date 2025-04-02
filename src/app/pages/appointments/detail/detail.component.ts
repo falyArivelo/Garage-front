@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentData } from '../client-appointment/all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { StatusService } from 'src/app/services/status.service';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 
 @Component({
     selector: 'app-detail',
@@ -23,6 +25,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
         MatProgressBarModule,
         NgScrollbarModule,
         RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
@@ -33,8 +36,9 @@ export class AppointmentDetailByIdComponent {
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService, 
+        private appointmentService: AppointmentService,
         private route: ActivatedRoute,
+        private statusService: StatusService
     ) { }
 
     ngOnInit(): void {
@@ -45,5 +49,9 @@ export class AppointmentDetailByIdComponent {
                 this.isLoading = false;
             });
         }
+    }
+
+    getStatusColor(status: string): string {
+        return this.statusService.getStatusColor(status);
     }
 }

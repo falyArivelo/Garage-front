@@ -71,7 +71,7 @@
             <!-- Prix Column -->
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14"> Prix </th>
-                <td mat-cell *matCellDef="let piece">{{ piece.price | currency:'MGA':'symbol':'1.0-0' }}</td>
+                <td mat-cell *matCellDef="let piece">{{ piece.price | currencyAr }}</td>
             </ng-container>
 
             <!-- Stock Column -->

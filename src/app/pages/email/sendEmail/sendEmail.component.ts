@@ -33,7 +33,7 @@ import { EmailService } from 'src/app/services/email.service';
   styleUrls: ['./sendEmail.component.scss'],
 })
 export class EmailComponent {
-  to = '';
+  to = 'arivelofaly@gmail.com';
   subject = '';
   text = '';
 

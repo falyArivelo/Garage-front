@@ -10,7 +10,7 @@
                     <h3>{{ service.name }}</h3>
                     <p>{{ service.category }}</p>
                     <p>{{ service.description }}</p>
-                    <p>{{ service.price | currency:'MGA':'symbol':'1.0-0' }}</p>
+                    <p>{{ service.price | currencyAr }}</p>
                 </div>
                 <div class="service-image">
                     <img *ngIf="service.image" [src]="service.image" alt="Image du service" />
@@ -19,16 +19,6 @@
                     <input type="checkbox" [checked]="isSelected(service)" (change)="onServiceSelect(service)">
                 </div>
             </div>
-        </div>
-
-        <!-- Affichage des services sélectionnés -->
-        <div class="f-w-600 p-16 bg-light-primary">
-            Services sélectionnés :
-            <ul>
-                <li *ngFor="let selectedService of selectedServices">
-                    {{ selectedService.name }}
-                </li>
-            </ul>
         </div>
     </mat-card-content>
 
@@ -46,12 +36,6 @@
                 <small>Immatriculation : {{ vehicle.licensePlate }}</small><br>
                 <small>Statut : {{ vehicle.status }}</small>
             </div>
-        </div>
-
-        <!-- Affichage du véhicule sélectionné -->
-        <div *ngIf="selectedVehicle" class="mt-16 bg-light-primary p-12 f-w-600">
-            Véhicule sélectionné : {{ selectedVehicle.brand }} {{ selectedVehicle.model }} - {{
-            selectedVehicle.licensePlate }}
         </div>
     </mat-card-content>
 
@@ -78,10 +62,6 @@
         <input matInput type="time" [(ngModel)]="selectedTime" name="time">
     </mat-form-field>
 
-    <!-- Affichage de la date sélectionnée -->
-    <div *ngIf="selectedDate" class="mt-16 bg-light-primary rounded p-12 f-w-600">
-        Date sélectionnée : {{ selectedDate | date: 'fullDate' }}
-    </div>
     <!-- LOADING -->
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 

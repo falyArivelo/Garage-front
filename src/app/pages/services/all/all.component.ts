@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { ServiceService } from 'src/app/services/service.service';
-
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 export interface ServiceData {
     _id: string;
     name: string;
@@ -39,6 +39,7 @@ export interface ServiceData {
         NgScrollbarModule,
         FormsModule,
         RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './all.component.html',
     styleUrl: './all.component.scss'
