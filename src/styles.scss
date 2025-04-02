@@ -32,3 +32,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .tox-statusbar__path-item {
   display: none !important;
 }
+
+.status-pending { background-color: orange; color: white; }
+.status-inprogress { background-color: blue; color: white; }
+.status-done { background-color: green; color: white; }
+.status-cancelled { background-color: red; color: white; }

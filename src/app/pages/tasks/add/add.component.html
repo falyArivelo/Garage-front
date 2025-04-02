@@ -1,0 +1,176 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">Ajouter une tâche pour l'appointment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="row">
+            <h3>Informations sur l'Appointment</h3>
+            <table *ngIf="appointment" mat-table [dataSource]="[appointment]" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef> Client </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.client?.username }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle">
+                    <th mat-header-cell *matHeaderCellDef> Véhicule </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.vehicle?.brand }} {{ element.vehicle?.model
+                        }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="services">
+                    <th mat-header-cell *matHeaderCellDef> Services </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ul *ngIf="element.services?.length">
+                            <li *ngFor="let service of element.services">{{ service.name }}</li>
+                        </ul>
+                        <span *ngIf="!element.services?.length">Aucun service</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="appointmentDate">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.appointmentDate | date: 'short' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Statut </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="f-s-12 f-w-500 p-x-10 p-y-4 rounded-pill"
+                            [ngClass]="['bg-light-' + getStatusColor(element.status), 'text-' + getStatusColor(element.status)]">
+                            {{ element.status }}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="totalEstimatedPrice">
+                    <th mat-header-cell *matHeaderCellDef> Prix estimé </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.totalEstimatedPrice | currencyAr }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+        </div>
+        <form *ngIf="isFormEnable" [formGroup]="taskForm" (ngSubmit)="createTask()">
+
+            <!-- Appointment Details -->
+
+
+            <!-- Formulaire de création de tâche -->
+            <mat-form-field appearance="fill">
+                <mat-label>Service</mat-label>
+                <mat-select formControlName="serviceId" required (selectionChange)="onServiceChange($event.value)">
+                    <mat-option *ngFor="let service of services" [value]="service._id">
+                        {{ service.name }} ({{ service.estimatedDuration }} min)
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Durée (en minutes)</mat-label>
+                <input matInput formControlName="duration" type="number" required />
+            </mat-form-field>
+
+            <!-- <mat-form-field > -->
+            <!-- <mat-label>Date et Heure Planifiées</mat-label> -->
+            <input matInput formControlName="scheduledDateTime" type="datetime-local" required />
+            <!-- </mat-form-field> -->
+
+            <mat-form-field appearance="fill">
+                <mat-label>Mécanicien</mat-label>
+                <mat-select formControlName="mechanicId" required>
+                    <mat-option *ngFor="let mechanic of mechanics" [value]="mechanic._id">
+                        {{ mechanic.username }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="actions">
+                <button mat-button type="submit" [disabled]="taskForm.invalid">Créer la tâche</button>
+                <button mat-button (click)="cancel()">Annuler</button>
+            </div>
+        </form>
+
+        <!-- task-list.component.html -->
+        <!-- <div *ngIf="tasks.length > 0">
+            <h2>Tâches pour cet appointment</h2>
+            <ul>
+                <li *ngFor="let task of tasks">
+                    <strong>Tâche:</strong> {{ task.service.name }}<br>
+                    <strong>Mécanicien:</strong> {{ task.mechanic.username }}<br>
+                    <strong>Date de début:</strong> {{ task.scheduledDateTime | date }}<br>
+                    <strong>Date de fin:</strong> {{ task.endDateTime | date }}<br>
+                    <strong>Status:</strong> {{ task.status }}
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="tasks.length === 0">
+            <p>Aucune tâche trouvée pour cet appointment.</p>
+        </div> -->
+
+        <div class="task-container">
+            <h2>Liste des Tâches</h2>
+
+            <table mat-table [dataSource]="tasks" class="mat-elevation-z8" *ngIf="tasks.length > 0; else noTasks">
+
+                <!-- Colonne: Service -->
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef> Service </th>
+                    <td mat-cell *matCellDef="let task"> {{ task.service?.name }} </td>
+                </ng-container>
+
+                <!-- Colonne: Mécanicien -->
+                <ng-container matColumnDef="mechanic">
+                    <th mat-header-cell *matHeaderCellDef> Mécanicien </th>
+                    <td mat-cell *matCellDef="let task"> {{ task.mechanic?.username }} </td>
+                </ng-container>
+
+                <!-- Colonne: Date & Durée -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let task"> {{ task.scheduledDateTime | date:'short' }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="duration">
+                    <th mat-header-cell *matHeaderCellDef> Durée </th>
+                    <td mat-cell *matCellDef="let task"> {{ task.duration }} min </td>
+                </ng-container>
+
+                <!-- Colonne: Statut -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Statut </th>
+                    <td mat-cell *matCellDef="let task">
+                        <span class="f-s-12 f-w-500 p-x-10 p-y-4 rounded-pill"
+                            [ngClass]="['bg-light-' + getStatusColor(task.status), 'text-' + getStatusColor(task.status)]">
+                            {{ task.status }}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <!-- Colonne: Actions -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let task">
+                        <button mat-icon-button color="primary" (click)="viewTaskDetails(task)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['service', 'mechanic', 'date', 'duration', 'status', 'actions']">
+                </tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: ['service', 'mechanic', 'date', 'duration', 'status', 'actions'];">
+                </tr>
+            </table>
+
+            <!-- Message si aucune tâche -->
+            <ng-template #noTasks>
+                <p>Aucune tâche disponible.</p>
+            </ng-template>
+        </div>
+
+    </mat-card-content>
+</mat-card>

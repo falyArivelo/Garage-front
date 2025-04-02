@@ -11,6 +11,18 @@ export const navItems: NavItem[] = [
     role : ['manager']
   },
   {
+    displayName: 'Tâches',
+    iconName: 'fluent:tasks-app-24-regular',
+    route: '/tasks/all',
+    role : ['manager'],
+  },
+  {
+    displayName: 'Mes Tâches',
+    iconName: 'fluent:tasks-app-24-regular',
+    route: '/tasks/me',
+    role : ['mecanicien'],
+  },
+  {
     displayName: 'Envoyer Email',
     iconName: 'bx:stats',
     route: '/email/sendEmail',

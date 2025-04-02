@@ -1,0 +1,43 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+        <mat-card-title class="m-b-0">Chips</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+        <div class="row">
+            <div class="col-lg-6">
+                <mat-card class="b-1 shadow-none">
+                    <mat-card-header>
+                        <mat-card-title>Raisons</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="b-t-1">
+                        <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                            @for(reason of reasons; track reason.color) {
+                            <mat-chip-option [color]="reason.color" [selected]="selectedReason === reason.name"
+                                (click)="selectedReason = reason.name" [ngClass]="getReasonClasses(reason.name)">
+                                {{ reason.name }}
+                            </mat-chip-option>
+                            }
+                        </mat-chip-listbox>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-lg-6">
+                <mat-card class="b-1 shadow-none">
+                    <mat-card-header>
+                        <mat-card-title>Raisons</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="b-t-1">
+                        <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+                            @for(reason of reasons; track reason.color) {
+                            <mat-chip-option [color]="reason.color" [selected]="selectedReason === reason.name"
+                                (click)="selectedReason = reason.name" [ngClass]="getReasonClasses(reason.name)">
+                                {{ reason.name }}
+                            </mat-chip-option>
+                            }
+                        </mat-chip-listbox>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

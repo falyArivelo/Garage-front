@@ -55,7 +55,7 @@ export class ServiceAllComponent implements OnInit {
     isLoading = true;
 
     constructor(
-        private serviceService: ServiceService, 
+        private serviceService: ServiceService,
         private cdr: ChangeDetectorRef,
         private snackBar: MatSnackBar,
         private router: Router,
@@ -84,8 +84,8 @@ export class ServiceAllComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges): void {
         // Si dataSource change, réinitialisez le filtre
         if (changes['dataSource']) {
-          this.filteredDataSource.data = this.dataSource;
-          this.applyFilter(); // Appliquez le filtre dès que les données changent
+            this.filteredDataSource.data = this.dataSource;
+            this.applyFilter(); // Appliquez le filtre dès que les données changent
         }
     }
 

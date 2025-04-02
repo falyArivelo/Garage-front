@@ -1,3 +1,66 @@
+
+<div *ngIf="isLoading" class="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="client">
+    <th mat-header-cell *matHeaderCellDef> Client </th>
+    <td mat-cell *matCellDef="let element"> {{ element.client.username }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vehicle">
+    <th mat-header-cell *matHeaderCellDef> Vehicle </th>
+    <td mat-cell *matCellDef="let element"> {{ element.vehicle.brand }} {{ element.vehicle.model }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="services">
+    <th mat-header-cell *matHeaderCellDef> Services </th>
+    <td mat-cell *matCellDef="let element">
+      <ul>
+        <li *ngFor="let service of element.services">{{ service.name }}</li>
+      </ul>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="appointmentDate">
+    <th mat-header-cell *matHeaderCellDef> Appointment Date </th>
+    <td mat-cell *matCellDef="let element"> {{ element.appointmentDate | date: 'short' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Statut </th>
+    <td mat-cell *matCellDef="let element">
+      <span class="f-s-12 f-w-500 p-x-10 p-y-4 rounded-pill"
+            [ngClass]="['bg-light-' + getStatusColor(element.status), 'text-' + getStatusColor(element.status)]">
+        {{ element.status }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalEstimatedPrice">
+    <th mat-header-cell *matHeaderCellDef> Prix estimé</th>
+    <td mat-cell *matCellDef="let element"> {{ element.totalEstimatedPrice | currencyAr }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="menu">
+    <th mat-header-cell *matHeaderCellDef> Menu </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [matMenuTriggerFor]="menu">Actions</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/tasks/add', element._id]">Assigner Tache</button>
+        
+        <button mat-menu-item [routerLink]="['/appointments/status-change', element._id]">Modifier</button>
+
+        <button mat-menu-item>Supprimer</button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
 <mat-card class="cardWithShadow overflow-hidden">
   <mat-card-content>
       <mat-card-title class="m-b-4">Tous les Rendez-vous</mat-card-title>
@@ -125,3 +188,4 @@
     <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
   </div>
 </mat-card>
+
