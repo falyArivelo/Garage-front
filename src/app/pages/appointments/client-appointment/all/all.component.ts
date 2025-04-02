@@ -2,9 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, SimpleChanges } from '@angular/co
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
 import { Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from 'src/app/material.module';
@@ -64,8 +62,6 @@ export class AppointmentClientAllComponent implements OnInit {
         private appointmentService: AppointmentService,
         private cdr: ChangeDetectorRef,
         private snackBar: MatSnackBar,
-        private router: Router,
-        private route: ActivatedRoute,
     ) { }
 
     filterValues = {
@@ -78,7 +74,6 @@ export class AppointmentClientAllComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.dataSource && this.dataSource.length > 0) {
-            console.log('Données initiales:', this.dataSource);
             this.filteredDataSource = new MatTableDataSource(this.dataSource);
             this.applyFilter();  // Appliquer le filtre immédiatement si les données sont déjà présentes
             this.isLoading = false;
@@ -87,7 +82,7 @@ export class AppointmentClientAllComponent implements OnInit {
         }
     }
 
-     ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         // Si dataSource change, réinitialisez le filtre
         if (changes['dataSource'] && this.dataSource) {
             this.filteredDataSource.data = this.dataSource;
@@ -104,7 +99,7 @@ export class AppointmentClientAllComponent implements OnInit {
                 this.applyFilter();  // Appliquer le filtre après que les services aient été chargés
                 this.isLoading = false;
             },
-            error: (err) => {
+            error: () => {
                 this.isLoading = false; // même en cas d'erreur, on arrête le chargement
             }
         });
