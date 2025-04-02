@@ -66,14 +66,25 @@ export class TaskEditReasonComponent {
   ];
 
   reasons = [
-    { name: 'Travail en cours', value: 'en_cours', color: 'primary' },
-    { name: 'Pièces manquantes', value: 'pieces_manquantes', color: 'accent' },
-    { name: 'Problème technique', value: 'probleme_technique', color: 'warn' },
-    { name: 'Changement de priorité', value: 'changement_priorite', color: 'warn' },
-    { name: 'Absence du mécanicien', value: 'absence_mecanicien', color: 'warn' }
+    { name: 'Travail en cours', value: 'En cours', color: 'primary' },
+    { name: 'Terminé', value: 'Terminé', color: 'accent' },
+    { name: 'Annuler', value: 'Annulé', color: 'danger' },
+    { name: 'Pièces manquantes', value: 'En attente', color: 'warn' },
+    { name: 'Problème technique', value: 'En attente', color: 'warn' },
+    { name: 'Changement de priorité', value: 'En attente', color: 'warn' },
+    { name: 'Absence du mécanicien', value: 'En attente', color: 'danger' }
   ];
 
   selectedReason: string = '';
+  message: string = '';
+  currentDateTime: string = new Date().toISOString().slice(0, 16); // Format YYYY-MM-DDTHH:mm
+  sendMail: boolean = false;
+
+  validate() {
+    console.log("Message :", this.message);
+    console.log("Date et heure :", this.currentDateTime);
+    console.log("Envoyer mail :", this.sendMail);
+  }
 
   onReasonChange(reason: string) {
     this.selectedReason = reason;
