@@ -23,11 +23,6 @@ export const navItems: NavItem[] = [
     role : ['mecanicien'],
   },
   {
-    displayName: 'Envoyer Email',
-    iconName: 'bx:stats',
-    route: '/email/sendEmail',
-  },
-  {
     displayName: 'Mes Véhicules',
     iconName: 'mingcute:car-line',
     role :['client'],
@@ -117,6 +112,16 @@ export const navItems: NavItem[] = [
         role :['manager', 'mecanicien', 'client'],
       }
     ]
+  },
+  
+  {
+    navCap: 'Autres',
+    divider: true
+  },
+  {
+    displayName: 'Nous contacter',
+    iconName: 'majesticons:mail-line',
+    route: '/email/sendEmail',
   },
   {
     navCap: 'Ui Components',

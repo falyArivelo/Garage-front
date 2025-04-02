@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ServiceService } from 'src/app/services/service.service';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 
 @Component({
     selector: 'app-allCard',
@@ -25,6 +26,7 @@ import { ServiceService } from 'src/app/services/service.service';
         NgScrollbarModule,
         RouterModule,
         FormsModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './allCard.component.html',
     styleUrls: ['./allCard.component.scss'],

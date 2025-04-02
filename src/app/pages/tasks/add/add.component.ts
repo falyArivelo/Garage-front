@@ -119,6 +119,7 @@ export class TaskAddComponent implements OnInit {
   cancel() {
     this.taskForm.reset();
   }
+  
   getStatusColor(status: string): string {
     return this.statusService.getStatusColor(status);
   }

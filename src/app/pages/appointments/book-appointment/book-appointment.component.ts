@@ -20,7 +20,7 @@ import { ServiceService } from 'src/app/services/service.service';
 import { Service } from '../../services/service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 @Component({
   selector: 'app-book-appointment',
   imports: [MatListModule, MatCardModule, DatePipe, MatIconModule, MaterialModule, CommonModule, FormsModule, MatProgressBarModule,
@@ -28,7 +28,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    CurrencyFormatPipe
   ],
   templateUrl: './book-appointment.component.html',
   styleUrl: './book-appointment.component.scss'

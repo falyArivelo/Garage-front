@@ -9,17 +9,18 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDatepickerModule } from '@angular/material/datepicker'; 
-import { MatNativeDateModule } from '@angular/material/core'; 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import Swal from 'sweetalert2';
-import { ServiceData } from 'src/app/pages/services/all/all.component'; 
+import { ServiceData } from 'src/app/pages/services/all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { StatusService } from 'src/app/services/status.service';
 
 export interface AppointmentData {
     _id: string;
-    client : any;
+    client: any;
     vehicle: any;
     services: ServiceData[];
     status: 'En attente' | 'Confirmé' | 'En cours' | 'Terminé' | 'Annulé';
@@ -62,12 +63,13 @@ export class AppointmentClientAllComponent implements OnInit {
         private appointmentService: AppointmentService,
         private cdr: ChangeDetectorRef,
         private snackBar: MatSnackBar,
+        private statusService: StatusService
     ) { }
 
     filterValues = {
         vehicle: '',
         services: '',
-        dateMin: null, 
+        dateMin: null,
         dateMax: null,
         status: '',
     };
@@ -110,7 +112,7 @@ export class AppointmentClientAllComponent implements OnInit {
         if (!this.dataSource || this.dataSource.length === 0) {
             return;  // Ne rien faire si dataSource est vide ou non défini
         }
-    
+
         const filtered = this.dataSource.filter(appointment => {
             // Vérification si vehicle existe et si vehicle.brand existe
             const vehicleBrand = appointment.vehicle && appointment.vehicle.brand ? appointment.vehicle.brand.trim().toLowerCase() : '';
@@ -121,30 +123,30 @@ export class AppointmentClientAllComponent implements OnInit {
             // Vérification des services uniquement si services existe et est un tableau
             let servicesMatch = true;
             if (Array.isArray(appointment.services)) {
-                servicesMatch = appointment.services.some((service: ServiceData) => 
+                servicesMatch = appointment.services.some((service: ServiceData) =>
                     service.name && service.name.toLowerCase().includes(this.filterValues.services.trim().toLowerCase())
                 );
             }
-    
+
             // Vérification des dates min et max
             const dateMatches = (this.filterValues.dateMin == null || new Date(appointment.appointmentDate).setHours(0, 0, 0, 0) >= new Date(this.filterValues.dateMin).setHours(0, 0, 0, 0)) &&
                 (this.filterValues.dateMax == null || new Date(appointment.appointmentDate).setHours(0, 0, 0, 0) <= new Date(this.filterValues.dateMax).setHours(0, 0, 0, 0));
-    
+
             // Filtrage du statut
             const statusMatches = this.filterValues.status === '' || appointment.status === this.filterValues.status;
 
             // Retourner true si toutes les conditions sont remplies
             return vehicleMatches && servicesMatch && dateMatches && statusMatches;
         });
-    
+
         // Mise à jour de filteredDataSource
         this.filteredDataSource.data = filtered;
-         // Réinitialiser la page courante si les résultats filtrés changent
+        // Réinitialiser la page courante si les résultats filtrés changent
         this.currentPage = 0;
         this.totalPages = Math.ceil(this.filteredDataSource.data.length / this.pageSize); // Calculer le nombre de pages total
         this.updatePagedData();
         this.cdr.detectChanges();
-    }    
+    }
 
     // Fonction de suppression avec confirmation
     confirmDelete(appointment_id: string): void {
@@ -176,7 +178,7 @@ export class AppointmentClientAllComponent implements OnInit {
             },
             error: (error) => {
                 console.error('Erreur lors de la suppression:', error);
-            }, complete : () => {
+            }, complete: () => {
                 this.loadAppointment();
             }
 
@@ -218,4 +220,9 @@ export class AppointmentClientAllComponent implements OnInit {
     getPageNumbers() {
         return Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
+
+    getStatusColor(status: string): string {
+        return this.statusService.getStatusColor(status);
+      }
+    
 }

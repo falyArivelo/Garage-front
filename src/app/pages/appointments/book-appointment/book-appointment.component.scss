@@ -11,7 +11,8 @@
 .scrollable-list {
   max-height: 400px; /* Hauteur maximale pour activer le scroll */
   overflow-y: auto;  /* Activer le défilement vertical */
-  border: 1px solid #ccc; /* Bordure pour bien voir la zone */
+  border: 1px solid #f0f7f7; /* Bordure pour bien voir la zone */
+  border-radius: 5px;
   padding: 8px;
   display: flex;
   flex-direction: column;
@@ -48,18 +49,6 @@
   background: #555;
 }
 
-// .service-item {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding: 15px ;
-//     border: 1px solid #f0f0f0;
-//     border-radius: 5px;
-//     background-color: #fcfcfc;
-//     min-height: 100px;
-//     height: auto;
-//     box-sizing: border-box;
-// }
 
 .service-info {
     flex: 1;

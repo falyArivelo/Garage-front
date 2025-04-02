@@ -11,6 +11,8 @@ import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentData } from '../all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { StatusService } from 'src/app/services/status.service';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 
 @Component({
     selector: 'app-detailClient',
@@ -24,6 +26,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
         MatProgressBarModule,
         NgScrollbarModule,
         RouterModule,
+        CurrencyFormatPipe
     ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
@@ -34,8 +37,9 @@ export class AppointmentDetailByClientComponent {
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService, 
+        private appointmentService: AppointmentService,
         private route: ActivatedRoute,
+        private statusService: StatusService
     ) { }
 
     ngOnInit(): void {
@@ -55,5 +59,9 @@ export class AppointmentDetailByClientComponent {
                 this.isLoading = false; // Gérer le cas où l'ID est absent
             }
         });
+    }
+
+    getStatusColor(status: string): string {
+        return this.statusService.getStatusColor(status);
     }
 }
