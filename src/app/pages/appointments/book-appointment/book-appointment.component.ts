@@ -35,36 +35,7 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 
 export class AppointmentAddComponent implements OnInit {
-  // Liste fictive de services comme donnée statique
-  // services = [
-  //   {
-  //     _id: "67cc26038819432e26e25651",
-  //     name: "Réparation du moteur",
-  //     description: "Réparation du moteur V8.",
-  //     price: 180000,
-  //     category: "Réparation",
-  //     availability: true,
-  //     image: null,
-  //     createdAt: "2025-03-08T11:12:03.208Z",
-  //     updatedAt: "2025-03-08T11:17:33.995Z",
-  //     __v: 0
-  //   },
-  //   {
-  //     _id: "67d6f68079c86915204b72df",
-  //     name: "Vidange moteur",
-  //     description: "Changement d’huile moteur et remplacement du filtre.",
-  //     price: 80000,
-  //     estimatedDuration: 60,
-  //     availability: true,
-  //     image: "https://example.com/images/vidange.jpg",
-  //     createdAt: "2025-03-16T16:04:16.816Z",
-  //     updatedAt: "2025-03-16T16:04:16.816Z",
-  //     __v: 0
-  //   }
-  // ];
-
   services: Service[] = []
-
   vehicles: VehicleData[] = []
 
   // Variable pour gérer les services sélectionnés
@@ -74,11 +45,13 @@ export class AppointmentAddComponent implements OnInit {
   selectedTime: string = ''; // Format: "HH:mm"
 
   toISOStringWithTime(date: Date, time: string): string {
+    console.log(date)
     const [hours, minutes] = time.split(':').map(Number);
     const result = new Date(date);
     result.setHours(hours, minutes, 0, 0);
     return result.toISOString();
   }
+
   isLoading = false;
   confirmationMessage: string = '';
   messageType: 'success' | 'error' = 'success';  // Initialisation par défaut à 'success'
@@ -138,7 +111,9 @@ export class AppointmentAddComponent implements OnInit {
     const userId = user?.user_id ?? ''
 
     const formatedDate = this.formatDate(this.selectedDate)
+    console.log("selected date : ",this.selectedDate)
     console.log(formatedDate)
+
     const localDateTime = new Date(`${formatedDate}T${this.selectedTime}`);
     const utcDateTimeString = localDateTime.toISOString();
     console.log('Date UTC:', utcDateTimeString);
@@ -170,6 +145,8 @@ export class AppointmentAddComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
+    const offset = date.getTimezoneOffset(); // Décalage en minutes
+    date.setMinutes(date.getMinutes() - offset); // Corriger le décalage
     return date.toISOString().split('T')[0]; // YYYY-MM-DD
   }
 

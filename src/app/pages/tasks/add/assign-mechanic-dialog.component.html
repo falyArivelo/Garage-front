@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Assigner un Mécanicien</h1>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Mécanicien</mat-label>
+    <mat-select [(value)]="selectedMechanic">
+      <mat-option *ngFor="let mechanic of mechanics" [value]="mechanic">
+        {{ mechanic.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annuler</button>
+  <button mat-button (click)="assignMechanic()">Confirmer</button>
+</mat-dialog-actions>

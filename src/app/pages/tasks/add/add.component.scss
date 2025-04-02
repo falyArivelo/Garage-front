@@ -1,0 +1,27 @@
+.appointment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  
+  .appointment-item {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+  
+  /* Styles dynamiques pour les statuts */
+  .bg-light-success { background-color: #d4edda; color: #155724; }
+  .bg-light-warning { background-color: #fff3cd; color: #856404; }
+  .bg-light-danger { background-color: #f8d7da; color: #721c24; }
+  
+  

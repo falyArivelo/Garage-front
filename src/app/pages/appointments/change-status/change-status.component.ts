@@ -27,7 +27,8 @@ export class ChangeStatusComponent implements OnInit {
   appointmentId: string;  // Variable pour stocker l'ID du rendez-vous
   clientEmail: any;
 
-  constructor(private snackBar: MatSnackBar, private appointmentService: AppointmentService,
+  constructor(private snackBar: MatSnackBar,
+    private appointmentService: AppointmentService,
     private emailService: EmailService,
     private route: ActivatedRoute,
     private authService: AuthService
@@ -76,20 +77,16 @@ export class ChangeStatusComponent implements OnInit {
 
   // Fonction pour envoyer un mail (logique à ajouter)
   sendEmail() {
-    // this.snackBar.open('Email envoyé avec succès.', 'Fermer', { duration: 3000 });
-
     this.emailService.sendEmail(this.clientEmail, this.selectedStatus, this.statusMessage)
       .subscribe({
-        next: (res) =>{
+        next: (res) => {
           this.snackBar.open('Email envoyé avec succès !', 'Fermer', { duration: 3000 });
-
         },
         error: (err) => {
           console.error('Erreur:', err);
           this.snackBar.open('Erreur lors de l\'envoi de l\'email', 'Fermer', { duration: 3000 });
         },
       });
-
   }
 
   getclientEmail() {
