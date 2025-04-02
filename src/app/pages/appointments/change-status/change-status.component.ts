@@ -42,7 +42,7 @@ export class ChangeStatusComponent implements OnInit {
   // Messages associés à chaque statut
   statusMessages: { [key: string]: string } = {
     'En attente': 'Votre rendez-vous est en attente.',
-    'Confirmé': 'Votre rendez-vous à 9h a été confirmé. Veuillez ne pas être en retard.',
+    'Confirmé': 'Votre rendez-vous a été confirmé. Veuillez ne pas être en retard.',
     'En cours': 'Votre rendez-vous est en cours.',
     'Terminé': 'Votre rendez-vous est terminé. Merci de votre visite.',
     'Annulé': 'Votre rendez-vous a été annulé.'

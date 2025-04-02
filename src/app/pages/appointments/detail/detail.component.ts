@@ -8,8 +8,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { ServiceService } from 'src/app/services/service.service';
-import { ServiceData } from '../all/all.component';
+import { AppointmentData } from '../client-appointment/all/all.component';
+import { AppointmentService } from 'src/app/services/appointment.service';
 
 @Component({
     selector: 'app-detail',
@@ -28,20 +28,20 @@ import { ServiceData } from '../all/all.component';
     styleUrls: ['./detail.component.scss'],
 })
 
-export class ServiceDetailByIdComponent {
-    service: ServiceData | null = null;
+export class AppointmentDetailByIdComponent {
+    appointment: AppointmentData | null = null;
     isLoading = true;
 
     constructor(
-        private serviceService: ServiceService, 
+        private appointmentService: AppointmentService, 
         private route: ActivatedRoute,
     ) { }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
         if (id) {
-            this.serviceService.getServiceById(id).subscribe((data) => {
-                this.service = data;
+            this.appointmentService.getAppointmentById(id).subscribe((data) => {
+                this.appointment = data;
                 this.isLoading = false;
             });
         }

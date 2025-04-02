@@ -9,6 +9,8 @@ import { RoleGuard } from 'src/app/guards/role.guard';
 import { AllAppointmentComponent } from './all/all.component';
 import { EditAppointmentComponent } from './edit/edit.component';
 import { ChangeStatusComponent } from './change-status/change-status.component';
+import { AppointmentDetailByClientComponent } from './client-appointment/detail/detail.component';
+import { AppointmentDetailByIdComponent } from './detail/detail.component';
 
 export const AppointmentRoutes: Routes = [
   {
@@ -31,6 +33,18 @@ export const AppointmentRoutes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: ['client'] },
         component: AppointmentClientAllComponent,
+      },
+      {
+        path: 'detailClient/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: AppointmentDetailByClientComponent,
+      },
+      {
+        path: 'detail/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager'] },
+        component: AppointmentDetailByIdComponent,
       },
       {
         path: 'edit/:id',

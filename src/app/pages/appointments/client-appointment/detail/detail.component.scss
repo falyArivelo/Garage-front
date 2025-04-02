@@ -33,11 +33,11 @@ main{
     h3{
       flex: 0 1 200px;
       text-align: right;
-      margin-right: 26px;
+      margin-right: 14px;
       color: #252525;
       font-family: sans-serif;
       font-weight: 600;
-      font-size: 24px;
+      font-size: 18px;
       text-transform: uppercase;
     }
     
@@ -47,7 +47,7 @@ main{
       color: #fff;
       padding: 10px 10px;
       transition: 200ms;
-      margin-right: 4%;
+      margin-right: 5%;
       
       > a{
         color: #fff;
@@ -59,7 +59,7 @@ main{
     }
   }
   
-  .card__body{
+.card__body{
     padding: 0 40px;
     display: flex;
     flex-flow: row no-wrap;
@@ -73,11 +73,11 @@ main{
     
     .featured_text{
       h1{
-        margin: 0;
+        margin-bottom: 3px;
         padding: 0;
         font-weight: 800;
         font-family: "Montserrat", sans-serif;
-        font-size: 40px;
+        font-size: 46px;
         line-height: 50px;
         color: #181e28;
       }
@@ -86,7 +86,7 @@ main{
         margin: 0;
         padding: 0;
         
-        &.sub{
+        &.model{
           font-family: "Montserrat", sans-serif;
           font-size: 23px;
           text-transform: uppercase;
@@ -95,7 +95,7 @@ main{
           margin-bottom: 5px;
         }
         
-        &.price{
+        &.licensePlate{
           font-family: "Fjalla One", sans-serif;
           color: #252525;
           font-size: 26px;
@@ -127,34 +127,132 @@ main{
       }
     }
 
-    .pieces{
-      h6{
-        text-decoration: underline;
-        font-size: 16px;
-        font-weight: 400;
-      }
+    .services{
+        h4{
+            // text-decoration: underline;
+            // font-size: 16px;
+            // font-weight: 400;
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            text-decoration: underline;
+            letter-spacing: 0.5px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
-      .list{
-        list-style-type: circle;
-      }
+        /* Conteneur principal des services */
+        .services-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-item {
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Nom du service et prix */
+        .service-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .service-price {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Description du service */
+        .service-description {
+            font-size: 15px;
+            color: #555;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .pieces {
+            .pieces-header {
+                display: flex;
+                align-items: center; /* Assure que l'icône et le texte sont bien alignés verticalement */
+                gap: 8px; /* Espacement entre l'icône et le texte */
+
+                /* Icône de paramètre */
+                i-tabler {
+                    font-size: 18px; /* Taille de l'icône */
+                }
+
+                /* Titre "Les pièces utiles :" */
+                h6{
+                    text-decoration: underline;
+                    font-size: 16px;
+                    font-weight: 400;
+                    margin-left: -6px;
+                }
+            }
+            
+            .list{
+              list-style-type: circle;
+            }
+            
+            .piece-name{
+              font-size: 15px;
+            }
       
-      .piece-name{
-        font-size: 15px;
-      }
+            .piece-description {
+                flex-grow: 1; /* Permet d'occuper l'espace restant */
+                font-family: "Open Sans", sans-serif;
+                font-size: 15px;
+            }
 
-      .piece-description {
-          flex-grow: 1; /* Permet d'occuper l'espace restant */
-          font-family: "Open Sans", sans-serif;
-          font-size: 15px;
-      }
+            /* Pour un effet de survol de l'élément */
+            .piece-item:hover {
+                background-color: #f1f1f1;
+                border-radius: 4px;
+                padding: 5px;
+                transition: background-color 0.3s ease;
+            }
+        }
+    }
 
-      /* Pour un effet de survol de l'élément */
-      .piece-item:hover {
-        background-color: #f1f1f1;
-        border-radius: 4px;
-        padding: 5px;
-        transition: background-color 0.3s ease;
-      }
+    .appointmentDate {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Augmente un peu l'espace entre les éléments */
+    
+        /* Icône de calendrier */
+        i-tabler {
+            font-size: 18px; /* Ajuste la taille pour mieux s’aligner avec le texte */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 18px; /* Hauteur ajustée pour alignement */
+        }
+        
+        /* Texte "Date du rendez-vous le" */
+        h6 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            color: #444;
+        }
+        
+        /* Affichage de la date */
+        p {
+            font-size: 14px;
+            color: #222;
+            margin: 0;
+            margin-left: -4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center; /* Assure l'alignement avec l'icône */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Effet d'ombre subtil */
+        }
     }
 
     .estimateDuration{
@@ -176,16 +274,16 @@ main{
       }
     }
 
-    .text-success, .text-error {
-      font-weight: bold;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: inline-block;
-      padding: 6px 12px; /* Plus d'espace autour du texte */
-      min-width: 120px; /* Largeur minimale pour éviter que ce soit trop petit */
-      text-align: center; /* Centrer le texte */
-      border-radius: 8px; /* Arrondir légèrement pour un meilleur rendu */
+    .text-warning, .text-success, .text-primary, .text-secondary, .text-error {
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        padding: 6px 12px; /* Plus d'espace autour du texte */
+        min-width: 120px; /* Largeur minimale pour éviter que ce soit trop petit */
+        text-align: center; /* Centrer le texte */
+        border-radius: 8px; /* Arrondir légèrement pour un meilleur rendu */
     }
     
     span.stock{
@@ -216,9 +314,9 @@ main{
         color: #555;
       }
     }
-  }
+}
   
-  .card__footer{
+.card__footer{
     padding: 30px 40px;
     display: flex;
     flex-flow: row no-wrap;

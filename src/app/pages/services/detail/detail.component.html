@@ -3,14 +3,14 @@
       <div class="icon" routerLink="/services/allCard">
         <a href="#"><i class="fa fa-arrow-left"></i></a>
       </div>
-      <h3>Notre Service</h3>
+      <h3>Détail Service</h3>
     </div>
     <div class="card__body">
       <div class="half">
         <div class="featured_text">
           <h1>{{ service.name }}</h1>
           <p class="sub">{{ service.category }}</p>
-          <p class="price">{{ service.price | currencyAr }}</p>
+          <p class="price">{{ service.price | currency:'MGA':'symbol':'1.0-0' }}</p>
         </div>
         <!-- <div class="image">
           <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg" alt="">

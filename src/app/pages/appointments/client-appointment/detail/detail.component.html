@@ -1,0 +1,105 @@
+<div class="card" *ngIf="appointment">
+    <div class="card__title">
+      <div class="icon" routerLink="/appointments/allClient">
+        <a href="#"><i class="fa fa-arrow-left"></i></a>
+      </div>
+      <h3>Détail Rendez-vous</h3>
+    </div>
+    <div class="card__body">
+      <div class="half">
+        <div class="featured_text">
+          <h1>{{ appointment.vehicle?.brand }}</h1>
+          <p class="model">{{ appointment.vehicle?.model }}</p>
+          <p class="licensePlate">{{ appointment.vehicle?.licensePlate }}</p>
+        </div>
+        <!-- <div class="image">
+          <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg" alt="">
+        </div> -->
+    </div>
+    <div class="half">
+        <div class="services">
+          <h4>Les services demandés pour votre véhicule:</h4>
+          <ul *ngFor="let service of appointment.services" class="services-list">
+            <li class="service-item">
+                <span class="service-name">- {{ service.name }} 
+                    (<span class="service-price">{{ service.price | currency:'MGA':'symbol':'1.0-0' }}</span>)
+                </span>
+                <span class="service-description">{{ service.description }} d'une durée de {{ service.estimatedDuration }} h.</span>
+                <div *ngIf="service.pieces && service.pieces.length > 0" class="pieces">
+                    <div class="pieces-header">
+                        <i-tabler name="settings" class="icon-18 m-r-4"></i-tabler>
+                        <h6>Les pièces utiles :</h6>
+                    </div>
+                    <ul *ngFor="let piece of service.pieces" class="pieces-list">
+                    <li class="piece-item">
+                        <span class="piece-name">{{ piece.name }}</span> :
+                        <span class="piece-description">{{ piece.description }}</span>
+                    </li>
+                    </ul>
+                </div>
+            </li>
+          </ul>                 
+        </div>
+        <div class="appointmentDate">
+            <i-tabler name="calendar" class="icon-18"></i-tabler>
+            <h6>Date du rendez-vous le</h6>
+            <p>{{ appointment.appointmentDate | date:'EEEE d MMMM y à HH:mm' }}</p>
+        </div>        
+        <div>
+          <span class="m-l-auto f-s-14 d-flex align-items-center">
+            @switch(appointment.status) {
+                @case('En attente') {
+                  <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+                    En attente
+                  </span>
+                }
+                @case('Confirmé') {
+                  <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                    Confirmé
+                  </span>
+                }
+                @case('En cours') {
+                  <span class="bg-light-primary text-primary rounded f-w-600 p-6 p-y-4 f-s-12">
+                    En cours
+                  </span>
+                }
+                @case('Terminé') {
+                  <span class="bg-light-secondary text-secondary rounded f-w-600 p-6 p-y-4 f-s-12">
+                    Terminé
+                  </span>
+                }
+                @case('Annulé') {
+                  <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                    Annulé
+                  </span>
+                }
+                @default {
+                  <span class="bg-light-gray text-secondary rounded f-w-600 p-6 p-y-4 f-s-12">
+                    Inconnu
+                  </span>
+                }
+              }
+          </span>
+        </div>
+        <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->
+        <div class="reviews">
+          <ul class="stars">
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star-o"></i></li>
+          </ul>
+          <span>(64 reviews)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <div class="recommend">
+        <p>Recommandé par</p>
+        <h3>
+          ARIVELOMADIMBY Faliniaina - ETU001948 & RANDRIANARISON Nancy - ETU001487
+        </h3>
+      </div>
+    </div>
+</div>
