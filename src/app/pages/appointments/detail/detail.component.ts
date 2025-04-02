@@ -7,13 +7,12 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
-import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppointmentData } from '../all/all.component';
+import { AppointmentData } from '../client-appointment/all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
 
 @Component({
-    selector: 'app-detailClient',
+    selector: 'app-detail',
     standalone: true,
     imports: [
         MaterialModule,
@@ -29,7 +28,7 @@ import { AppointmentService } from 'src/app/services/appointment.service';
     styleUrls: ['./detail.component.scss'],
 })
 
-export class AppointmentDetailByClientComponent {
+export class AppointmentDetailByIdComponent {
     appointment: AppointmentData | null = null;
     isLoading = true;
 
@@ -39,21 +38,12 @@ export class AppointmentDetailByClientComponent {
     ) { }
 
     ngOnInit(): void {
-        this.route.paramMap.subscribe(params => {
-            const id = params.get('id'); // Récupérer l'ID du rendez-vous depuis l'URL
-            if (id) {
-                this.appointmentService.getAppointmentsByClient().subscribe((data) => {
-                    console.log('Données reçues:', data);
-                    this.appointment = data.find(app => app._id === id) || null; // Chercher le rendez-vous correspondant
-                    this.isLoading = false;
-                }, error => {
-                    console.error("Erreur lors de la récupération des rendez-vous:", error);
-                    this.isLoading = false;
-                });
-            } else {
-                console.error("ID du rendez-vous non trouvé dans l'URL");
-                this.isLoading = false; // Gérer le cas où l'ID est absent
-            }
-        });
+        const id = this.route.snapshot.paramMap.get('id');
+        if (id) {
+            this.appointmentService.getAppointmentById(id).subscribe((data) => {
+                this.appointment = data;
+                this.isLoading = false;
+            });
+        }
     }
 }

@@ -103,7 +103,7 @@
       <td mat-cell *matCellDef="let element">
         <button mat-button [matMenuTriggerFor]="menu">Actions</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>En savoir plus</button>
+          <button mat-menu-item [routerLink]="['/appointments/detail', element._id]">En savoir plus</button>
           <button mat-menu-item [routerLink]="['/appointments/status-change', element._id]">Modifier</button>
           <button mat-menu-item>Supprimer</button>
         </mat-menu>

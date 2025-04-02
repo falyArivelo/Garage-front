@@ -1,6 +1,6 @@
 <div class="card" *ngIf="appointment">
     <div class="card__title">
-      <div class="icon" routerLink="/appointments/allClient">
+      <div class="icon" routerLink="/appointments/all">
         <a href="#"><i class="fa fa-arrow-left"></i></a>
       </div>
       <h3>Détail Rendez-vous</h3>
@@ -8,8 +8,8 @@
     <div class="card__body">
       <div class="half">
         <div class="featured_text">
-          <h1>{{ appointment.vehicle?.brand }}</h1>
-          <p class="model">{{ appointment.vehicle?.model }}</p>
+          <h1>{{ appointment.client?.username }}</h1>
+          <p class="model">{{ appointment.vehicle?.brand}} <span style="text-transform: none;">({{ appointment.vehicle?.model }})</span></p>
           <p class="licensePlate">{{ appointment.vehicle?.licensePlate }}</p>
         </div>
         <!-- <div class="image">
@@ -80,6 +80,11 @@
                 }
               }
           </span>
+        </div>
+        <div style="margin-top: 10px;display: flex;justify-content: center;">
+            <button *ngIf="appointment.status === 'Terminé'" class="btn-generate">
+                Générer devis
+            </button>
         </div>
         <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->
         <div class="reviews">
