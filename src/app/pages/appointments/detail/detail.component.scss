@@ -21,7 +21,7 @@ main{
 }
 
 .card{
-  box-shadow: 0 2px 6px rgba(#c2c2c2, 0.3);
+  box-shadow: 0 6px 6px rgba(#000, 0.3);
   transition: 200ms;
   background: #fff;
   
@@ -43,19 +43,19 @@ main{
     
     .icon{
       flex: 1 0 10px;
-      // background: #115dd8;
+      background: #115dd8;
       color: #fff;
       padding: 10px 10px;
       transition: 200ms;
       margin-right: 5%;
-      cursor: pointer;
       
       > a{
         color: #fff;
-        color: #30393b;
-
       }
       
+      &:hover{
+        background: #252525;
+      }
     }
   }
   
@@ -129,11 +129,16 @@ main{
 
     .services{
         h4{
-            text-decoration: none;
+            // text-decoration: underline;
+            // font-size: 16px;
+            // font-weight: 400;
             font-size: 18px;
             font-weight: bold;
             color: #222;
+            text-decoration: underline;
             letter-spacing: 0.5px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         /* Conteneur principal des services */
