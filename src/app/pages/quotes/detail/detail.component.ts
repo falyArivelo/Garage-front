@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MaterialModule } from 'src/app/material.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import html2pdf from 'html2pdf.js';
 import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { QuoteService } from 'src/app/services/quote.service';
 import { QuoteData } from '../all/all.component';
@@ -31,6 +32,8 @@ import { QuoteData } from '../all/all.component';
 })
 
 export class AppointmentDetailByIdComponent {
+    @ViewChild('pdfButton') pdfButton: ElementRef | undefined;  // Référence au bouton
+    isPDFView = false; // Initialement, le bouton est visible
     quote: QuoteData | null = null;
     hasQuote: boolean = false;
     today: Date;
@@ -58,6 +61,32 @@ export class AppointmentDetailByIdComponent {
                 }
             });
         }
+    }
+
+    // Méthode pour générer le PDF
+    generatePDF() {
+        // Cacher le bouton avant de générer le PDF
+        if (this.pdfButton) {
+        this.pdfButton.nativeElement.style.display = 'none';
+        }
+
+        const element = document.getElementById('invoiceholder');
+        if (element) {
+        html2pdf()
+            .from(element)
+            .save('devis.pdf')
+            .finally(() => {
+            // Réafficher le bouton après la génération du PDF
+            if (this.pdfButton) {
+                this.pdfButton.nativeElement.style.display = 'block';
+            }
+            });
+        }
+    }   
+    
+    // Logique pour revenir à la vue normale
+    backToNormalView() {
+        this.isPDFView = false; 
     }
     
 }
