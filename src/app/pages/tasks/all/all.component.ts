@@ -14,7 +14,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 })
 export class TaskListComponent implements OnInit {
   tasks: any[] = [];
-
+  displayedColumns = ['service', 'mechanic', 'date', 'duration', 'status', 'menu']
   constructor(private taskService: TaskService,
     private statusService: StatusService
   ) { }

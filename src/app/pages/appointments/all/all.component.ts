@@ -47,7 +47,7 @@ export class AllAppointmentComponent {
   filteredDataSource: MatTableDataSource<any> = new MatTableDataSource();
   pagedData: any[] = []; // Variable pour stocker les données paginées
   currentPage = 0; // Page courante
-  pageSize = 4; // Nombre d'éléments par page
+  pageSize = 10; // Nombre d'éléments par page
   totalPages: number = 0; // Total des pages
   isLoading = true;
 
