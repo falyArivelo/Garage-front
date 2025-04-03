@@ -280,6 +280,11 @@ main{
         text-align: center; /* Centrer le texte */
         border-radius: 8px; /* Arrondir légèrement pour un meilleur rendu */
     }
+
+    .btn-container {
+      display: flex;
+      gap: 20px; /* Espacement entre les boutons */
+    }
     
     .btn-generate {
         background-color: white;

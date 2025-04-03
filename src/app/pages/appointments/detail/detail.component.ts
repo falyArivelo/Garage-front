@@ -12,6 +12,7 @@ import { AppointmentData } from '../client-appointment/all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { StatusService } from 'src/app/services/status.service';
 import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
+import { QuoteService } from 'src/app/services/quote.service';
 
 @Component({
     selector: 'app-detail',
@@ -33,12 +34,15 @@ import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 
 export class AppointmentDetailByIdComponent {
     appointment: AppointmentData | null = null;
+    hasQuote: boolean = false;
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService,
+        private appointmentService: AppointmentService, 
+        private statusService: StatusService,
+        private quoteService: QuoteService,
         private route: ActivatedRoute,
-        private statusService: StatusService
+        private cdr: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
@@ -46,6 +50,7 @@ export class AppointmentDetailByIdComponent {
         if (id) {
             this.appointmentService.getAppointmentById(id).subscribe((data) => {
                 this.appointment = data;
+                this.checkQuote(id);
                 this.isLoading = false;
             });
         }
@@ -53,5 +58,18 @@ export class AppointmentDetailByIdComponent {
 
     getStatusColor(status: string): string {
         return this.statusService.getStatusColor(status);
+    }
+
+    checkQuote(appointmentId: string) {
+        this.quoteService.getQuoteByIdAppointment(appointmentId).subscribe({
+            next: (quote) => {
+                this.hasQuote = !!quote; // Vérifie que le devis existe
+              },
+              error: (error) => {
+                console.log("Erreur lors de la récupération du devis :", error);
+                this.hasQuote = false;
+                this.cdr.detectChanges();
+            }
+        });
     }
 }

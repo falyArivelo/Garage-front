@@ -1,0 +1,56 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Ajouter devis</mat-card-title>
+    </mat-card-header>
+  
+    <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <mat-card-content class="b-t-1" *ngIf="appointment">
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Name -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Client</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="appointment.client.username" name="username" disabled/>
+                    </mat-form-field>
+
+                    <!-- Véhicule -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Véhicule</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="appointment.vehicle.brand" name="vehicle" disabled/>
+                    </mat-form-field>
+
+                    <!-- Frais -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Frais</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: 120000" [(ngModel)]="quote.frais" name="frais"/>
+                    </mat-form-field>
+
+                    <!-- Date de validite -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date de validité</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="quote.validUntil" placeholder="Sélectionner une date" name="validUntil">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Services</mat-label>
+                    <div *ngFor="let service of appointment.services; let i = index">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="service.name" [name]="'serviceName' + i" placeholder="Nom du service" name="name" disabled/>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="service.price" [name]="'servicePrice' + i" placeholder="Prix du service" name="price" type="number" />
+                    </mat-form-field>
+                    </div>
+                </div>
+                <button mat-flat-button color="primary" class="m-r-8 m-l-16" (click)="save()">Enregistrer</button>
+                <button mat-flat-button color="primary" class="m-r-8 m-l-16" (click)="openEmailDialog()">Envoyer Email</button>
+                <button mat-stroked-button color="warn" type="button" (click)="cancel()">Annuler</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

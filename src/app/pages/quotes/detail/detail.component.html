@@ -1,0 +1,79 @@
+<div id="invoiceholder" *ngIf="quote">
+    <div id="toPDF">
+        <div id="headerimage"></div>
+        <div id="invoice" class="effect2">
+            <div id="invoice-top">
+                <div class="logo"></div>
+                <div class="info">
+                    <a ng-reflect-router-link="/" href="/">
+                        <img src="./assets/images/logos/variant1.png" alt="logo" class="align-middle m-2" style="width: 180px; height: auto;">
+                    </a>
+                    <p> carcare&#64;gmail.com <br>
+                        +33 1 23 45 67 89
+                    </p>
+                </div><!--End Info-->
+                <div class="title">
+                    <h1>Devis</h1>
+                    <p>Le, {{ today | date:'dd MMMM yyyy' }}<br>
+                        Andoharanofotsy <br>
+                        <span style="color: red;">{{ quote.status }}</span>
+                    </p>
+                </div><!--End Title-->
+            </div><!--End InvoiceTop-->
+
+            <div id="invoice-mid">
+            <div class="clientlogo"></div>
+            <div class="info">
+                <h2>Client Name</h2>
+                <p>{{ quote.appointment.client.username }}<br>
+            </div>
+    
+            <div id="project">
+                <p>
+                    Nous nous engageons à offrir un service de 
+                    qualité pour garantir la sécurité et la performance 
+                    de votre véhicule. Grâce à des diagnostics précis, 
+                    des réparations soignées et un entretien régulier, 
+                    nous veillons à prolonger la durée de vie de votre 
+                    voiture tout en assurant son bon fonctionnement.
+                </p>
+            </div>   
+        </div><!--End Invoice Mid-->
+        
+        <div id="invoice-bot">
+            <div id="table">
+                <table>
+                    <tr class="tabletitle">
+                    <td class="item"><h2>Services demandés</h2></td>
+                    <td class="Hours"><h2>Durée estimée</h2></td>
+                    <td class="Rate"><h2>Prix</h2></td>
+                    </tr>
+                    
+                    <tr class="service" *ngFor="let service of quote.appointment.services">
+                        <td class="tableitem"><p class="itemtext">{{ service.name }}</p></td>
+                        <td class="tableitem"><p class="itemtext">{{ service.estimatedDuration }} h</p></td>
+                        <td class="tableitem"><p class="itemtext">{{ service.price | currencyAr }}</p></td>
+                    </tr>
+                    
+                    <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate"><h2>Total</h2></td>
+                    <td class="payment"><h2>{{ quote.total | currencyAr }}</h2></td>
+                    </tr>
+                    
+                </table>
+            </div><!--End Table-->
+
+            <div id="legalcopy">
+                <p class="legal">
+                    <strong>Merci pour votre confiance !</strong>  
+                    Nous vous prions de bien vouloir traiter et examiner ce devis jusqu'au 
+                    <strong>{{ quote.validUntil | date:'EEEE d MMMM y' }}</strong> 
+                </p>
+            </div>
+            <div class="btn-container">
+                <button #pdfButton (click)="generatePDF()" class="btn-generate">Générer le PDF</button>
+            </div>
+        </div><!--End InvoiceBot-->
+    </div><!--End Invoice-->
+</div><!--End Invoice Holder -->
