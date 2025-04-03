@@ -1,7 +1,0 @@
-[[redirects]]
-  command = "npm run build:prod"
-  publish = "dist/materialm/browser"
-
-  from = "/*"
-  to = "/index.html"
-  status = 200
