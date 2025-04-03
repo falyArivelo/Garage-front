@@ -1,0 +1,33 @@
+
+    <mat-card class="email-card">
+      <mat-card-header>
+        <mat-card-title>Envoyer un email</mat-card-title>
+        <mat-card-subtitle>Rédigez votre message personnalisé</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <form (ngSubmit)="sendEmail()">
+          <!-- Champ destinataire -->
+          <mat-form-field appearance="outline" class="w-100 custom-form-field">
+            <mat-label>Destinataire</mat-label>
+            <input matInput [(ngModel)]="to" name="to" required placeholder="email@exemple.com" disabled>
+          </mat-form-field>
+  
+          <!-- Champ sujet -->
+          <mat-form-field appearance="outline" class="w-100 custom-form-field">
+            <mat-label>Objet</mat-label>
+            <input matInput [(ngModel)]="subject" name="subject" required placeholder="Objet de votre email">
+          </mat-form-field>
+  
+          <textarea [(ngModel)]="text"name="text" required></textarea>
+  
+          <!-- Bouton envoyer -->
+          <div class="btn-generate-container">
+            <button mat-stroked-button class="btn-generate" (click)="closeDialog()">Annuler</button>
+            <button mat-raised-button class="btn-generate" type="submit" [disabled]="!to || !subject || !text">
+              Envoyer
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>

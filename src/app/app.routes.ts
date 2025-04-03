@@ -52,6 +52,12 @@ export const routes: Routes = [
           import('./pages/services/services.routes').then((m) => m.ServicesRoutes),
       },
       {
+        path: 'quotes',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/quotes/quotes.routes').then((m) => m.QuotesRoutes),
+      },
+      {
         path: 'ui-components',
         canActivate: [AuthGuard],
         loadChildren: () =>

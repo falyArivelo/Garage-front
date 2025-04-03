@@ -81,9 +81,12 @@
               }
           </span>
         </div>
-        <div style="margin-top: 10px;display: flex;justify-content: center;">
-            <button *ngIf="appointment.status === 'Terminé'" class="btn-generate">
+        <div class="btn-container" style="margin-top: 10px;">
+            <button *ngIf="appointment.status === 'Terminé'" [routerLink]="['/quotes/add', appointment._id]" class="btn-generate">
                 Générer devis
+            </button>
+            <button *ngIf="hasQuote && appointment.status === 'Terminé'" [routerLink]="['/quotes/detail/appointment', appointment._id]" class="btn-generate">
+              Voir devis
             </button>
         </div>
         <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->

@@ -8,9 +8,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { AppointmentData } from '../client-appointment/all/all.component';
-import { AppointmentService } from 'src/app/services/appointment.service';
+import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 import { QuoteService } from 'src/app/services/quote.service';
+import { QuoteData } from '../all/all.component';
 
 @Component({
     selector: 'app-detail',
@@ -24,44 +24,40 @@ import { QuoteService } from 'src/app/services/quote.service';
         MatProgressBarModule,
         NgScrollbarModule,
         RouterModule,
+        CurrencyFormatPipe,
     ],
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
 
 export class AppointmentDetailByIdComponent {
-    appointment: AppointmentData | null = null;
+    quote: QuoteData | null = null;
     hasQuote: boolean = false;
+    today: Date;
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService, 
-        private quoteService: QuoteService,
+        private quoteService: QuoteService, 
         private route: ActivatedRoute,
-        private cdr: ChangeDetectorRef,
-    ) { }
+    ) { 
+        this.today = new Date();
+    }
 
     ngOnInit(): void {
-        const id = this.route.snapshot.paramMap.get('id');
-        if (id) {
-            this.appointmentService.getAppointmentById(id).subscribe((data) => {
-                this.appointment = data;
-                this.checkQuote(id);
-                this.isLoading = false;
+        const idAppointment = this.route.snapshot.paramMap.get('appointmentId');
+        if (idAppointment) {
+            this.quoteService.getQuoteByIdAppointment(idAppointment).subscribe({
+                next: (data) => {
+                    console.log('Réponse du backend :', data);
+                    this.quote = data;
+                    this.isLoading = false;
+                },
+                error: (err) => {
+                    console.error('Erreur lors de la récupération du devis :', err);
+                    this.isLoading = false;
+                }
             });
         }
     }
-
-    checkQuote(appointmentId: string) {
-        this.quoteService.getQuoteByIdAppointment(appointmentId).subscribe({
-            next: (quote) => {
-                this.hasQuote = !!quote; // Vérifie que le devis existe
-              },
-              error: (error) => {
-                console.log("Erreur lors de la récupération du devis :", error);
-                this.hasQuote = false;
-                this.cdr.detectChanges();
-            }
-        });
-    }
+    
 }

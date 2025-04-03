@@ -1,0 +1,139 @@
+/* Police et design global */
+body {
+    font-family: 'Roboto', sans-serif; /* Choisir une police moderne et lisible */
+    font-size: 1.1rem; /* Taille de texte plus grande pour une meilleure lisibilité */
+    color: #333; /* Texte en couleur sombre pour plus de contraste */
+}
+
+/* Carte d'email */
+.email-card {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 0%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header */
+.email-card-header {
+    background-color: #6200ea;
+    color: white;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.email-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.email-card-subtitle {
+    font-size: 1.1rem;
+    color: #ddd;
+}
+
+/* Content du formulaire */
+.email-card-content {
+    padding: 20px;
+}
+
+/* Champs de formulaire */
+.custom-form-field {
+    width: 100%;
+    margin-bottom: 16px; /* Espace supplémentaire entre les champs pour une meilleure lisibilité */
+}
+
+/* Trait en bas seulement */
+.mat-form-field-appearance-legacy .mat-form-field-outline {
+    border: none;
+    border-bottom: 2px solid #6200ea;
+    transition: all 0.3s ease;
+}
+
+/* Effet au focus */
+.mat-form-field-appearance-legacy.mat-focused .mat-form-field-outline {
+    border-bottom: 2px solid #3700b3;
+}
+
+/* 🌟 Augmentation de la hauteur des inputs */
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 18px 16px;
+    height: 60px; /* Hauteur plus grande pour un meilleur confort */
+    display: flex;
+    align-items: center;
+}
+
+/* Texte plus grand et lisible */
+input.mat-input-element, textarea {
+    font-size: 1.2rem; /* Augmenter la taille du texte pour le rendre plus lisible */
+    height: 100%;
+}
+
+/* Style pour le textarea */
+textarea {
+    width: 100%;
+    padding: 5px 11px;
+    font-size: 0.9rem;/* Augmenter la taille du texte pour le rendre plus lisible */
+    line-height: 1.6;
+    border: 1px solid #bbb; /* Bordure plus douce (gris foncé) */
+    border-radius: 8px;
+    resize: vertical; /* Permet de redimensionner verticalement */
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9; /* Fond clair pour plus de contraste */
+    white-space: pre-wrap; /* Conserve les retours à la ligne dans le texte */
+    word-wrap: break-word; /* Permet au texte de se casser proprement à la fin de la ligne */
+}
+
+/* Effet de focus sur le textarea */
+textarea:focus {
+    border-color: #6200ea; /* Bordure violette lorsqu'on est en focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(98, 0, 234, 0.4); /* Ombre douce autour du champ au focus */
+}
+
+/* Augmenter la hauteur pour améliorer l'ergonomie */
+textarea {
+    min-height: 150px; /* Hauteur minimale du textarea */
+    height: auto; /* Pour que la hauteur s'ajuste selon le contenu */
+}
+
+
+/* Ajout de styles pour les boutons personnalisés */
+.btn-generate-container {
+    display: flex;
+    gap: 16px; /* Espacement entre les boutons */
+    justify-content: flex-end;
+}
+
+button.btn-generate {
+    padding: 11px 30px; /* Réduction du padding pour une taille plus petite */
+    font-size: 0.9rem; /* Réduction de la taille de la police */
+    font-weight: 500; /* Poids de police plus léger */
+    border-radius: 6px; /* Bord arrondi un peu moins marqué */
+    border: 2px solid #007bff; /* Bordure bleue */
+    background-color: white;
+    color: #007bff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 1px 1px 6px rgba(0, 0, 255, 0.2); /* Ombre plus douce */
+}
+
+button.btn-generate:hover {
+    background-color: #007bff; /* Fond bleu */
+    color: white;
+    box-shadow: 2px 2px 8px rgba(0, 0, 255, 0.4); /* Ombre plus marquée */
+}
+
+/* Bouton désactivé */
+button.btn-generate[disabled] {
+    background-color: #e0e0e0;
+    color: #a9a9a9;
+    border-color: #a9a9a9;
+}
+
+/* Pour les boutons "mat-stroked" ou "mat-raised" */
+button.mat-stroked-button, button.mat-raised-button {
+    border-radius: 6px; /* S'assurer que le bouton garde des bords arrondis */
+}
