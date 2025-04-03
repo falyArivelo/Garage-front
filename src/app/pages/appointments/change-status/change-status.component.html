@@ -1,0 +1,35 @@
+<div class="status-container">
+    <!-- Conteneur principal pour gérer l'alignement avec Flexbox -->
+    <div class="form-container">
+      <!-- Radio buttons pour choisir un statut (à gauche) -->
+      <div class="status-form">
+        <mat-card class="status-card">
+          <mat-card-header>
+            <mat-card-title>Choisissez un statut</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-radio-group [(ngModel)]="selectedStatus" (ngModelChange)="onStatusChange()" class="status-radio-group">
+              <mat-radio-button value="En attente" class="status-radio-button">En attente</mat-radio-button>
+              <mat-radio-button value="Confirmé" class="status-radio-button">Confirmé</mat-radio-button>
+              <mat-radio-button value="En cours" class="status-radio-button">En cours</mat-radio-button>
+              <mat-radio-button value="Terminé" class="status-radio-button">Terminé</mat-radio-button>
+              <mat-radio-button value="Annulé" class="status-radio-button">Annulé</mat-radio-button>
+            </mat-radio-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
+  
+      <!-- Champ de texte pour afficher le message associé au statut sélectionné (à droite) -->
+      <div class="message-container">
+        <mat-form-field appearance="fill" class="message-input">
+          <textarea matInput [(ngModel)]="statusMessage" placeholder="Entrez votre message ici" rows="4"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <!-- Bouton Confirmer -->
+    <div class="confirm-button">
+      <button mat-raised-button color="primary" (click)="onConfirm()">Confirmer</button>
+    </div>
+  </div>
+  

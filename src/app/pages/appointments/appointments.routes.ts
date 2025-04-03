@@ -2,9 +2,15 @@ import { Routes } from '@angular/router';
 
 // Composants
 import { AppointmentAddComponent } from './book-appointment/book-appointment.component';
+import { AppointmentClientAllComponent } from './client-appointment/all/all.component';
 // import { AppointmentListComponent } from './list/list.component';
 // import { AppointmentEditComponent } from './edit/edit.component';
 import { RoleGuard } from 'src/app/guards/role.guard';
+import { AllAppointmentComponent } from './all/all.component';
+import { EditAppointmentComponent } from './edit/edit.component';
+import { ChangeStatusComponent } from './change-status/change-status.component';
+import { AppointmentDetailByClientComponent } from './client-appointment/detail/detail.component';
+import { AppointmentDetailByIdComponent } from './detail/detail.component';
 
 export const AppointmentRoutes: Routes = [
   {
@@ -16,18 +22,42 @@ export const AppointmentRoutes: Routes = [
         data: { roles: ['client'] },
         component: AppointmentAddComponent, // Page pour prendre rendez-vous
       },
-    //   {
-    //     path: 'all',
-    //     canActivate: [RoleGuard],
-    //     data: { roles: ['manager', 'mecanicien'] },
-    //     component: AppointmentListComponent, // Liste de tous les rendez-vous
-    //   },
-    //   {
-    //     path: 'edit/:id',
-    //     canActivate: [RoleGuard],
-    //     data: { roles: ['client'] },
-    //     component: AppointmentEditComponent, // Modifier un rendez-vous
-    //   },
+      {
+        path: 'all',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager', 'mecanicien'] },
+        component: AllAppointmentComponent, // Liste de tous les rendez-vous
+      },
+      {
+        path: 'allClient',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: AppointmentClientAllComponent,
+      },
+      {
+        path: 'detailClient/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: AppointmentDetailByClientComponent,
+      },
+      {
+        path: 'detail/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager'] },
+        component: AppointmentDetailByIdComponent,
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['client'] },
+        component: EditAppointmentComponent, // Modifier un rendez-vous
+      },
+      {
+        path: 'status-change/:id',
+        canActivate: [RoleGuard],
+        data: { roles: ['manager'] },
+        component: ChangeStatusComponent, // Modifier un rendez-vous
+      },
     ],
   },
 ];

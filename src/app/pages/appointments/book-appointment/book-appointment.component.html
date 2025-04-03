@@ -1,16 +1,16 @@
 <mat-card class="b-1 shadow-none">
+    <!-- SELECTION SERVICES -->
     <mat-card-header>
         <mat-card-title>Sélectionner des services</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <div class="service-list">
+        <div class="service-list scrollable-list">
             <div *ngFor="let service of services" class="service-item">
                 <div class="service-info">
                     <h3>{{ service.name }}</h3>
-                    <p><strong>Catégorie :</strong> {{ service.category }}</p>
+                    <p>{{ service.category }}</p>
                     <p>{{ service.description }}</p>
-                    <p><strong>Prix :</strong> {{ service.price |  currency:'MGA':'symbol':'1.0-0' }}</p>
-                    <p><strong>Disponibilité :</strong> {{ service.availability ? 'Disponible' : 'Indisponible' }}</p>
+                    <p>{{ service.price | currencyAr }}</p>
                 </div>
                 <div class="service-image">
                     <img *ngIf="service.image" [src]="service.image" alt="Image du service" />
@@ -20,15 +20,57 @@
                 </div>
             </div>
         </div>
+    </mat-card-content>
 
-        <!-- Affichage des services sélectionnés -->
-        <div class="f-w-600 p-16 bg-light-primary rounded">
-            Services sélectionnés :
-            <ul>
-                <li *ngFor="let selectedService of selectedServices">
-                    {{ selectedService.name }}
-                </li>
-            </ul>
+    <!-- SELECTION VOITURE -->
+    <mat-card-header>
+        <mat-card-title>Sélectionner un véhicule</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="vehicle-list scrollable-list">
+            <div *ngFor="let vehicle of vehicles" (click)="selectVehicle(vehicle)"
+                [ngClass]="{'selected-vehicle': selectedVehicle?._id === vehicle._id}"
+                class="vehicle-item p-8 m-b-8 cursor-pointer border">
+                <strong>{{ vehicle.brand }} {{ vehicle.model }}</strong><br>
+                <small>Immatriculation : {{ vehicle.licensePlate }}</small><br>
+                <small>Statut : {{ vehicle.status }}</small>
+            </div>
         </div>
     </mat-card-content>
+
+    <!-- SELECTION DE LA DATE -->
+    <mat-card-header>
+        <mat-card-title>Choisir une date de rendez-vous</mat-card-title>
+    </mat-card-header>
+
+    <!-- <div class="mt-16">
+        <input type="date" id="appointment-date" [(ngModel)]="selectedDate" class="p-8 border rounded m-t-8" />
+    </div> -->
+
+    <!-- Date Picker -->
+    <mat-form-field appearance="outline">
+        <mat-label>Date du rendez-vous</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Time Picker -->
+    <mat-form-field appearance="outline">
+        <mat-label>Heure</mat-label>
+        <input matInput type="time" [(ngModel)]="selectedTime" name="time">
+    </mat-form-field>
+
+    <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <!-- <div *ngIf="confirmationMessage"
+        [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}"
+        class="confirmation-message">
+        {{ confirmationMessage }}
+    </div> -->
+
+    <button mat-flat-button color="primary" class="m-r-8" (click)="save()">Enregistrer</button>
+
 </mat-card>

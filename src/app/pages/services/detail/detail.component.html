@@ -1,0 +1,70 @@
+<div class="card" *ngIf="service">
+    <div class="card__title">
+      <div class="icon" routerLink="/services/allCard">
+        <a href="#"><i class="fa fa-arrow-left"></i></a>
+      </div>
+      <h3>Détail Service</h3>
+    </div>
+    <div class="card__body">
+      <div class="half">
+        <div class="featured_text">
+          <h1>{{ service.name }}</h1>
+          <p class="sub">{{ service.category }}</p>
+          <p class="price">{{ service.price | currencyAr }}</p>
+        </div>
+        <!-- <div class="image">
+          <img src="https://images-na.ssl-images-amazon.com/images/I/613A7vcgJ4L._SL1500_.jpg" alt="">
+        </div> -->
+      </div>
+      <div class="half">
+        <div class="description">
+          <p>{{ service.description }}</p>
+        </div>
+        <div *ngIf="service.pieces && service.pieces.length > 0" class="pieces">
+          <h6>Les pièces utiles :</h6>
+          <ul *ngFor="let piece of service.pieces" class="list">
+            <li class="piece-item">
+              <span class="piece-name">{{ piece.name }}</span> :
+              <span class="piece-description">{{ piece.description }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="estimateDuration">
+          <h6>Durée du service :</h6>
+          <p>{{ service.estimatedDuration}} h</p>
+        </div>
+        <div>
+          <span class="m-l-auto f-s-14 d-flex align-items-center">
+            @if(service.availability) {
+              <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                Disponible
+              </span>
+            } @else {
+              <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                Non disponible
+              </span>
+            }
+          </span>
+        </div>
+        <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->
+        <div class="reviews">
+          <ul class="stars">
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star"></i></li>
+            <li><i class="fa fa-star-o"></i></li>
+          </ul>
+          <span>(64 reviews)</span>
+        </div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <div class="recommend">
+        <p>Recommandé par</p>
+        <h3>
+          ARIVELOMADIMBY Faliniaina - ETU001948 & RANDRIANARISON Nancy - ETU001487
+        </h3>
+      </div>
+    </div>
+</div>

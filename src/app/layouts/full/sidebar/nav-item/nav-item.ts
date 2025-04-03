@@ -10,5 +10,5 @@ export interface NavItem {
   chipClass?: string;
   external?: boolean;
   subItemIcon?: boolean;
-  role?:string
+  role?:string[]
 }

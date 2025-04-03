@@ -1,0 +1,192 @@
+<div class="blue_theme light-theme" dir="ltr">
+    <app-topstrip></app-topstrip>
+
+    <!-- Bannière de bienvenue -->
+    <div class="banner text-center p-16  text-black">
+        <div class="slogan">
+            <div class="text">
+                Fini les files d’attente, vos réparations commencent en un clic !
+            </div>
+            <a class="btn btn-light btn-rounded" [routerLink]="['/authentication/login']">
+                Allons-y ! <i style="color: #0070cc;" class="fa fa-arrow-right"></i>
+            </a>
+            <!-- <button mat-raised-button color="primary" (click)="openServiceModal()">Voir plus</button> -->
+
+        </div>
+    </div>
+
+    <!-- Présentation de l’application -->
+    <section class="app-intro text-center p-16">
+        <h2 class="intro-title"><span>Bienvenue chez</span><span> CARCARE</span></h2>
+        <div class="intro-text">
+            <p>Une solution moderne pour votre garage.</p>
+            <p>Gagnez du temps et simplifiez vos démarches.</p>
+            <p>Prenez rendez-vous en quelques clics, rapidement et facilement.</p>
+            <p>Évitez les files d'attente avec notre plateforme de réservation en ligne.</p>
+        </div>
+    </section>
+
+    <!-- Nos Services -->
+    <section class="services text-center p-16">
+        <h3>Nos Services clés</h3>
+        <div class="carrousel">
+            @for(service of services; track service.image) {
+            <div class="col-lg-4">
+                <mat-card class="cardWithShadow position-relative overflow-hidden">
+                    <div class="position-relative">
+                        <img mat-card-image src="{{ service.image}}" alt="Photo of a Shiba Inu" class="w-100" />
+                        <div class="card-overlay h-100 d-flex align-items-end justify-content-end">
+                            <span class="f-s-12 f-w-600 m-y-16 m-r-16 p-y-4 p-x-8 rounded-pill bg-white">{{
+                                service.estimatedDuration
+                                }}</span>
+                        </div>
+                    </div>
+
+                    <mat-card-content class="p-y-24">
+                        <mat-card-title class="m-t-20 text-hover-primary cursor-pointer"><a routerLink="['/']"
+                                class="hover-text">{{
+                                service.name
+                                }}</a></mat-card-title>
+                        <div class="d-flex align-items-center justify-content-center m-t-24">
+                            <div class="d-flex align-items-center">
+                                <!-- <span class="m-r-12 f-s-14 d-flex align-items-center"><i-tabler name="eye"
+                                        class="icon-18 m-r-4"></i-tabler>{{ service.views }}</span> -->
+                                <span class="f-s-14 d-flex align-items-center"><i-tabler name="message-2"
+                                        class="icon-18 m-r-4"></i-tabler>{{ service.description }}</span>
+                            </div>
+                            <!-- <span class="m-l-auto f-s-14 d-flex align-items-center">
+                                <i-tabler name="point" class="icon-14 m-r-4 d-flex"></i-tabler>
+                                {{ service.date }}
+                            </span> -->
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            }
+        </div>
+    </section>
+    <!-- Fonctionnalités clés -->
+    <section class="features text-center p-16">
+        <h3>Ce que nous vous Offrons ? </h3>
+        <div class="features-grid">
+            <div class="feature">
+                <h4>Prise de rendez-vous en ligne</h4>
+                <p>Choisissez votre créneau, tout simplement.</p>
+            </div>
+            <div class="feature">
+                <h4>Suivi de votre réparation</h4>
+                <p>Savoir où en est votre voiture à tout moment.</p>
+            </div>
+            <div class="feature">
+                <h4>Historique des réparations</h4>
+                <p>Accédez à vos précédentes visites en un clic.</p>
+            </div>
+            <div class="feature">
+                <h4>Notifications & rappels</h4>
+                <p>Recevez des notifications pour vos rendez-vous à venir.</p>
+            </div>
+            <div class="feature">
+                <h4>Service de paiement en ligne</h4>
+                <p>Payez vos services de manière simple et rapide.</p>
+            </div>
+            <div class="feature">
+                <h4>Suivi des pièces et des accessoires</h4>
+                <p>Obtenez des informations sur les pièces de votre véhicule.</p>
+            </div>
+            <div class="feature">
+                <h4>Assistance à distance</h4>
+                <p>Consultez nos experts sans vous déplacer.</p>
+            </div>
+            <div class="feature">
+                <h4>Services de dépannage 24/7</h4>
+                <p>Besoin d’aide en cas de panne ? Nous intervenons à tout moment.</p>
+            </div>
+            <div class="feature">
+                <h4>Garantie sur les services effectués</h4>
+                <p>Bénéficiez d’une garantie sur toutes nos réparations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment ça marche -->
+    <section class="how-it-works text-center p-16">
+        <h3>Comment ça marche ?</h3>
+        <div class="steps">
+            <div class="step">
+                <span class="step-number">1</span>
+                <h4>Choisissez un service</h4>
+                <p>Définissez le type de réparation ou d'entretien.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <h4>Sélectionnez une date</h4>
+                <p>Choisissez le créneau horaire qui vous convient.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <h4>Recevez une confirmation instantanée</h4>
+                <p>Vous êtes prêt pour votre rendez-vous !</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Témoignages -->
+    <section class="testimonials text-center p-16">
+        <h3>Ce que nos clients disent</h3>
+        <div class="testimonial">
+            <p>"J’ai réservé mon contrôle technique en 2 minutes. Parfait !" — Jean R.</p>
+        </div>
+        <div class="testimonial">
+            <p>"Une expérience simple et rapide. Je recommande !" — Marie L.</p>
+        </div>
+    </section>
+
+    <section class="footer text-center">
+        <!-- Texte principal avec le call-to-action -->
+        <h2>Prêt à prendre rendez-vous ?</h2>
+        <a class="btn btn-light" routerLink="/dashboard">Réservez maintenant</a>
+
+        <!-- Informations de contact fictives pour Carcare -->
+        <div class="footer-contact mt-4">
+            <p><strong>Contactez-nous :</strong></p>
+            <p>
+                <a href="mailto:contact&#64;carcare.com">contact&#64;carcare.com</a>
+            </p>
+            <p>
+                <strong>Téléphone :</strong> +33 1 23 45 67 89
+            </p>
+        </div>
+
+        <!-- Adresse et horaires -->
+        <div class="footer-address mt-4">
+            <!-- <p><strong>Adresse :</strong> 123 Rue du Garage, 75000 Paris</p> -->
+            <p><strong>Horaires d'ouverture :</strong></p>
+            <p>Lundi - Vendredi : 8h00 - 18h00</p>
+            <p>Samedi : 9h00 - 13h00</p>
+            <p>Dimanche : Fermé</p>
+        </div>
+
+        <!-- Garanties -->
+        <div class="footer-assurances mt-4">
+            <p><strong>Assurances & Garanties</strong></p>
+            <p>Nous offrons des garanties sur toutes nos réparations. Votre satisfaction est notre priorité.</p>
+        </div>
+
+        <!-- Informations des étudiants -->
+        <div class="footer-info mt-4">
+            <p>
+                <strong>ARIVELOMADIMBY Faliniaina</strong> - ETU001948
+            </p>
+            <p>
+                <strong>RANDRIANARISON Nancy</strong> - ETU001487
+            </p>
+        </div>
+
+        <!-- Copyright ou informations légales -->
+        <div class="footer-legal mt-3">
+            <p>&copy; 2025 Carcare - Tous droits réservés</p>
+        </div>
+    </section>
+
+</div>

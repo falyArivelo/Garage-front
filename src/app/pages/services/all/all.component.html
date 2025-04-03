@@ -1,0 +1,126 @@
+<mat-card class="cardWithShadow overflow-hidden">
+    <mat-card-content>
+        <mat-card-title class="m-b-4">Les Services</mat-card-title>
+        <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
+    </mat-card-content>
+
+    <!-- Zone de filtrage -->
+    <div class="filter-container d-flex gap-3">
+        <!-- Nom du service -->
+        <mat-form-field appearance="outline" class="flex-grow-1">
+            <mat-label>Nom du service</mat-label>
+            <input matInput [(ngModel)]="filterValues.name" placeholder="Rechercher un service">
+        </mat-form-field>
+
+        <!-- Catégorie -->
+        <mat-form-field appearance="outline">
+            <mat-label>Catégorie</mat-label>
+            <mat-select [(ngModel)]="filterValues.category">
+                <mat-option value="">Toutes</mat-option>
+                <mat-option value="Réparation">Réparation</mat-option>
+                <mat-option value="Entretien">Entretien</mat-option>
+                <mat-option value="Diagnostic">Diagnostic</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Prix minimum -->
+        <mat-form-field appearance="outline">
+            <mat-label>Prix min</mat-label>
+            <input matInput type="number" [(ngModel)]="filterValues.priceMin">
+        </mat-form-field>
+
+        <!-- Prix maximum -->
+        <mat-form-field appearance="outline">
+            <mat-label>Prix max</mat-label>
+            <input matInput type="number" [(ngModel)]="filterValues.priceMax">
+        </mat-form-field>
+
+        <!-- Bouton Filtrer -->
+        <button mat-raised-button color="primary" (click)="applyFilter()">
+            Filtrer
+        </button>
+    </div>
+
+
+    <div class="table-responsive">
+
+        <table mat-table [dataSource]="pagedData" class="w-100">
+
+            <!-- Service Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Service </th>
+                <td mat-cell *matCellDef="let service">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 lh-sm">{{ service.name }}</h6>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Catégorie Column -->
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Catégorie </th>
+                <td mat-cell *matCellDef="let service">{{ service.category }}</td>
+            </ng-container>
+
+            <!-- Prix Column -->
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Prix </th>
+                <td mat-cell *matCellDef="let service">{{ service.price | currencyAr }}</td>
+            </ng-container>
+
+            <!-- Statut Column -->
+            <ng-container matColumnDef="availability">
+                <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14"> Statut </th>
+                <td mat-cell *matCellDef="let service">
+                    <span *ngIf="service.availability" class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                        Disponible
+                    </span>
+                    <span *ngIf="!service.availability" class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                        Non disponible
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Menu Column -->
+            <ng-container matColumnDef="menu">
+                <th mat-header-cell *matHeaderCellDef class="mat-subtitle-1 f-s-14">
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="menu"
+                        aria-label="Example icon button with a vertical three dot icon">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <a class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
+                            [routerLink]="['/services/edit', element._id]">
+                            <i-tabler name="edit" class="icon-18"></i-tabler>
+                            <span>Modifier</span>
+                        </a>
+                        <a href="javascript:void(0)"
+                            class="d-flex align-items-center text-decoration-none p-y-10 p-x-16 mat-body-1 gap-8"
+                            (click)="confirmDelete(element._id)">
+                            <i-tabler name="trash" class="icon-18"></i-tabler>
+                            <span>Supprimer</span>
+                        </a>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <!-- LOADING -->
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+        <span *ngFor="let pageNumber of getPageNumbers()">
+            <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+                {{ pageNumber }}
+            </button>
+        </span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+    </div>
+</mat-card>

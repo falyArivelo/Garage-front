@@ -1,0 +1,108 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+      <mat-card-title class="m-b-4">Nos Services</mat-card-title>
+      <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
+  </mat-card-content>
+
+  <!-- Zone de filtrage -->
+  <div class="filter-container d-flex gap-3">
+    <!-- Nom du service -->
+    <mat-form-field appearance="outline" class="flex-grow-1">
+        <mat-label>Nom du service</mat-label>
+        <input matInput [(ngModel)]="filterValues.name" placeholder="Rechercher un service">
+    </mat-form-field>
+
+    <!-- Catégorie -->
+    <mat-form-field appearance="outline">
+        <mat-label>Catégorie</mat-label>
+        <mat-select [(ngModel)]="filterValues.category">
+            <mat-option value="">Toutes</mat-option>
+            <mat-option value="Réparation">Réparation</mat-option>
+            <mat-option value="Entretien">Entretien</mat-option>
+            <mat-option value="Diagnostic">Diagnostic</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Prix minimum -->
+    <mat-form-field appearance="outline">
+        <mat-label>Prix min</mat-label>
+        <input matInput type="number" [(ngModel)]="filterValues.priceMin">
+    </mat-form-field>
+
+    <!-- Prix maximum -->
+    <mat-form-field appearance="outline">
+        <mat-label>Prix max</mat-label>
+        <input matInput type="number" [(ngModel)]="filterValues.priceMax">
+    </mat-form-field>
+
+    <!-- Bouton Filtrer -->
+    <button mat-raised-button color="primary" (click)="applyFilter()">
+        Filtrer
+    </button>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-4"  *ngFor="let service of pagedData">
+      <mat-card class="cardWithShadow position-relative overflow-hidden">
+        <div class="position-relative">
+          <img
+            mat-card-image
+            src="/assets/images/blog/entretien-auto.jpg"
+            alt="Photo of a Shiba Inu"
+            class="w-100"
+          />
+          <!-- <div class="card-overlay h-100 d-flex align-items-end justify-content-end">
+            <span class="f-s-16 f-w-600 m-y-16 m-r-16 p-y-4 p-x-8 rounded-pill bg-white">2 mins Read</span>
+          </div> -->
+        </div>
+
+        <mat-card-content class="p-y-24">
+          <div class="user-category">
+            <!-- <div class="m-b-20">
+              <img src="/assets/images/profile/user-1.jpg" class="rounded-circle" width="40" />
+            </div> -->
+            <span class="f-s-16 m-y-16 f-w-600 p-x-8 p-y-4 bg-light rounded-pill" style="background-color: #95caff !important;">{{ service.name }}</span>
+          </div>
+          <mat-card-title class="m-t-20 text-hover-primary cursor-pointer">
+            <a [routerLink]="['/services/detail', service._id]" class="hover-text">{{ service.description }}</a>
+          </mat-card-title>
+          <div class="d-flex align-items-center justify-content-center m-t-24">
+            <div class="d-flex align-items-center">
+              <span class="m-r-12 f-s-14 d-flex align-items-center">
+                <i-tabler name="clock" class="icon-18 m-r-4"></i-tabler>
+                {{ service.estimatedDuration }} h
+              </span>
+              <span class="f-s-14 d-flex align-items-center">
+                <i-tabler name="coins" class="icon-18 m-r-4"></i-tabler>
+                {{ service.price | currencyAr }}
+                </span>
+            </div>
+            <span class="m-l-auto f-s-14 d-flex align-items-center">
+              @if(service.availability) {
+                <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                  Disponible
+                </span>
+              } @else {
+                <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                  Non disponible
+                </span>
+              }
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span *ngFor="let pageNumber of getPageNumbers()">
+        <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+            {{ pageNumber }}
+        </button>
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+  </div>
+</mat-card>
+

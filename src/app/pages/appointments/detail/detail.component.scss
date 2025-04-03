@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Montserrat:300,400,700,800|Open+Sans:300');
+
+body {
+  background-image: linear-gradient(
+    to right bottom,
+    #b91eda,
+    #a02ae0,
+    #8234e5,
+    #5d3be8,
+    #1241eb
+  );
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+main{
+  max-width: 720px;
+  margin: 5% auto;
+}
+
+.card{
+  box-shadow: 0 2px 6px rgba(#c2c2c2, 0.3);
+  transition: 200ms;
+  background: #fff;
+  
+  .card__title{
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+    
+    h3{
+      flex: 0 1 200px;
+      text-align: right;
+      margin-right: 14px;
+      color: #252525;
+      font-family: sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    
+    .icon{
+      flex: 1 0 10px;
+      // background: #115dd8;
+      color: #fff;
+      padding: 10px 10px;
+      transition: 200ms;
+      margin-right: 5%;
+      cursor: pointer;
+      
+      > a{
+        color: #fff;
+        color: #30393b;
+
+      }
+      
+    }
+  }
+  
+.card__body{
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+    
+    > .half{
+      box-sizing: border-box;
+      padding: 0 15px;
+      flex: 1 0 50%;
+    }
+    
+    .featured_text{
+      h1{
+        margin-bottom: -6px;
+        padding: 0;
+        font-weight: 800;
+        font-family: "Montserrat", sans-serif;
+        font-size: 30px;
+        line-height: 50px;
+        color: #181e28;
+      }
+      
+      p{
+        margin: 0;
+        padding: 0;
+        
+        &.model{
+          font-family: "Montserrat", sans-serif;
+          font-size: 23px;
+          text-transform: uppercase;
+          color: #686e77;
+          font-weight: 300;
+          margin-bottom: 5px;
+        }
+        
+        &.licensePlate{
+          font-family: "Fjalla One", sans-serif;
+          color: #252525;
+          font-size: 26px;
+        }
+      }
+    }
+    
+    .image{
+      padding-top: 15px;
+      width: 100%;
+      
+      img{
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    
+    .description{
+      margin-bottom: 25px;
+      
+      p{
+        margin: 0;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        line-height: 27px;
+        font-size: 20px;
+        color: #555;
+      }
+    }
+
+    .services{
+        h4{
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            letter-spacing: 0.5px;
+        }
+
+        /* Conteneur principal des services */
+        .services-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-item {
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Nom du service et prix */
+        .service-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .service-price {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Description du service */
+        .service-description {
+            font-size: 15px;
+            color: #555;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .pieces {
+            .pieces-header {
+                display: flex;
+                align-items: center; /* Assure que l'icône et le texte sont bien alignés verticalement */
+                gap: 8px; /* Espacement entre l'icône et le texte */
+
+                /* Icône de paramètre */
+                i-tabler {
+                    font-size: 18px; /* Taille de l'icône */
+                }
+
+                /* Titre "Les pièces utiles :" */
+                h6{
+                    text-decoration: underline;
+                    font-size: 16px;
+                    font-weight: 400;
+                    margin-left: -6px;
+                }
+            }
+            
+            .list{
+              list-style-type: circle;
+            }
+            
+            .piece-name{
+              font-size: 15px;
+            }
+      
+            .piece-description {
+                flex-grow: 1; /* Permet d'occuper l'espace restant */
+                font-family: "Open Sans", sans-serif;
+                font-size: 15px;
+            }
+
+            /* Pour un effet de survol de l'élément */
+            .piece-item:hover {
+                background-color: #f1f1f1;
+                border-radius: 4px;
+                padding: 5px;
+                transition: background-color 0.3s ease;
+            }
+        }
+    }
+
+    .appointmentDate {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Augmente un peu l'espace entre les éléments */
+    
+        /* Icône de calendrier */
+        i-tabler {
+            font-size: 18px; /* Ajuste la taille pour mieux s’aligner avec le texte */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 18px; /* Hauteur ajustée pour alignement */
+        }
+        
+        /* Texte "Date du rendez-vous le" */
+        h6 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            color: #444;
+        }
+        
+        /* Affichage de la date */
+        p {
+            font-size: 14px;
+            color: #222;
+            margin: 0;
+            margin-left: -4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center; /* Assure l'alignement avec l'icône */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Effet d'ombre subtil */
+        }
+    }
+
+    .estimateDuration{
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center; /* Alignement vertical */
+      gap: 8px; /* Espacement entre le titre et la valeur */
+
+      h6{
+        text-decoration: underline;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      
+      p {
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        font-size: 16px;
+      }
+    }
+
+    .text-warning, .text-success, .text-primary, .text-secondary, .text-error {
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        padding: 6px 12px; /* Plus d'espace autour du texte */
+        min-width: 120px; /* Largeur minimale pour éviter que ce soit trop petit */
+        text-align: center; /* Centrer le texte */
+        border-radius: 8px; /* Arrondir légèrement pour un meilleur rendu */
+    }
+    
+    .btn-generate {
+        background-color: white;
+        color: #007bff; /* Bleu */
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 15px;
+        border: 2px solid #007bff; /* Bordure bleue */
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 255, 0.2); /* Effet d'ombre */
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .btn-generate:hover {
+        background-color: #007bff; /* Bleu rempli */
+        color: white;
+        box-shadow: 3px 3px 15px rgba(0, 0, 255, 0.4);
+    }    
+
+    span.stock{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      color: #a1cc16;
+    }
+    
+    .reviews{
+      .stars{
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+        
+        > li{
+          display: inline-block;
+          
+          .fa{
+            color: #f7c01b;
+          }
+        }
+      }
+      
+      > span{
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        margin-left: 5px;
+        color: #555;
+      }
+    }
+}
+  
+.card__footer{
+    padding: 30px 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    align-items: center;
+    position: relative;
+    
+    &::before{
+      content: "";
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 40px;
+      width: calc(100% - 40px);
+      height: 3px;
+      background: #115dd8;
+      background: linear-gradient(to right, #115dd8 0%,#115dd8 20%,#ddd 20%,#ddd 100%);
+    }
+    
+    .recommend{
+      flex: 1 0 10px;
+      
+      p{
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        color: #555;
+      }
+     
+      h3{
+        margin: 0;
+        font-size: 20px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #115dd8;
+      }
+    }
+    
+    .action{
+      button{
+        cursor: pointer;
+        border: 1px solid #115dd8;
+        padding: 14px 30px;
+        border-radius: 200px;
+        color: #fff;
+        background: #115dd8;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        transition: 200ms;
+        
+        &:hover{
+          background: #fff;
+          color: #115dd8;
+        }
+      }
+    }
+  }
+}

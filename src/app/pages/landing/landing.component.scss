@@ -1,0 +1,385 @@
+// @use "variables" as *;
+
+.banner {
+    padding: 2rem;
+    height: 100vh;
+
+    .slogan {
+        padding-left: 20px;
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        font-weight: bold;
+        gap: 30px;
+
+        .text {
+            text-wrap: wrap;
+            height: max-content;
+            font-size: 5rem;
+            line-height: 1.2;
+            text-align: left;
+        }
+    }
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+
+    h3,
+    h2 {
+        font-size: 2.5rem;
+    }
+}
+
+.app-intro {
+    min-height: 80vh;
+    height: auto;
+    // text-align: center;
+    // padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 0 20px;
+    background-color: #f4f7fc;
+
+    /* Titre principal */
+    .intro-title {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #222;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 30px; /* Augmenter l'espacement sous le titre */
+    }
+
+    /* Effet "Bienvenue chez" en blanc/gris sombre */
+    .intro-title span:first-child {
+        color: #818283;
+        /* background: linear-gradient(90deg, #ccc, #666); */
+        /* color: transparent; */
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Effet souligné du titre avec un dégradé bleu */
+    .intro-title::after {
+        content: "";
+        display: block;
+        width: 90%; /* Largement espacé du texte */
+        height: 4px;
+        background: linear-gradient(90deg, #c9e5f8, #7bcef8, #006bb3);
+        margin: 20px auto 0; /* Plus d'espacement pour un effet aéré */
+        border-radius: 2px;
+    }
+
+    /* "CARCARE" en bleu */
+    .intro-title span {
+        color: #006bb3;
+        text-shadow: 2px 2px 8px rgba(0, 106, 179, 0.6);
+    }
+    
+    .intro-text {
+        font-family: 'Poppins', sans-serif; /* Police moderne Poppins */
+        text-align: center;
+        color: #333;
+        padding: 6px 20px;
+    }
+
+    .intro-text p {
+        font-size: 33px; /* Taille plus grande pour une meilleure lisibilité */
+        font-weight: 500; /* Texte semi-gras pour le rendre plus captivant */
+        line-height: 1.7; /* Espacement amélioré entre les lignes */
+        margin: 38px 0; /* Ajout d'un espacement vertical entre les paragraphes */
+        color: #555;
+        text-transform: capitalize; /* Mise en majuscule des premières lettres pour un effet élégant */
+        letter-spacing: 1px; /* Espacement des lettres pour un look moderne */
+        transition: all 0.3s ease-in-out; /* Transition fluide au survol */
+        font-family: Poppins;
+    }
+
+    /* Effet au survol */
+    .intro-text p:hover {
+        font-size: 36px;
+        color: #2980b9; /* Couleur bleue au survol */
+        margin-bottom: 3%;
+        transform: translateY(-5px); /* Léger effet de levitation */
+        text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2); /* Ombre subtile pour plus de profondeur */
+        font-family: Poppins;
+    }
+}
+
+.features {
+    font-size: 1.5rem;
+
+    h3 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Grille responsive */
+        gap: 20px; /* Espacement entre les cartes */
+        padding: 70px;
+    }
+
+    .feature {
+        background-color: #e0edef; /* Bleu ciel doux pour la carte */
+        padding: 25px;
+        border-radius: 12px; /* Bords arrondis */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+        text-align: center;
+        transition: all 0.3s ease; /* Transition fluide au survol */
+    }
+    
+    .feature:hover {
+        transform: translateY(-5px); /* Effet de levée au survol */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Ombre plus intense */
+    }
+    
+    .feature h4 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333; /* Texte noir pour le titre */
+    }
+    
+    .feature p {
+        font-size: 16px;
+        color: #555; /* Texte gris pour la description */
+    }
+    
+    @media (max-width: 768px) {
+        .features h3 {
+            font-size: 2rem; /* Taille du titre plus petite sur mobile */
+        }
+    
+        .feature {
+            padding: 20px;
+        }
+    
+        .feature h4 {
+            font-size: 18px;
+        }
+    
+        .feature p {
+            font-size: 14px;
+        }
+    }
+}
+
+.how-it-works {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        text-align: center;
+        background-color: #f4f7fc;
+        padding: 40px 20px;
+    
+    /* Titre h3 centré avec plus d'espacement */
+    h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 60px; /* Augmenter l'espacement avec les étapes */
+        color: #333;
+        width: 100%;
+        text-align: center;
+        margin-top: 4%;
+    }
+    
+    /* Conteneur des étapes alignées horizontalement */
+    .steps {
+        display: flex;
+        justify-content: space-evenly; /* Espacement uniforme entre les étapes */
+        width: 100%;
+        margin-top: 10%;
+    }
+    
+    /* Style de chaque étape */
+    .step {
+        position: relative;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #333;
+        width: 30%; /* Chaque étape prend environ un tiers de l'espace */
+        text-align: center;
+        padding-left: 40px;
+        margin-bottom: 40px; /* Espacement entre les étapes */
+    }
+    
+    /* Numéro de l'étape */
+    .step-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #007BFF; /* Bleu pour le numéro */
+        position: absolute;
+        left: -10px;
+        top: 0;
+    }
+    
+    /* Lien entre le numéro et la ligne */
+    .step:before {
+        content: '';
+        position: absolute;
+        top: -2px; /* Petite espace entre le numéro et la ligne */
+        left: 24px;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(to bottom, #007BFF, #ffffff); /* Dégradé bleu à blanc */
+    }
+    
+    /* Titre de l'étape (h4) */
+    .step h4 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin-top: 10px; /* Plus grand espacement entre la ligne et le titre */
+    }
+    
+    /* Description de l'étape (p) */
+    .step p {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #666;
+        line-height: 1.5;
+        margin-top: 15px; /* Espacement entre le titre et la description */
+    }
+    
+    /* Responsive design pour les petits écrans */
+    @media (max-width: 768px) {
+        .how-it-works {
+            padding: 40px 10px;
+        }
+    
+        /* Passer les étapes en colonne sur petits écrans */
+        .steps {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+    
+        .step {
+            width: 80%; /* Chaque étape prend plus de largeur sur petits écrans */
+        }
+    
+        .step + .step {
+            margin-left: 0; /* Retirer l'espacement entre les étapes */
+        }
+    }
+}
+
+.services {
+    .carrousel {
+        padding: 50px 20px;
+        display: flex;
+        gap: 20px;
+        overflow-x: scroll ;
+        
+
+    }
+}
+
+// .footer{
+//     display: flex;
+//     flex-direction: column;
+//     gap: 15px;
+//     background: #000;
+//     color: white;
+//     min-height: 80vh;
+//     height: auto;
+//     padding: 50px;
+    
+// .footer-info p,
+// .footer-contact p {
+//     margin: 5px 0;
+// }
+
+// .footer-contact a {
+//     color: #007bff; /* Couleur bleue pour le lien mail */
+//     text-decoration: none;
+// }
+
+// .footer-contact a:hover {
+//     text-decoration: underline;
+// }
+
+// .footer-legal p {
+//     font-size: 0.875rem;
+//     color: #6c757d;
+// }
+
+// }
+
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000;
+    color: white;
+    padding: 50px 20px;
+}
+.footer h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.footer a.btn {
+    background: white;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.footer a.btn:hover {
+    background: #007bff;
+    color: white;
+}
+.footer-contact, .footer-address, .footer-assurances, .footer-info, .footer-legal {
+    text-align: center;
+    margin-top: 20px;
+}
+.footer p, .footer a {
+    font-size: 1rem;
+    color: #ffffff;
+}
+.footer a {
+    text-decoration: none;
+    color: #007bff;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+.btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(202, 202, 202, 0.2);
+    cursor: pointer;
+}
+
+.btn-light {
+    background-color: #ffffff;
+    color: #0070cc;
+    font-size: 1.3rem;
+}
+
+.btn-light:hover {
+    background-color: #cce9fe;
+    color: #1976d2;
+}

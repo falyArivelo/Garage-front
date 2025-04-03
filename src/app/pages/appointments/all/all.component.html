@@ -1,0 +1,132 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content>
+    <mat-card-title class="m-b-4">Tous les Rendez-vous</mat-card-title>
+    <!-- <mat-card-subtitle class="mat-mdc-card-subtitle">Total : {{ dataSource.length }}</mat-card-subtitle> -->
+  </mat-card-content>
+
+  <!-- Zone de filtrage -->
+  <div class="filter-container d-flex gap-3">
+    <!-- Nom du vehicule -->
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <mat-label>Nom du véhicule</mat-label>
+      <input matInput [(ngModel)]="filterValues.vehicle" placeholder="Rechercher un véhicule">
+    </mat-form-field>
+
+    <!-- Nom du vehicule -->
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <mat-label>Nom du service</mat-label>
+      <input matInput [(ngModel)]="filterValues.services" placeholder="Rechercher un service">
+    </mat-form-field>
+
+    <!-- Date minimum -->
+    <mat-form-field appearance="outline">
+      <mat-label>Date minimum</mat-label>
+      <input matInput [matDatepicker]="pickerMin" [(ngModel)]="filterValues.dateMin"
+        placeholder="Sélectionner une date">
+      <mat-datepicker-toggle matSuffix [for]="pickerMin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMin></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Date maximum -->
+    <mat-form-field appearance="outline">
+      <mat-label>Date maximum</mat-label>
+      <input matInput [matDatepicker]="pickerMax" [(ngModel)]="filterValues.dateMax"
+        placeholder="Sélectionner une date">
+      <mat-datepicker-toggle matSuffix [for]="pickerMax"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMax></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Statut -->
+    <mat-form-field appearance="outline">
+      <mat-label>Statut</mat-label>
+      <mat-select [(ngModel)]="filterValues.status">
+        <mat-option value="">Toutes</mat-option>
+        <mat-option value="En attente">En attente</mat-option>
+        <mat-option value="Confirmé">Confirmé</mat-option>
+        <mat-option value="En cours">En cours</mat-option>
+        <mat-option value="Terminé">Terminé</mat-option>
+        <mat-option value="Annulé">Annulé</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Bouton Filtrer -->
+    <button mat-raised-button color="primary" (click)="applyFilter()">
+      Filtrer
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+
+  <table mat-table [dataSource]="filteredDataSource.data" class="mat-elevation-z8">
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef> Client </th>
+      <td mat-cell *matCellDef="let element"> {{ element.client.username }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vehicle">
+      <th mat-header-cell *matHeaderCellDef> Vehicle </th>
+      <td mat-cell *matCellDef="let element"> {{ element.vehicle.brand }} {{ element.vehicle.model }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="services">
+      <th mat-header-cell *matHeaderCellDef> Services </th>
+      <td mat-cell *matCellDef="let element">
+        <ul>
+          <li *ngFor="let service of element.services">{{ service.name }}</li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalEstimatedPrice">
+      <th mat-header-cell *matHeaderCellDef> Prix estimé</th>
+      <td mat-cell *matCellDef="let element"> {{ element.totalEstimatedPrice | currencyAr }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="appointmentDate">
+      <th mat-header-cell *matHeaderCellDef> Appointment Date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.appointmentDate | date: 'short' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="f-s-12 f-w-500 p-x-10 p-y-4 rounded-pill"
+          [ngClass]="['bg-light-' + getStatusColor(element.status), 'text-' + getStatusColor(element.status)]">
+          {{ element.status }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="menu">
+      <th mat-header-cell *matHeaderCellDef> Menu </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/appointments/detail', element._id]">En savoir plus</button>
+          <button mat-menu-item [routerLink]="['/tasks/add', element._id]">Assigner Tache</button>
+          <button mat-menu-item [routerLink]="['/appointments/status-change', element._id]">Modifier</button>
+          <button mat-menu-item>Supprimer</button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span *ngFor="let pageNumber of getPageNumbers()">
+      <button (click)="goToPage(pageNumber)" [class.active]="currentPage === pageNumber - 1">
+        {{ pageNumber }}
+      </button>
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+  </div>
+</mat-card>

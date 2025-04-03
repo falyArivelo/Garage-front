@@ -6,6 +6,13 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/animations';
 import { NavItem } from './nav-item';
 import { Router } from '@angular/router';
 import { NavService } from '../../../../services/nav.service';
@@ -15,12 +22,30 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-nav-item',
   imports: [TranslateModule, TablerIconsModule, MaterialModule, CommonModule],
   templateUrl: './nav-item.component.html',
   styleUrls: [],
+  animations: [
+    trigger('submenu', [
+      state('collapsed', style({
+        height: '0',
+        overflow: 'hidden',
+        opacity: 0,
+      })),
+      state('expanded', style({
+        height: '*',
+        overflow: 'visible',
+        opacity: 1,
+      })),
+      transition('collapsed <=> expanded', [
+        animate('300ms ease-in-out')
+      ])
+    ])
+  ]
 })
 export class AppNavItemComponent implements OnChanges {
   @Output() notify: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -30,7 +55,7 @@ export class AppNavItemComponent implements OnChanges {
   expanded: any = false;
 
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  @Input() depth: any;
+  @Input() depth: any = 0;
 
   constructor(public navService: NavService, public router: Router,public authService : AuthService) {}
 

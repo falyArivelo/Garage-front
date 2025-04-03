@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 // ui
-import { PieceComponent } from './pieces/piece.component';
 import { AppBadgeComponent } from './badge/badge.component';
 import { AppChipsComponent } from './chips/chips.component';
 import { AppListsComponent } from './lists/lists.component';
@@ -14,10 +13,6 @@ export const UiComponentsRoutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: 'pieces', // URL : /ui-components/pieces
-        component: PieceComponent
-      },
       {
         path: 'badge',
         component: AppBadgeComponent,

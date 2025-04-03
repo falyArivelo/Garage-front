@@ -4,7 +4,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
-
+import { LandingComponent } from './pages/landing/landing.component';
 export const routes: Routes = [
   {
     path: '',
@@ -12,7 +12,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/landing',
         pathMatch: 'full',
       },
       {
@@ -20,6 +20,12 @@ export const routes: Routes = [
         canActivate: [AuthGuard], 
         loadChildren: () =>
           import('./pages/pages.routes').then((m) => m.PagesRoutes),
+      },
+      {
+        path: 'email',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/email/email.routes').then((m) => m.EmailRoutes),
       },
       {
         path: 'vehicles',
@@ -32,6 +38,30 @@ export const routes: Routes = [
         canActivate: [AuthGuard], 
         loadChildren: () =>
           import('./pages/appointments/appointments.routes').then((m) => m.AppointmentRoutes),
+      },
+      {
+        path: 'pieces',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/pieces/pieces.routes').then((m) => m.PiecesRoutes),
+      },
+      {
+        path: 'services',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/services/services.routes').then((m) => m.ServicesRoutes),
+      },
+      {
+        path: 'tasks',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/tasks/tasks.routes').then((m) => m.TaskRoutes),
+      },
+      {
+        path: 'users',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/users/users.routes').then((m) => m.UsersRoutes),
       },
       {
         path: 'ui-components',
@@ -61,6 +91,16 @@ export const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'landing',
+        component: LandingComponent,
+      },
+    ]
   },
   {
     path: '**',

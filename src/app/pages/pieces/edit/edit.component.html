@@ -1,0 +1,62 @@
+<mat-card class="cardWithShadow theme-card">
+
+    <mat-card-header>
+
+        <mat-card-title class="m-b-0">Modifier une pièce</mat-card-title>
+    </mat-card-header>
+            <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-card-content class="b-t-1">
+        <form>
+            <div class="row">
+                <!-- Pièce -->
+                <div class="col-lg-6">
+                    <mat-label class="f-w-600 m-b-8 d-block">Pièce<span style="color: red;">*</span></mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: Radiateur" [(ngModel)]="piece.name" name="name" />
+                    </mat-form-field>
+
+                    <!-- Description -->
+                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Description</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <textarea matInput placeholder="Entrez la description..." rows="6" [(ngModel)]="piece.description" name="description"></textarea>
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-lg-6">
+                    <!-- Catégorie -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Catégorie<span style="color: red;">*</span></mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select [(ngModel)]="piece.category" name="category">
+                            <mat-option value="Moteur">Moteur</mat-option>
+                            <mat-option value="Système de freinage">Système de freinage</mat-option>
+                            <mat-option value="Électrique et Électronique">Électrique et Électronique</mat-option>
+                            <mat-option value="Échappement">Échappement</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Prix -->
+                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Prix<span style="color: red;">*</span></mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="ex: 15000" [(ngModel)]="piece.price" name="price" />
+                    </mat-form-field>
+
+                    <!-- Stock -->
+                    <mat-label class="f-w-600 m-b-8 d-block mt-3">Stock<span style="color: red;">*</span></mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput type="number"[(ngModel)]="piece.stock" name="stock" />
+                    </mat-form-field>
+                </div>
+            </div>
+    
+            <div class="m-t-12">
+                <button mat-flat-button color="primary" class="m-r-8" (click)="save()">
+                    <!-- Spinner affiché uniquement pendant le chargement -->
+                    Mettre à jour
+                </button>
+                <button mat-stroked-button color="warn" type="button" (click)="cancel()">Annuler</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

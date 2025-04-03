@@ -1,34 +1,63 @@
 /* Container pour la liste des services */
+@import "../../../../assets/scss/variables";
+
 .service-list {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.service-item {
-    display: flex;
-    justify-content: space-between;
-    /* Espacement entre les informations du service et le bouton de sélection */
-    align-items: center;
-    padding: 5px ;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    background-color: #fcfcfc;
-    min-height: 100px;
-    /* Hauteur minimale ajustable */
-    height: auto;
-    box-sizing: border-box;
+/* Appliquer un scroll à la liste des services */
+.scrollable-list {
+  max-height: 400px; /* Hauteur maximale pour activer le scroll */
+  overflow-y: auto;  /* Activer le défilement vertical */
+  border: 1px solid #f0f7f7; /* Bordure pour bien voir la zone */
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacement entre les services */
 }
+
+/* Assurer que chaque service a une bonne mise en page */
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff; /* Fond blanc pour chaque service */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Effet de légère ombre */
+}
+
+/* Personnalisation de la scrollbar */
+.scrollable-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 
 .service-info {
     flex: 1;
     padding-right: 16px;
-    /* Espacement entre la description et l'image */
     font-size: 14px;
     color: #383838;
 
     h3 {
-        color: rgb(150, 0, 180);
+        color:$primary;
     }
 }
 
@@ -64,10 +93,46 @@ mat-card-content {
     gap: 16px;
 }
 
-/* Gérer l'affichage de la section des services sélectionnés */
 mat-selection-list {
     max-height: 600px;
-    /* Limite la hauteur de la liste si elle est trop grande */
     overflow-y: auto;
-    /* Ajoute un scroll si nécessaire */
+}
+
+.vehicle-item {
+    transition: 0.3s;
+  }
+  
+  .vehicle-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .selected-vehicle {
+    background-color: #cce5ff;
+    border: 2px solid #007bff;
+  }
+  
+
+  .confirmation-message {
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .success-message {
+    background-color: #4caf50; /* Vert */
+  }
+  
+  .error-message {
+    background-color: #f44336; /* Rouge */
+  }
+  
+  ::ng-deep .alert-success .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+::ng-deep .alert-error .mat-mdc-snack-bar-label .mdc-snackbar__label {
+    background-color: #f44336 !important;
 }

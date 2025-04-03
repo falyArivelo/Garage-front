@@ -20,6 +20,7 @@ export class AppointmentService {
     }
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
   }
 
@@ -36,9 +37,12 @@ export class AppointmentService {
   }
 
   // Obtenir les rendez-vous d'un client par clientId
-  getAppointmentsByClient(clientId: string): Observable<any[]> {
+  getAppointmentsByClient(): Observable<any[]> {
+    const user = this.authService.currentUserValue; // Récupérer l'utilisateur connecté
+    console.log('User ID envoyé:', user?.user_id);
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}/appointments/client/${clientId}`, { headers });
+    const params = new HttpParams().set('user_id', user?.user_id ?? '');
+    return this.http.get<any[]>(`${this.apiUrl}/appointments/client`, { headers, params });
   }
 
   // Obtenir un rendez-vous par son ID
@@ -50,12 +54,18 @@ export class AppointmentService {
   // Mettre à jour un rendez-vous
   updateAppointment(id: string, appointmentData: any): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/appointments/${id}`, appointmentData, { headers });
+    return this.http.put(`${this.apiUrl}/appointments/${id}`,appointmentData, { headers });
   }
 
   // Supprimer un rendez-vous
-  deleteAppointment(id: string): Observable<any> {
+  cancelAppointment(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}/appointments/${id}`, { headers });
+    return this.http.put(`${this.apiUrl}/appointments/cancel/${id}`,{},{ headers });
+  }
+
+  changingStatusAppointmentByManager(id: string, status: string, message: string, userId: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const body = { status, message, userId };  // Envoie le statut, message et l'ID de l'utilisateur
+    return this.http.put(`${this.apiUrl}/appointments/changing-status-manager/${id}`, body,{headers});
   }
 }
