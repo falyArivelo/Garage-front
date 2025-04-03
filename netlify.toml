@@ -1,4 +1,7 @@
 [[redirects]]
+  command = "npm run build:prod"
+  publish = "dist/browser"
+
   from = "/*"
   to = "/index.html"
   status = 200

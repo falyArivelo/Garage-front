@@ -1,0 +1,1 @@
+import{vb as e}from"./chunk-NNBNMEEF.js";var m=(()=>{class r{transform(t){return t==null?"":new Intl.NumberFormat("fr-FR",{minimumFractionDigits:0}).format(t)+" Ar"}static{this.\u0275fac=function(i){return new(i||r)}}static{this.\u0275pipe=e({name:"currencyAr",type:r,pure:!0})}}return r})();export{m as a};
