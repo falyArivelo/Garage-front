@@ -11,6 +11,7 @@ import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentData } from '../all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { QuoteService } from 'src/app/services/quote.service';
 
 @Component({
     selector: 'app-detailClient',
@@ -31,11 +32,14 @@ import { AppointmentService } from 'src/app/services/appointment.service';
 
 export class AppointmentDetailByClientComponent {
     appointment: AppointmentData | null = null;
+    hasQuote: boolean = false;
     isLoading = true;
 
     constructor(
         private appointmentService: AppointmentService, 
+        private quoteService: QuoteService,
         private route: ActivatedRoute,
+        private cdr: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
@@ -45,6 +49,7 @@ export class AppointmentDetailByClientComponent {
                 this.appointmentService.getAppointmentsByClient().subscribe((data) => {
                     console.log('Données reçues:', data);
                     this.appointment = data.find(app => app._id === id) || null; // Chercher le rendez-vous correspondant
+                    this.checkQuote(id);
                     this.isLoading = false;
                 }, error => {
                     console.error("Erreur lors de la récupération des rendez-vous:", error);
@@ -53,6 +58,19 @@ export class AppointmentDetailByClientComponent {
             } else {
                 console.error("ID du rendez-vous non trouvé dans l'URL");
                 this.isLoading = false; // Gérer le cas où l'ID est absent
+            }
+        });
+    }
+
+    checkQuote(appointmentId: string) {
+        this.quoteService.getQuoteByIdAppointment(appointmentId).subscribe({
+            next: (quote) => {
+                this.hasQuote = !!quote; // Vérifie que le devis existe
+              },
+              error: (error) => {
+                console.log("Erreur lors de la récupération du devis :", error);
+                this.hasQuote = false;
+                this.cdr.detectChanges();
             }
         });
     }

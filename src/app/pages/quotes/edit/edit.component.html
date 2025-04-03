@@ -1,0 +1,71 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Choisissez votre choix pour le devis</mat-card-title>
+    </mat-card-header>
+  
+    <!-- LOADING -->
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <mat-card-content class="b-t-1" *ngIf="quote">
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Name -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Client</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="quote.appointment.client.username" name="username" disabled/>
+                    </mat-form-field>
+
+                    <!-- Véhicule -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Véhicule</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="quote.appointment.vehicle.brand" name="vehicle" disabled/>
+                    </mat-form-field>
+
+                    <!-- Statut -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Statut<span style="color: red;">*</span></mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select [(ngModel)]="quote.status" name="category">
+                            <mat-option value="En attente">En attente</mat-option>
+                            <mat-option value="Validé">Validé</mat-option>
+                            <mat-option value="Annulé">Annulé</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Frais -->
+                    <mat-label class="f-w-600 m-b-8 d-block">Frais</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [(ngModel)]="quote.frais" name="frais" disabled/>
+                    </mat-form-field>
+
+                    <!-- Total -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Prix total</mat-label>
+                        <input matInput [(ngModel)]="quote.total" name="total" disabled>
+                    </mat-form-field>
+
+                    <!-- Date de validite -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Date de validité</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="quote.validUntil" placeholder="Sélectionner une date" name="validUntil" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                
+                <button mat-flat-button color="primary" class="m-r-8 m-l-16" (click)="save()">Enregistrer</button>
+                <button mat-flat-button color="primary" class="m-r-10 m-l-5" (click)="openPaymentPopup()" *ngIf="quote.status === 'Validé'">Procéder au paiement</button>
+                <button mat-stroked-button color="warn" type="button" (click)="cancel()">Annuler</button>
+
+                <!-- Afficher le popup de paiement quand le bouton est cliqué -->
+                <app-payment-popup 
+                *ngIf="isPaymentPopupOpen" 
+                [qrData]="paymentUrl" 
+                (closePopup)="closePaymentPopup()">
+                </app-payment-popup>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

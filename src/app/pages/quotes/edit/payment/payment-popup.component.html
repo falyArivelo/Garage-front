@@ -1,0 +1,10 @@
+<div class="popup-overlay" (click)="close()">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+    <h3>Procédez au paiement via Mvola</h3>
+    <p>Scannez ce QR Code pour effectuer votre paiement de 1000 MGA.</p>
+    <div *ngIf="qrCodeUrl">
+      <img [src]="qrCodeUrl" alt="QR Code" />
+    </div>
+    <button (click)="close()">Fermer</button>
+  </div>
+</div>
