@@ -81,6 +81,13 @@ export class TaskService {
   // Marquer une tâche comme terminée
   markTaskAsDone(taskId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/tasks/${taskId}/complete`, {}, { headers });
+    return this.http.put(`${this.apiUrl}/${taskId}/complete`, {}, { headers });
   }
+
+  updateTaskStatus(taskId: string, status: string, message?: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    const userId = this.authService.currentUserValue?.user_id
+    return this.http.put(`${this.apiUrl}/${taskId}/updateStatus`, { status, message ,userId}, { headers });
+  }
+
 }

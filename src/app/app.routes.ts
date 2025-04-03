@@ -58,6 +58,12 @@ export const routes: Routes = [
           import('./pages/tasks/tasks.routes').then((m) => m.TaskRoutes),
       },
       {
+        path: 'users',
+        canActivate: [AuthGuard], 
+        loadChildren: () =>
+          import('./pages/users/users.routes').then((m) => m.UsersRoutes),
+      },
+      {
         path: 'ui-components',
         canActivate: [AuthGuard],
         loadChildren: () =>
