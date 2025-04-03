@@ -53,6 +53,14 @@
           {{ appointment.status }}
         </span>
       </div>
+      <div class="btn-container" style="margin-top: 10px;">
+        <button *ngIf="hasQuote && appointment.status === 'Terminé'" [routerLink]="['/quotes/detail/appointment', appointment._id]" class="btn-generate">
+          Consulter devis
+        </button>
+        <button *ngIf="hasQuote && appointment.status === 'Terminé'" [routerLink]="['/quotes/edit', appointment._id]" class="btn-generate">
+          Répondre au devis
+        </button>
+      </div>
       <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->
       <div class="reviews">
         <ul class="stars">

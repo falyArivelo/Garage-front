@@ -13,6 +13,7 @@ import { AppointmentData } from '../all/all.component';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { StatusService } from 'src/app/services/status.service';
 import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
+import { QuoteService } from 'src/app/services/quote.service';
 
 @Component({
     selector: 'app-detailClient',
@@ -34,12 +35,15 @@ import { CurrencyFormatPipe } from 'src/app/helpers/pipe/currencyFormat.pipe';
 
 export class AppointmentDetailByClientComponent {
     appointment: AppointmentData | null = null;
+    hasQuote: boolean = false;
     isLoading = true;
 
     constructor(
-        private appointmentService: AppointmentService,
+        private appointmentService: AppointmentService, 
+        private statusService: StatusService, 
+        private quoteService: QuoteService,
         private route: ActivatedRoute,
-        private statusService: StatusService
+        private cdr: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
@@ -49,6 +53,7 @@ export class AppointmentDetailByClientComponent {
                 this.appointmentService.getAppointmentsByClient().subscribe((data) => {
                     console.log('Données reçues:', data);
                     this.appointment = data.find(app => app._id === id) || null; // Chercher le rendez-vous correspondant
+                    this.checkQuote(id);
                     this.isLoading = false;
                 }, error => {
                     console.error("Erreur lors de la récupération des rendez-vous:", error);
@@ -63,5 +68,18 @@ export class AppointmentDetailByClientComponent {
 
     getStatusColor(status: string): string {
         return this.statusService.getStatusColor(status);
+    }
+
+    checkQuote(appointmentId: string) {
+        this.quoteService.getQuoteByIdAppointment(appointmentId).subscribe({
+            next: (quote) => {
+                this.hasQuote = !!quote; // Vérifie que le devis existe
+              },
+              error: (error) => {
+                console.log("Erreur lors de la récupération du devis :", error);
+                this.hasQuote = false;
+                this.cdr.detectChanges();
+            }
+        });
     }
 }
